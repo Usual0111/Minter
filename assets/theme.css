@@ -1,0 +1,33 @@
+/* Bountera — the shared dark/green palette from the supplied Home reference. */
+:root{color-scheme:dark;--ink:#eeeef0;--muted:#929592;--orange:#a0ff79;--accent:#9eff70;--paper:#080a09;--surface:#1e1e20;--line:#343735}
+body{background:#080a09;color:var(--ink)}.app{background:radial-gradient(ellipse at 25% 25%,#0d120b66,transparent 60%),#080a09;box-shadow:none}
+h1,h2,h3,.list-title,.empty-state h3,.menu-row,.admin-tile,.detail-row strong{color:var(--ink)}
+.brand-name{color:#e6e8e5}.brand-mark{filter:drop-shadow(0 0 7px #86fa635c)}.brand-mark path{stroke:#9eff70}
+#orange-icon stop:first-child{stop-color:#a3ff79}#orange-icon stop:last-child{stop-color:#7af35c}
+.profile{background:linear-gradient(130deg,#27272a,#202023);color:#929496;box-shadow:inset 0 0 0 1.3px #77797a}
+.balance-label,.result-label,.energy-caption{color:#959894}.balance-value,.result-value,#balance-number,.balance-unit,#next-bonus{color:#fff}
+.wallet-button,.energy-button,.claim,.solid-button{color:#071004;background:linear-gradient(105deg,#98ff6b,#a8ff7d);box-shadow:none;text-shadow:none;font-weight:700}
+.wallet-button{box-shadow:0 0 calc(15 * var(--u)) #8afc6c48}.wallet-button .icon{color:#071004}
+.cycle{background:linear-gradient(115deg,#222225,#1d1d20);box-shadow:inset 0 0 0 1px #3b3b3e,0 8px 25px #0003}.status{background:#2a2a2d;color:#919193}
+.remaining,.daily-reward,.task-detail,.all-tasks,.cycle-id #mode-label,.positive,.text-orange,.subtle-link,.task-reward,.balance-reward,.bonus-reward{color:#a2f484}
+.cycle-id{color:#9da09c}.energy-number{color:#eee}.gauge svg #energy-gradient stop:first-child{stop-color:#baff91}.gauge svg #energy-gradient stop{stop-color:#96fa71}.gauge #progress-glow{stroke:#87f85e}.gauge circle[filter="url(#small-glow)"]{stroke:#a4fa78}.gauge #progress-light{stroke:#c2ffa0}.gauge #progress-tip{fill:#baff92}.gauge #arc-pulse{stroke:#e4ffbc}
+.daily,.task,.card,.task-card,.stat-card,.milestone,.partner-tile,.empty-state,.admin-tile,.admin-table-wrap{background:#1d1d20;box-shadow:none;border-color:#343735}
+.icon-box,.daily .icon-box,.circle-icon,.circle-icon.gray,.circle-icon.dark,.circle-icon.green,.reward-strip,.milestone-number,.badge,.badge.green,.soft-button,.task-action,.claim:disabled,.step-number,.icon-button,.admin-banner,.admin-table td button{background:#283225;color:#9dee80;box-shadow:none}
+.icon-box svg{filter:drop-shadow(0 0 5px #a5ff7740)}.task:last-child .task-detail{color:#a2f484}
+.claim:disabled{color:#9eed80}.task-action:disabled{background:#282b29;color:#787e78}
+.card-copy p,.list-subtitle,.row-end small,.task-meta,.stat-label,.stat-foot,.hero-note,.profile-header p,.profile-footer,.dialog-description,.partner-tile p,.step p,.friends-empty-note,.task-state,.admin-tile small{color:#9a9d98}
+.hero-card{background:linear-gradient(130deg,#232724,#1b1d1c);border-color:#363b37;box-shadow:none}.hero-top p,.hero-card .muted{color:#a8aca6}.hero-line{background:#373b36!important}
+.dark-button{background:#353b33;color:#d5e5ce}.outline-button{border-color:#424940;color:#d2d8cf}.negative{color:#e4e5e2}
+.badge.dark,.badge.gray{background:#30332e;color:#b1b7ad}.badge.red{background:#422a2a;color:#ef9c99}
+.filters{background:transparent}.filters button{background:#20241f;color:#9aa196}.filters button[aria-pressed="true"]{background:#a0ff79;color:#102009}
+.progress-fill{background:linear-gradient(90deg,#79f052,#afff7f)}.progress-track{background:#343a30}.progress-caption{color:#a2a79d}
+.partner-tile,.list-row,.menu-row,.task-card-bottom{border-color:#353933}.admin-tile .icon{color:#9dee80}.input{background:#141813;border-color:#373e33;color:#eee}.input:focus{background:#192017;border-color:#9fff70}.input::placeholder{color:#737b6e}
+.input-helper,.input-unit,.detail-row,.referral-code code{color:#a3aa9d}.input-helper button,.detail-row.total strong{color:#a0ff79}.detail-list,.notice,.referral-code{background:#242923;border-color:#434a3e;color:#a6b19c}.detail-row.total{border-color:#40483b}.notice.warm{background:#293220;color:#b8d9a1}
+.form-error{color:#f5a19a}.step-number{background:#2c3926}.avatar,.avatar.peach,.avatar.blue,.avatar.mint{background:#333e2d;color:#b1d69c}.profile-avatar{background:#272e24;color:#a8c49b}
+.app-dialog{background:#1d211b;border:1px solid #3b4635;color:#ecf0e8;box-shadow:0 20px 70px #0009}.app-dialog::backdrop{background:#000a}.dialog-head .icon-button{background:#333b2e;color:#c2cbb9}.dialog-status-icon{background:#293d20;color:#abff87}.demo-ad{background:radial-gradient(circle,#39472b,#1b2118 75%);color:#b4ff8e}.demo-ad p{color:#becab2}
+.admin-table th{background:#252c21;color:#9dac92}.admin-table td,.admin-table th{border-color:#35402e}.admin-table-wrap{background:#1d2219}.back-link{color:#a3b298}
+.bottom-nav{background:#1c1d1df7;border-color:#333633;backdrop-filter:blur(18px)}.nav-item{color:#818680}.nav-item[aria-current="page"]{color:#a0f77c}.nav-item[aria-current="page"] svg{filter:drop-shadow(0 0 7px #87fc5d36)}
+.toast{background:#283422f5;color:#d4ffc0;border:1px solid #68865266}.no-script{background:#20271c}.ad-message{color:#acb8a3}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline-color:#a3ff79}
+@media(min-width:600px){body{background:radial-gradient(ellipse at 50% 10%,#151e10,#080a09 65%)}.app{box-shadow:0 0 70px #0005}}
+@media(max-width:360px){.hero-action-row{grid-template-columns:repeat(2,minmax(0,1fr))}.page .hero-action-row button{min-width:0;padding:10px 8px;font-size:12px;gap:5px}.hero-action-row .icon{width:18px;height:18px}}
