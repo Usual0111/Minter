@@ -1,8 +1,8 @@
 {
   "name": "bountera",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": true,
-  "description": "Bountera dark green Mini App prototype with interactive Node Hub",
+  "description": "Bountera cyan Network Hub prototype with interactive Node Hub",
   "scripts": {
     "start": "node --env-file-if-exists=.env server/index.cjs",
     "build": "node scripts/build-static.cjs",
