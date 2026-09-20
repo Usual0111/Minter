@@ -1,58 +1,63 @@
-# Bountera — Network Hub & Node Hub prototype
+# Bountera — DATA mining game
 
-The app uses the latest reference's graphite, cyan and blue/lavender palette across every screen. The main CR balance and Home's next bonus stay white. Navigation: Home → Node → Tasks → Friends → Wallet. Home remains an outline icon.
+Полностью обновлённый интерактивный прототип. Пять разделов: Home, Nodes, Tasks, Friends, Wallet. Переключение English / Русский доступно в шапке. Виртуальное оборудование добывает **DATA**, кнопка Claim переводит ресурс в **CR**. **Gems** остаются отдельной игровой валютой.
 
-Home now shows Network Hub: a generated digital globe, explicitly simulated network statistics, an animated linear ad progress bar, a five-icon reward track and the existing Watch ad action. Reward amounts and available views reflect the existing configuration, not decorative values from the reference. Unlimited provider views are shown as Unlimited. Daily reward remains accessible below Earn credits. The Tasks summary and completed-task counter are smaller; its play button has been removed.
+## Быстрый запуск
 
-## Open the prototype
+Нужен Node.js 24 или новее. Зависимостей npm нет.
 
-Open index.html after extracting the ZIP, or open the standalone Bountera.html. All Node features work in the offline demo, with browser storage. Both device and globe images are embedded in the single HTML; no external assets or libraries are needed. Farm-Zone-Bot.html remains a compatibility copy.
+```sh
+npm start
+```
 
-For persistent server demo accounts, install Node.js 24+ and run npm start from the extracted project. Open http://127.0.0.1:4173. No npm dependencies are required. State, ledger and request records are stored in .data/bountera.sqlite. Keep that directory across restarts. File and HTTP previews use separate storage; server demo identity uses a browser cookie.
+Откройте `http://127.0.0.1:4173`. Локальный сервер хранит состояние в SQLite `.data/bountera.sqlite`; CR, Gems, история, покупки, задания и майнинг переживают перезапуск. В расчётах баланса используются целые минимальные единицы, промежуточная добыча вычисляется через BigInt. Сервер принимает команды, а не произвольные балансы. Запросы защищены сессией, Origin, CSRF и идемпотентными ключами. Это **серверный демо-режим**, не готовая платёжная система.
 
-## Node mechanics
+## Без сервера / Netlify
 
-Node Hub replaces the old timed Farm screen. A new demo node starts with Bandwidth 3, Storage 2, CPU 1, GPU locked, four simulated active friends, a five-day streak and a three-quarter-full buffer. This does not change the existing main CR balance.
+Самостоятельный файл `Bountera.html` из архива выдачи открывается двойным щелчком. Он включает все изображения и код. Сохранение — в браузере, без синхронизации устройств. Смена часов устройства влияет на локальное демо. Внешних библиотек, шрифтов и обязательных интернет-запросов для HTML нет.
 
-- Base income: 1.5 CR/hour. Resources, demand, region, uptime, certification, streak and traffic boosts modify the rate.
-- Buffer: four hours of regular income; eight hours after expansion. Income stops at capacity. When temporary capacity expires, already buffered income is retained.
-- Collection moves whole integer cents into the existing CR balance and History. Sub-cent remainder stays buffered. Each collection is a node ping. Accumulation resumes automatically.
-- Seven consecutive UTC days with qualifying pings at ≥90% uptime unlock ×1.5. Missing a full day drops uptime to 60% and clears the streak. A normal collection does not bypass restoration. A rewarded preview or 10 CR restores 90% and starts a new qualifying streak.
-- Upgrades spend CR, with increasing costs and Lv.5 caps. GPU unlocks at Node Lv.10 or five active invited friends and contributes up to +50% of base income.
-- Every five confirmed Home ads adds one percentage point of stability that day. The third confirmed task of a day gives +10% income for 24 hours. Replayed confirmations do not count again.
-- The user plus four active friends gives +15% region income. Ten active invited friends gives +25% and the regional pool preview. The Friends screen can simulate arrivals.
-- Node level sets Wallet queue priority. New demo withdrawal requests retain the node tier and a processing estimate.
+Для GitHub загрузите содержимое этой папки, не загружайте `.env` и `.data`. На Netlify: build command `npm run build`, publish directory `public`, Node 24. Настройки уже записаны в `netlify.toml`. После сборки `public` можно загрузить через Netlify Drop. На статическом хостинге работает браузерный демо-режим; сервер и SQLite туда не публикуются.
 
-Farm rewarded previews take three seconds and require explicit completion. Closing early gives nothing. They do not increment Home ad progress. The combined cap is ten rewarded Farm ads per UTC day:
+```sh
+npm run build
+npm test
+npm run package
+```
 
-| Reward | Rule |
-|---|---|
-| Traffic Package | ×2 income for 30 minutes; every 3 hours; 4/day |
-| Buffer expansion | 8 hours of capacity for 24 hours; once/day |
-| Uptime recovery | Available below 90%; restores 90% |
-| Instant Harvest | Below 50% buffer; +10%; once/hour |
-| Double collection | ×2 collected amount; 2/day |
-| Network Overload | +50% on next collection; two daily 10-minute windows; at most 2/day |
+Последняя команда сохраняет автономный HTML в соседней папке `outputs`.
 
-Collection bonuses multiply if combined. These are editable demo defaults where exact rules were unspecified.
+## Демо-экономика
 
-Open Node → Demo controls to advance node-only time by 1 hour, 4 hours, 1 day or 2 days; add an active friend; trigger an overload; or set network demand from 0.7× to 1.3×. Home and Wallet clocks do not move with this control.
+Все параметры находятся в `assets/config.js`. Это выбранные для прототипа правила, а не восстановленные условия Meme Mining:
 
-## Implementation and limits
+- 1 DATA = 0.50 CR; 100 H/s = 1 DATA/час. Накопление без лимита и без обязательного открытого экрана. CR начисляются только при Claim; дробь меньше 0.01 CR сохраняется в DATA.
+- Новый демо-профиль: 550 CR, 120 Gems, Relay Mini 100 H/s и 12.34 DATA для проверки первого сбора. При доступном старом профиле сохраняется его CR вместо стартовых 550 CR; старые механики не переносятся.
+- Ноды: Relay Mini 25 CR / 100 H/s; Storage Array 120 CR / 600 H/s; Tensor Station 450 CR / 2 500 H/s; Orbital Core 1 500 CR / 10 000 H/s. Ноды постоянные, характеристики суммируются.
+- Daily Bonus: 2 CR + 25 Gems раз в 24 часа. Boost ×4: 20 Gems, 15 минут, повторное включение через час после запуска. Офлайн-интервал разбивается по времени окончания буста.
+- Демо-реклама: 3 секунды, +0.10 CR / 2 Gems / 0.1 DATA; 5 просмотров за календарный час, 20 за сутки UTC. Закрытие до подтверждения не награждается.
+- Сезон: 30 дней. Миссии считают активность текущего сезона; награда каждой миссии и предложение магазина доступны раз за сезон.
+- Комбо: ежедневный бонус + реклама + покупка ноды за сутки UTC, награда 50 Gems. Подарок: 100 Gems один раз. Рейтинг использует явно обозначенных демонстрационных соперников.
+- Демо-пополнение: 1 USD = 100 CR, +10% для произвольной суммы; состав скидочных паков задаётся отдельно. Указанные USD — единица тестового расчёта, списания денег нет.
+- Демо-выплата: минимум 10 CR, комиссия 2%, завершение доступно через 5 секунд. Сумма резервируется; отмена возвращает её один раз. Фактического перевода нет.
+- Реферальные ставки: 5/2/1%, 7/3/1%, 10/5/2%, 15/7/3% по линиям 1/2/3; пороги оборота первой линии: 0, 1 000, 5 000, 20 000 CR. Начисления только с демо-пополнений рефералов, без бонусной части и паков. На депозит применяется ставка до повышения карьеры; новая ставка действует со следующего депозита.
 
-assets/app-config.js contains Node defaults. assets/node-engine.js implements exact accumulation, upgrade costs, reward eligibility and progression. Buffer arithmetic uses integer micro-CR and BigInt division/remainders; the shared balance remains integer cents. Accrual integrates boost, certification, day and capacity boundaries without a background job.
+Настройки фиксируются в демо-профиле при создании. Изменение файла применяется к новым профилям; миграция действующих аккаунтов намеренно не выполняется автоматически.
 
-assets/node-ui.js contains the Node screen. assets/node.css follows its reference composition. assets/theme.css sets the cool palette across all screens; assets/network-home.css contains the new Home composition and compact Tasks styling. The existing motion controller now drives linear progress, a clipped highlight and confirmed balance updates. Home animations work in file, static HTTP and server demo previews. Zero ad progress has no highlight. Hidden visual updates stop; Node respects reduced motion.
+Меню → Demo controls позволяет переместить время на час/сутки, добавить рефералов трёх линий и проверить пополнения. Изменения времени действуют только внутри демо-профиля, не меняют системные часы. В серверном демо обычные часы браузера не определяют начисления.
 
-SQLite transactions, collection request IDs and a unique ledger index protect server demo credits. Offline HTML intentionally uses local time/storage and is not a secure source of real-money balances. Production APIs refuse Node demo actions until real integrations are connected. Existing Farm data/history are preserved as legacy data, but its old interface is not loaded.
+## Что требуется для рабочего запуска
 
-Network logs, bandwidth, peers, region members, ad playback and withdrawal estimates are simulated. No real bandwidth, CPU or GPU is used. Push delivery, real ad callbacks, a funded shared regional pool, referrals from real users and blockchain transfers are not connected. The regional pool is an unlock preview, not an additional funded balance.
+- Реальная Telegram-авторизация и подключённый бот. Проверяющий HMAC-модуль сохранён, но продуктивный режим намеренно заблокирован до интеграций. В демо используется сессия браузера; одинаковый Telegram ID на разных устройствах пока не связывает профили.
+- Rewarded ad provider и серверные подтверждения просмотров.
+- Реальные ссылки заданий, проверки подписок и callbacks партнёров. Сейчас кнопка Verify явно имитирует подтверждение.
+- Регистрация рефералов по подписанному Telegram start-параметру; в демо персональная ссылка копируется и отправляется штатной функцией браузера, а начисления проверяются через Demo controls.
+- Платёжный провайдер, подписанные callbacks, обработчик выплат, условия пополнений/комиссий и реальные курсы. Кнопки оплаты/выплаты сейчас демонстрационные.
+- Серверный рейтинг игроков. Уведомления, прежние Farm-сессии, uptime, буфер, Network Hub, обмен ASSET и рекламные серии в новой игре отсутствуют.
 
-## Test and deploy
+Старая версия сохранена отдельно в резервном архиве рабочего каталога. Этот пакет содержит только новую игру.
 
-Run npm test for accounting, motion, authentication, persistence, legacy compatibility and Node tests. Node checks cover fractional display clocks, offline accrual/caps, exact collection, four concurrent SQLite retries, rollback, upgrades/GPU, rewarded ad cancellation/duplicates/limits, boost and buffer expiry, streak loss/restoration, Home/Tasks links and demo controls.
+## Проверки
 
-For GitHub upload the extracted project contents. Exclude .env, .data, database files and credentials. Netlify: build command npm run build; publish directory public; Node 24. This publishes the complete interactive local demo. Persistent server accounts require a Node host with persistent disk, HTTPS and frontend/API at one origin.
+`npm test`: начисление DATA, дробная точность, офлайн-восстановление, покупка нод, граница буста, бонус и задания, лимиты рекламы, повторные запросы, паки, резерв/отмена/завершение выплат, три линии рефералов, карьера, сезон, комбо, локализация, перенос CR. HTTP-проверки охватывают владельца сессии, Origin/CSRF, параллельные Claim, потерю ответа и недоступность приватных файлов.
 
-The device and globe images were generated with the built-in image generator using the imagegen skill. Assets and exact prompts: docs/node-artwork.md and docs/network-artwork.md.
-
+Иллюстрации и исходные запросы к imagegen: [docs/artwork.md](docs/artwork.md).
