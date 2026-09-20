@@ -1,6 +1,1 @@
-const fs=require('node:fs'),path=require('node:path');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'public');
-fs.mkdirSync(out,{recursive:true});
-fs.copyFileSync(path.join(root,'index.html'),path.join(out,'index.html'));
-fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
-console.log('Static demo built in public/. Server code and database are excluded.');
+const fs=require('node:fs'),path=require('node:path');const root=path.resolve(__dirname,'..'),out=path.join(root,'public');fs.mkdirSync(out,{recursive:true});fs.copyFileSync(path.join(root,'index.html'),path.join(out,'index.html'));fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});console.log('Static browser demo built in public/.');

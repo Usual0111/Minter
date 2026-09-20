@@ -1,218 +1,40 @@
-(function(root){
-  'use strict';
-  const F=typeof module==='object'&&module.exports?require('./farm-engine.js'):root.FarmEngine;
-  const N=typeof module==='object'&&module.exports?require('./node-engine.js'):root.NodeEngine;
-  const clone = x => JSON.parse(JSON.stringify(x));
-  const dayKey = now => new Date(now).toISOString().slice(0,10);
-  function weekKey(now){const d=new Date(now);d.setUTCHours(0,0,0,0);d.setUTCDate(d.getUTCDate()-((d.getUTCDay()+6)%7));return dayKey(d.getTime());}
-  const assert=(condition,message)=>{if(!condition)throw new Error(message);};
-  const safeInt=(value,min=0)=>Number.isSafeInteger(value)&&value>=min;
-  function canClaimDaily(s,now=Date.now()){
-    return !s.lastDaily||now>=s.lastDaily+s.settings.dailyBoost.intervalHours*3600000;
-  }
-  function parseAmount(raw,decimals){
-    const value=String(raw).trim();
-    if(!new RegExp('^\\d+(?:\\.\\d{1,'+decimals+'})?$').test(value))return null;
-    const [whole,fraction='']=value.split('.');
-    const units=Number(whole)*10**decimals+Number(fraction.padEnd(decimals,'0'));
-    return safeInt(units)?units:null;
-  }
-  function initial(config,now=Date.now()){
-    return {version:3,revision:0,nextId:2,createdAt:now,settings:clone(config),
-      user:{id:'1042',name:'Alex Morgan',username:'alexmorgan',language:'English',status:'Active'},
-      balance:{cr:12540,asset:1250000,reserved:0},energy:65,cycle:24,lastDaily:0,
-      series:{number:24,views:0,claimed:[],levels:clone(config.milestones.levels),length:config.milestones.seriesLength},bonusClaims:[],
-      ads:{day:dayKey(now),dailyViews:0,lastRewardAt:0,sessions:{}},
-      farm:{sessions:[],nextNumber:1},tasks:{},wallet:null,quotes:{},exchanges:{},withdrawals:[],redeemed:[],
-      promos:[{code:'BOUNTERA20',reward:20,maxUses:100,uses:0,expiresAt:now+30*86400000,active:true}],
-      ledger:[{id:'tx-000001',type:'opening',title:'Opening demo balance',cr:12540,asset:1250000,reserved:0,status:'completed',at:now,reference:'demo-opening',detail:'Initial preview balances. No real assets.'}],audit:[]};
-  }
-  function id(s,prefix){return prefix+'-'+String(s.nextId++).padStart(6,'0');}
-  function log(s,entry,now){const tx={id:id(s,'tx'),at:now,status:'completed',cr:0,asset:0,reserved:0,...entry};s.ledger.unshift(tx);return tx;}
-  function audit(s,action,detail,now){s.audit.unshift({id:id(s,'audit'),actor:'Demo administrator',action,detail,at:now});}
-  function migrate(source,config,now=Date.now()){
-    if(!source)return initial(config,now);
-    if(source.version===3){const saved=clone(source);for(const task of saved.settings.tasks){task.title=task.title.replaceAll('Farm Zone Bot','Bountera');task.description=task.description.replaceAll('Farm Zone Bot','Bountera');}return F.ensure(saved,config.farm);}
-    assert(source.version===2,'Unsupported saved state version.');
-    const s=clone(source);s.version=3;
-    s.legacy={...(s.legacy||{}),energy:s.energy,cycle:s.cycle,ads:clone(s.ads),tasks:clone(s.tasks),settings:clone(s.settings),preservedAt:now};
-    s.settings={...s.settings,ads:clone(config.ads),milestones:clone(config.milestones),dailyBoost:clone(config.dailyBoost),testing:{unlimitedDailyBoost:false}};
-    s.settings.tasks=s.settings.tasks.map(t=>{const configured=config.tasks.find(x=>x.id===t.id);return {...t,unit:'CR',rewardCents:configured?.rewardCents??parseAmount(t.reward,2)};});
-    s.series={number:1,views:0,claimed:[],levels:clone(config.milestones.levels),length:config.milestones.seriesLength};s.bonusClaims=[];
-    s.ads={day:dayKey(now),dailyViews:0,lastRewardAt:0,sessions:{}};
-    for(const [taskId,attempt] of Object.entries(s.tasks))if(attempt.status!=='claimed'){
-      const t=s.settings.tasks.find(x=>x.id===taskId);attempt.unit='CR';attempt.rewardCents=t?.rewardCents;
-      if(attempt.status==='confirmed')attempt.status='awaiting_verification';
-    }
-    return F.ensure(s,config.farm);
-  }
-  function seriesProgress(s){
-    const level=s.series.levels.find(l=>!s.series.claimed.includes(l.views))||s.series.levels.at(-1);
-    return {number:s.series.number,views:s.series.views,target:level.views,bonusCents:level.rewardCents,left:Math.max(0,level.views-s.series.views),ratio:Math.min(1,s.series.views/level.views)};
-  }
-  function adAvailability(s,now=Date.now()){
-    const active=Object.values(s.ads.sessions).find(a=>['started','awaiting_confirmation'].includes(a.status)&&a.expiresAt>now);
-    if(active)return {status:active.status==='awaiting_confirmation'?'checking':'active',sessionId:active.id};
-    const c=s.settings.ads;
-    if(c.providerDailyLimit!==null&&s.ads.day===dayKey(now)&&s.ads.dailyViews>=c.providerDailyLimit){const d=new Date(now);d.setUTCHours(24,0,0,0);return {status:'limited',nextAvailableAt:d.getTime()};}
-    const next=s.ads.lastRewardAt+c.cooldownSeconds*1000;
-    return next>now?{status:'limited',nextAvailableAt:next}:{status:'ready'};
-  }
-  function periods(s,now){
-    if(s.ads.day!==dayKey(now)){s.ads.day=dayKey(now);s.ads.dailyViews=0;}
-    for(const session of Object.values(s.ads.sessions))if(['created','started','awaiting_confirmation'].includes(session.status)&&session.expiresAt<=now)session.status='expired';
-  }
-  function credit(s,cents,type,title,reference,now,extra={}){
-    assert(safeInt(cents,1),'Invalid CR reward.');s.balance.cr+=cents;
-    return log(s,{type,title,cr:cents,reference,...extra},now);
-  }
-  function reward(s,amount,unit,type,title,reference,now){assert(unit==='CR','Energy rewards are retired.');return credit(s,parseAmount(amount,2),type,title,reference,now);}
-  function quoteFor(s,cr,now){
-    const cfg=s.settings.exchange;
-    assert(safeInt(cr,1),'Enter a valid CR amount.');assert(cr>=cfg.minCRCents,'The amount is below the exchange minimum.');assert(cr<=s.balance.cr,'Not enough CR available.');
-    const gross=Number(BigInt(cr)*BigInt(cfg.assetMicrosPerCR)/100n),fee=Number(BigInt(gross)*BigInt(cfg.feeBps)/10000n);
-    assert(safeInt(gross,1)&&gross>fee,'The exchange amount is too small.');
-    return {cr,gross,fee,net:gross-fee,rate:cfg.assetMicrosPerCR,expiresAt:now+cfg.quoteSeconds*1000};
-  }
-  function apply(source,action,payload={},now=Date.now()){
-    const s=clone(source);periods(s,now);let result={};
-    const p=payload;
-    if(s.node)N.settle(s,now);
-    if(action.startsWith('node')){
-      result=N.act(s,action,p,now);
-      if(result.creditCents)credit(s,result.creditCents,'node_reward',result.title,result.reference,now,{detail:result.detail});
-      if(result.debitCents){assert(s.balance.cr>=result.debitCents,'Not enough CR.');s.balance.cr-=result.debitCents;log(s,{type:action==='nodeUpgrade'?'node_upgrade':'node_restore',title:result.title,cr:-result.debitCents,reference:result.reference},now);}
-      if(action==='nodeDemo')audit(s,'Node demo control',JSON.stringify(p),now);
-      assert(Object.values(s.balance).every(x=>safeInt(x)),'Balance invariant failed.');s.revision++;return {state:s,...result};
-    }
-    switch(action){
-      case 'refresh':break;
-      case 'farmStart':{
-        F.ensure(s);const existing=F.current(s);result=existing?{session:existing,alreadyActive:true}:F.start(s,id(s,'farm-'+s.user.id),now);break;
-      }
-      case 'farmClaim':{
-        F.ensure(s);const session=s.farm.sessions.find(x=>x.id===p.id);assert(session&&session.userId===s.user.id,'Farm session not found.');
-        if(session.claimedAt!==null){result={alreadyApplied:true,claimed:clone(session)};break;}
-        assert(now>=session.endsAt,'This farming session is not ready to claim.');
-        const tx=credit(s,session.rewardCents,'farm','Farm reward',session.id,now,{farmSessionNumber:session.number,detail:'Completed farming session #'+String(session.number).padStart(3,'0')});
-        session.claimedAt=now;session.ledgerId=tx.id;result={claimed:clone(session)};break;
-      }
-      case 'claimDaily':{
-        assert(canClaimDaily(s,now),'Your daily reward is not ready yet.');
-        s.lastDaily=now;credit(s,s.settings.dailyBoost.rewardCents,'daily','Daily reward',id(s,'daily'),now);break;
-      }
-      case 'startAd':{
-        const available=adAvailability(s,now);assert(available.status==='ready',available.status==='limited'?'Ad provider limit reached.':'An ad session is already active.');
-        const cfg=s.settings.ads,session={id:id(s,'ad'),status:'started',createdAt:now,expiresAt:now+cfg.confirmationSeconds*1000,readyAt:now+cfg.demoDurationSeconds*1000,rewardCents:cfg.rewardCents};
-        s.ads.sessions[session.id]=session;result={session};break;
-      }
-      case 'awaitAd':{
-        const session=s.ads.sessions[p.id];assert(session&&['started','awaiting_confirmation','rewarded'].includes(session.status),'No active ad session.');if(session.status==='started')session.status='awaiting_confirmation';break;
-      }
-      case 'confirmAd':{
-        const a=s.ads.sessions[p.id];assert(a,'Ad session not found.');
-        if(a.status==='rewarded'){result={alreadyApplied:true,confirmation:clone(a.result)};break;}
-        assert(['started','awaiting_confirmation'].includes(a.status),'This ad session cannot receive a reward.');
-        assert(now>=a.readyAt,'Finish the preview before confirmation.');assert(now<a.expiresAt,'The ad session has expired.');
-        const seriesNumber=s.series.number;a.status='rewarded';a.confirmedAt=now;
-        const base=credit(s,a.rewardCents,'ad','Ad reward',a.id,now,{seriesNumber});s.ads.dailyViews++;s.ads.lastRewardAt=now;s.series.views++;
-        let bonusCents=0,threshold=null;const operations=[base.id];
-        for(const level of s.series.levels)if(s.series.views>=level.views&&!s.series.claimed.includes(level.views)){
-          const key=s.user.id+':'+seriesNumber+':'+level.views;assert(!s.bonusClaims.includes(key),'Duplicate milestone.');
-          s.series.claimed.push(level.views);s.bonusClaims.push(key);bonusCents+=level.rewardCents;threshold=level.views;
-          operations.push(credit(s,level.rewardCents,'milestone','Milestone bonus',a.id,now,{seriesNumber,threshold:level.views,bonusKey:key}).id);
-        }
-        N.event(s,'ad',now);
-        const confirmedViews=s.series.views;
-        if(s.series.views===s.series.length)s.series={number:seriesNumber+1,views:0,claimed:[],levels:clone(s.settings.milestones.levels),length:s.settings.milestones.seriesLength};
-        a.result={sessionId:a.id,seriesNumber,confirmedViews,baseRewardCents:a.rewardCents,bonusCents,totalCents:a.rewardCents+bonusCents,threshold,operations,next:seriesProgress(s)};
-        result={confirmation:clone(a.result)};break;
-      }
-      case 'cancelAd':{
-        const a=s.ads.sessions[p.id];if(a&&['started','awaiting_confirmation'].includes(a.status))a.status='closed_without_reward';break;
-      }
-      case 'startTask':{
-        const t=s.settings.tasks.find(x=>x.id===p.id&&x.active);assert(t,'This task is unavailable.');
-        const current=s.tasks[t.id];assert(!current||current.status!=='claimed','This task has already been completed.');
-        if(current&&['started','awaiting_verification'].includes(current.status))break;
-        s.tasks[t.id]={id:id(s,'task-event'),status:'started',startedAt:now,rewardCents:t.rewardCents,unit:'CR',title:t.title};break;
-      }
-      case 'verifyTask':{
-        const t=s.tasks[p.id];assert(t,'Start this task first.');
-        if(t.status==='claimed'){result={alreadyApplied:true};break;}
-        assert(['started','rejected','awaiting_verification'].includes(t.status),'Task cannot be verified.');
-        t.checkedAt=now;t.reason=p.approved===false?'The required action was not confirmed.':'';
-        if(p.approved===false)t.status='rejected';else{t.status='claimed';t.claimedAt=now;credit(s,t.rewardCents,'task',t.title,t.id||('task-'+p.id),now);N.event(s,'task',now);}break;
-      }
-      case 'connectWallet':s.wallet={address:'DEMO-BOUNTERA-1042-7A3F',network:s.settings.withdrawal.network,connectedAt:now,ownership:'demo-only'};break;
-      case 'disconnectWallet':assert(s.balance.reserved===0,'Wait for pending withdrawals before disconnecting.');s.wallet=null;break;
-      case 'createQuote':{
-        const quote={id:id(s,'quote'),...quoteFor(s,p.cr,now)};s.quotes[quote.id]=quote;result={quote};break;
-      }
-      case 'exchange':{
-        if(s.exchanges[p.id]){result={alreadyApplied:true};break;}
-        const q=s.quotes[p.id];assert(q,'Quote not found.');assert(now<q.expiresAt,'The quote has expired. Get a new quote.');assert(s.balance.cr>=q.cr,'Not enough CR available.');
-        s.balance.cr-=q.cr;s.balance.asset+=q.net;s.exchanges[p.id]={...q,completedAt:now};
-        log(s,{type:'exchange',title:'CR exchanged for ASSET',cr:-q.cr,asset:q.net,reference:q.id,detail:'Quote rate: '+q.rate+' micro-ASSET per CR. Fee: '+q.fee+' micro-ASSET.'},now);break;
-      }
-      case 'withdraw':{
-        assert(typeof p.requestId==='string'&&p.requestId.length>0,'Missing request ID.');
-        if(s.withdrawals.some(w=>w.requestId===p.requestId)){result={alreadyApplied:true};break;}
-        const cfg=s.settings.withdrawal;assert(s.wallet,'Connect the demo wallet first.');
-        assert(safeInt(p.amount,1),'Enter a valid amount.');assert(p.amount>=cfg.minAssetMicros,'The amount is below the withdrawal minimum.');assert(p.amount>cfg.feeAssetMicros,'The amount must exceed the fee.');assert(p.amount<=s.balance.asset,'Not enough ASSET available.');
-        const w={id:id(s,'withdrawal'),requestId:p.requestId,amount:p.amount,fee:cfg.feeAssetMicros,net:p.amount-cfg.feeAssetMicros,address:s.wallet.address,network:s.wallet.network,status:'under_review',createdAt:now};
-        w.nodeTier=s.node?N.view(s,now).tier:1;w.demoProcessingHours=Math.ceil(24/w.nodeTier);s.withdrawals.unshift(w);s.balance.asset-=w.amount;s.balance.reserved+=w.amount;
-        log(s,{type:'withdrawal',title:'Withdrawal requested',asset:-w.amount,reserved:w.amount,status:'pending',reference:w.id,detail:'Demo funds reserved for review.'},now);result={withdrawal:w};break;
-      }
-      case 'cancelWithdrawal':{
-        const w=s.withdrawals.find(x=>x.id===p.id);assert(w&&['under_review','approved'].includes(w.status),'This withdrawal cannot be cancelled.');
-        w.status='cancelled';w.updatedAt=now;s.balance.reserved-=w.amount;s.balance.asset+=w.amount;
-        const pending=s.ledger.find(t=>t.reference===w.id&&t.type==='withdrawal');if(pending)pending.status='cancelled';
-        log(s,{type:'refund',title:'Withdrawal cancelled',asset:w.amount,reserved:-w.amount,reference:w.id,detail:'Reserved funds returned.'},now);break;
-      }
-      case 'redeemPromo':{
-        const code=String(p.code||'').trim().toUpperCase(),promo=s.promos.find(x=>x.code===code);
-        assert(promo,'This promo code was not found.');assert(promo.active,'This promo code is inactive.');assert(now<promo.expiresAt,'This promo code has expired.');assert(!s.redeemed.includes(code),'You have already used this code.');assert(promo.uses<promo.maxUses,'This promo code has reached its activation limit.');
-        promo.uses++;s.redeemed.push(code);reward(s,promo.reward,'CR','promo','Promo code activated',code,now);break;
-      }
-      case 'adminAdjust':{
-        assert(Number.isSafeInteger(p.cr)&&p.cr!==0,'Enter a non-zero adjustment.');assert(typeof p.reason==='string'&&p.reason.trim().length>=5,'Please give a clear reason for this adjustment.');assert(s.balance.cr+p.cr>=0,'This adjustment would make the balance negative.');
-        s.balance.cr+=p.cr;log(s,{type:'adjustment',title:'Balance adjustment',cr:p.cr,reference:id(s,'adjustment'),detail:p.reason.trim()},now);audit(s,'Balance adjusted',p.reason.trim(),now);break;
-      }
-      case 'adminWithdrawal':{
-        const w=s.withdrawals.find(x=>x.id===p.id);assert(w,'Withdrawal not found.');
-        const transitions={under_review:['approved','rejected'],approved:['confirmed','rejected']};assert((transitions[w.status]||[]).includes(p.status),'This status change is not allowed.');
-        const before=w.status;w.status=p.status;w.updatedAt=now;
-        const pending=s.ledger.find(t=>t.reference===w.id&&t.type==='withdrawal');if(pending&&['confirmed','rejected'].includes(p.status))pending.status=p.status==='confirmed'?'completed':'rejected';
-        if(p.status==='rejected'){s.balance.reserved-=w.amount;s.balance.asset+=w.amount;log(s,{type:'refund',title:'Withdrawal rejected',asset:w.amount,reserved:-w.amount,reference:w.id,detail:'Demo administrator rejected the request.'},now);}
-        if(p.status==='confirmed'){s.balance.reserved-=w.amount;w.transactionId='DEMO-'+w.id;log(s,{type:'withdrawal',title:'Demo withdrawal completed',reserved:-w.amount,reference:w.id,detail:'Simulated payout only. No on-chain transaction.'},now);}
-        audit(s,'Withdrawal updated',w.id+': '+before+' → '+p.status,now);break;
-      }
-      case 'adminPromo':{
-        const code=String(p.code||'').trim().toUpperCase();assert(/^[A-Z0-9_-]{3,24}$/.test(code),'Use 3–24 letters, numbers, underscores or hyphens.');assert(!s.promos.some(x=>x.code===code),'That code already exists.');assert(safeInt(p.reward,1)&&safeInt(p.maxUses,1),'Reward and activation limit must be positive whole numbers.');
-        s.promos.push({code,reward:p.reward,maxUses:p.maxUses,uses:0,expiresAt:now+30*86400000,active:true});audit(s,'Promo code created',code,now);break;
-      }
-      case 'adminTogglePromo':{const promo=s.promos.find(x=>x.code===p.code);assert(promo,'Code not found.');promo.active=!promo.active;audit(s,'Promo code updated',promo.code+': '+(promo.active?'active':'inactive'),now);break;}
-      case 'adminToggleTask':{const t=s.settings.tasks.find(x=>x.id===p.id);assert(t,'Task not found.');t.active=!t.active;audit(s,'Task updated',t.title+': '+(t.active?'active':'inactive'),now);break;}
-      case 'adminCreateTask':{
-        assert(String(p.title||'').trim().length>=3,'Enter a task title.');assert(['channels','bots','partners'].includes(p.category),'Select a task category.');assert(safeInt(parseAmount(p.reward,2),1),'Enter a CR reward with up to two decimals.');assert(String(p.condition||'').trim().length>=5,'Specify the required action.');
-        const t={rewardCents:parseAmount(p.reward,2),id:id(s,'task'),title:p.title.trim(),category:p.category,description:p.condition.trim(),condition:p.condition.trim(),reward:p.reward,unit:'CR',active:true,icon:p.category==='bots'?'bot':'channel',url:'',limit:1};s.settings.tasks.push(t);audit(s,'Task created',t.title,now);break;
-      }
-      case 'adminSettings':{
-        const before=clone(s.settings);
-        if(p.section==='ads'){
-          assert(safeInt(p.rewardCents,1)&&(p.providerDailyLimit===null||safeInt(p.providerDailyLimit,1))&&safeInt(p.cooldownSeconds),'Use valid ad settings.');Object.assign(s.settings.ads,{rewardCents:p.rewardCents,providerDailyLimit:p.providerDailyLimit,cooldownSeconds:p.cooldownSeconds});
-        }else if(p.section==='referrals'){assert(safeInt(p.percent)&&p.percent<=100,'The referral share must be between 0 and 100%.');s.settings.referrals.percent=p.percent;}
-        else if(p.section==='exchange'){assert(safeInt(p.assetMicrosPerCR,1)&&safeInt(p.minCRCents,1)&&safeInt(p.feeBps)&&p.feeBps<10000,'Enter valid exchange settings.');Object.assign(s.settings.exchange,{assetMicrosPerCR:p.assetMicrosPerCR,minCRCents:p.minCRCents,feeBps:p.feeBps});}
-        else if(p.section==='withdrawal'){assert(safeInt(p.minAssetMicros,1)&&safeInt(p.feeAssetMicros)&&p.feeAssetMicros<p.minAssetMicros,'The fee must be below the minimum amount.');Object.assign(s.settings.withdrawal,{minAssetMicros:p.minAssetMicros,feeAssetMicros:p.feeAssetMicros});}
-        else if(p.section==='milestones'){assert(Array.isArray(p.levels)&&p.levels.length===3&&p.levels.every(l=>safeInt(l.views,1)&&l.views<=50&&safeInt(l.rewardCents,1))&&new Set(p.levels.map(l=>l.views)).size===3&&Math.max(...p.levels.map(l=>l.views))===50,'Use three unique thresholds ending at 50.');s.settings.milestones={seriesLength:50,levels:clone(p.levels).sort((a,b)=>a.views-b.views)};}
-        else throw new Error('Unknown settings section.');
-        audit(s,'Settings updated',p.section,now);s.audit[0].before=before[p.section];s.audit[0].after=clone(s.settings[p.section]);break;
-      }
-      default:throw new Error('Unknown action.');
-    }
-    assert(Object.values(s.balance).every(x=>safeInt(x)),'Balance invariant failed.');s.revision++;return {state:s,...result};
-  }
-  const api={initial,apply,quoteFor,parseAmount,dayKey,weekKey,canClaimDaily,migrate,seriesProgress,adAvailability};root.BounteraEngine=api;
-  if(typeof module==='object'&&module.exports)module.exports=api;
-})(typeof globalThis!=='undefined'?globalThis:window);
+(function(r){'use strict';const C=typeof module==='object'?require('./config.js'):r.MiningConfig,H=3600000,D=24*H,clone=x=>JSON.parse(JSON.stringify(x));const ok=(v,m)=>{if(!v)throw Error(m);};const day=t=>Math.floor(t/D),hour=t=>Math.floor(t/H);const uid=()=>typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
+function initial(c=C,at=Date.now(),legacy=null){return {version:5,user:{id:legacy?.user?.id||'demo-'+uid(),name:legacy?.user?.name||'Explorer',username:legacy?.user?.username||'explorer',xp:0,language:legacy?.user?.language==='ru'?'ru':c.language},balance:{cr:Number.isSafeInteger(legacy?.balance?.cr)?legacy.balance.cr:c.initialCRCents,gems:c.initialGems,reserved:0},settings:clone(c),nodes:{relay:1,storage:0,gpu:0,orbital:0},mine:{micro:c.initialDataMicro,lastAt:at,remainder:0},stats:{purchases:0,claimedMicro:0,tasks:0,ads:0},lastDaily:0,boostUntil:0,boostNext:0,tasks:{},adSessions:{},adEvents:[],invoices:[],payouts:[],friends:[],refEvents:{},refEarned:0,firstTurnover:0,season:null,comboDays:[],dailyActions:{day:day(at),daily:false,ad:false,node:false},giftClaimed:false,ledger:[],receipts:{},demoOffset:0,createdAt:at};}
+function load(saved,c=C,at=Date.now()){return saved?.version===5?clone(saved):initial(c,at,saved);}
+function time(s,at){return Math.max(s.mine.lastAt,Math.floor(at)+s.demoOffset);}
+function hash(s){return s.settings.nodes.reduce((n,x)=>n+x.hash*(s.nodes[x.id]||0),0);}
+function seasonIndex(s,t){return Math.max(0,Math.floor((t-s.settings.season.epoch)/s.settings.season.durationMs));}
+function settle(s,at){const t=time(s,at),m=s.mine,start=m.lastAt,boostEnd=Math.max(start,Math.min(t,s.boostUntil)),boostMs=boostEnd-start,plainMs=t-start-boostMs;const rate=BigInt(hash(s))*BigInt(s.settings.microPerHashHour),earned=rate*(BigInt(plainMs)+BigInt(boostMs)*BigInt(s.settings.boost.multiplier))+BigInt(m.remainder);const delta=Number(earned/BigInt(H));ok(Number.isSafeInteger(m.micro+delta),'Mining amount exceeds safe range');m.micro+=delta;m.remainder=Number(earned%BigInt(H));m.lastAt=t;const idx=seasonIndex(s,t);if(!s.season||s.season.index!==idx)s.season={index:idx,base:clone(s.stats),claimed:[],purchases:[]};if(s.dailyActions.day!==day(t))s.dailyActions={day:day(t),daily:false,ad:false,node:false};return t;}
+function add(s,type,cr=0,gems=0,data=0,at,source=uid()){ok([cr,gems,data].every(Number.isSafeInteger),'Invalid reward');ok(s.balance.cr+cr>=0&&s.balance.gems+gems>=0&&s.mine.micro+data>=0,'Insufficient balance');s.balance.cr+=cr;s.balance.gems+=gems;s.mine.micro+=data;ok([s.balance.cr,s.balance.gems,s.mine.micro].every(Number.isSafeInteger),'Balance exceeds safe range');s.ledger.unshift({id:uid(),type,cr,gems,data,at,source});}
+function reward(s,type,value,at,source){add(s,type,value.cr||0,value.gems||0,value.data||0,at,source);}
+function tier(s){return s.settings.referrals.tiers.filter(x=>s.firstTurnover>=x.turnover).at(-1);}
+function counts(s,t){return {daily:s.adEvents.filter(x=>day(x)===day(t)).length,hourly:s.adEvents.filter(x=>hour(x)===hour(t)).length};}
+function apply(input,action,p={},at=Date.now(),requestId=uid()){const s=clone(input);if(s.receipts[requestId])return {state:s,replayed:true,...s.receipts[requestId]};const t=settle(s,at),c=s.settings;let out={};
+ if(action==='refresh')return {state:s};
+ if(action==='claim'){const cents=Number(BigInt(s.mine.micro)*BigInt(c.centsPerData)/BigInt(c.microPerData));ok(cents>0,'Accumulate at least 0.01 CR / Накопите хотя бы 0.01 CR');const consumed=Number((BigInt(cents)*BigInt(c.microPerData)+BigInt(c.centsPerData)-1n)/BigInt(c.centsPerData));add(s,'mining',cents,0,-consumed,t,requestId);s.stats.claimedMicro+=consumed;s.user.xp+=10;out={credited:cents};}
+ else if(action==='buyNode'){const node=c.nodes.find(x=>x.id===p.id);ok(node,'Unknown node');ok(s.balance.cr>=node.price,'Not enough CR / Недостаточно CR');add(s,'node_purchase',-node.price,0,0,t,requestId);s.nodes[node.id]++;s.stats.purchases++;s.user.xp+=75;s.dailyActions.node=true;}
+ else if(action==='daily'){ok(t>=s.lastDaily+c.daily.intervalMs,'Daily bonus is not ready / Бонус ещё не готов');reward(s,'daily',c.daily,t,'daily-'+day(t));s.lastDaily=t;s.user.xp+=15;s.dailyActions.daily=true;}
+ else if(action==='boost'){ok(t>=s.boostNext,'Boost is cooling down / Буст восстанавливается');ok(s.balance.gems>=c.boost.costGems,'Not enough Gems / Недостаточно Gems');add(s,'boost',0,-c.boost.costGems,0,t,requestId);s.boostUntil=t+c.boost.durationMs;s.boostNext=t+c.boost.cooldownMs;}
+ else if(action==='taskStart'){const task=c.tasks.find(x=>x.id===p.id);ok(task,'Unknown task');if(s.tasks[p.id]?.status!=='claimed')s.tasks[p.id]={status:'started',at:t};}
+ else if(action==='taskVerify'){const task=c.tasks.find(x=>x.id===p.id);ok(task&&s.tasks[p.id],'Open the task first / Сначала откройте задание');if(s.tasks[p.id].status!=='claimed'){reward(s,'task',task.reward,t,'task-'+task.id);s.tasks[p.id].status='claimed';s.stats.tasks++;s.user.xp+=25;}}
+ else if(action==='adStart'){const used=counts(s,t);ok(used.daily<c.ads.dailyLimit&&used.hourly<c.ads.hourlyLimit,'Ad limit reached / Лимит рекламы достигнут');ok(!Object.values(s.adSessions).some(a=>a.status==='started'&&a.expiresAt>t),'An ad is already active');const id=uid();s.adSessions[id]={id,status:'started',at:t,readyAt:t+c.ads.durationMs,expiresAt:t+c.ads.expiryMs};out={ad:s.adSessions[id]};}
+ else if(action==='adCancel'){const a=s.adSessions[p.id];if(a?.status==='started')a.status='cancelled';}
+ else if(action==='adConfirm'){const a=s.adSessions[p.id];ok(a,'Ad not found');if(a.status!=='claimed'){ok(a.status==='started'&&t>=a.readyAt&&t<a.expiresAt,'Complete the ad first / Завершите просмотр');const used=counts(s,t);ok(used.daily<c.ads.dailyLimit&&used.hourly<c.ads.hourlyLimit,'Ad limit reached');reward(s,'ad',c.ads.reward,t,'ad-'+a.id);a.status='claimed';s.adEvents.push(t);s.stats.ads++;s.dailyActions.ad=true;s.user.xp+=5;}}
+ else if(action==='mission'){const m=c.missions.find(x=>x.id===p.id);ok(m&&!s.season.claimed.includes(m.id),'Reward already claimed');ok(s.stats[m.stat]-s.season.base[m.stat]>=m.goal,'Mission is not complete');reward(s,'mission',m.reward,t,'season-'+s.season.index+'-'+m.id);s.season.claimed.push(m.id);s.user.xp+=50;}
+ else if(action==='shop'){const item=c.shop.find(x=>x.id===p.id);ok(item&&!s.season.purchases.includes(item.id),'Offer already purchased');ok(s.balance.gems>=item.cost,'Not enough Gems / Недостаточно Gems');add(s,'season_shop',0,-item.cost,0,t,requestId);if(item.reward)reward(s,'season_reward',item.reward,t,requestId);if(item.node)s.nodes[item.node]++;s.season.purchases.push(item.id);}
+ else if(action==='combo'){ok(!s.comboDays.includes(day(t)),'Combo already claimed');ok(s.dailyActions.daily&&s.dailyActions.ad&&s.dailyActions.node,'Complete all three actions / Выполните все три действия');add(s,'combo',0,50,0,t,'combo-'+day(t));s.comboDays.push(day(t));}
+ else if(action==='gift'){ok(!s.giftClaimed,'Gift already claimed / Подарок уже получен');add(s,'gift',0,100,0,t,'welcome-gift');s.giftClaimed=true;}
+ else if(action==='language'){ok(['en','ru'].includes(p.value),'Unknown language');s.user.language=p.value;}
+ else if(action==='invoice'){const pack=p.pack?c.packs.find(x=>x.id===p.pack):null;ok(!p.pack||pack,'Unknown pack');const payCents=pack?pack.payCents:p.amount;ok(Number.isSafeInteger(payCents)&&payCents>=c.wallet.minDepositCents&&payCents<=c.wallet.maxDepositCents,'Invalid deposit amount / Некорректная сумма');const base=Number(BigInt(payCents)*BigInt(c.wallet.crCentsPerUnit)/100n),cr=pack?pack.cr:base+Number(BigInt(base)*BigInt(c.wallet.bonusBps)/10000n);const inv={id:uid(),payCents,cr,gems:pack?.gems||0,node:pack?.node||null,pack:pack?.id||null,status:'created',at:t};s.invoices.unshift(inv);out={invoice:inv};}
+ else if(action==='invoicePay'){const inv=s.invoices.find(x=>x.id===p.id);ok(inv,'Invoice not found');if(inv.status!=='paid'){ok(inv.status==='created','Invoice unavailable');add(s,'deposit',inv.cr,inv.gems,0,t,'invoice-'+inv.id);if(inv.node)s.nodes[inv.node]++;inv.status='paid';inv.paidAt=t;}}
+ else if(action==='payout'){const amount=p.amount;ok(Number.isSafeInteger(amount)&&amount>=c.wallet.minPayoutCRCents&&amount<=s.balance.cr,'Invalid payout amount / Некорректная сумма');ok(typeof p.address==='string'&&p.address.trim().length>=6&&p.address.length<=150,'Enter a demo destination / Укажите демо-адрес');const fee=Number(BigInt(amount)*BigInt(c.wallet.feeBps)/10000n),id=uid();add(s,'payout_reserve',-amount,0,0,t,id);s.balance.reserved+=amount;s.payouts.unshift({id,amount,fee,net:amount-fee,address:p.address.trim(),at:t,status:'pending'});}
+ else if(action==='payoutCancel'||action==='payoutFinish'){const pay=s.payouts.find(x=>x.id===p.id);ok(pay,'Payout not found');if(pay.status==='pending'){if(action==='payoutFinish')ok(t>=pay.at+c.wallet.demoProcessingMs,'Still processing / Выплата обрабатывается');s.balance.reserved-=pay.amount;pay.status=action==='payoutCancel'?'cancelled':'completed';pay.finishedAt=t;add(s,action==='payoutCancel'?'payout_refund':'payout_completed',action==='payoutCancel'?pay.amount:0,0,0,t,pay.id);}}
+ else if(action==='demoFriend'){const line=p.line||1;ok([1,2,3].includes(line),'Invalid referral line');s.friends.push({id:uid(),name:'Explorer '+(s.friends.length+1),line,joinedAt:t,deposits:0});}
+ else if(action==='demoReferralDeposit'){const friend=s.friends.find(x=>x.id===p.id);ok(friend,'Referral not found');const amount=p.amount;ok(Number.isSafeInteger(amount)&&amount>0&&amount<=10000000,'Invalid referral deposit');if(!s.refEvents[requestId]){const share=tier(s).rates[friend.line-1],credited=Number(BigInt(amount)*BigInt(share)/10000n);friend.deposits+=amount;if(friend.line===1)s.firstTurnover+=amount;s.refEarned+=credited;s.refEvents[requestId]=true;add(s,'referral',credited,0,0,t,'ref-'+requestId);out={credited};}}
+ else if(action==='demoAdvance'){ok([3600000,86400000].includes(p.ms),'Unsupported time jump');s.demoOffset+=p.ms;settle(s,at);}
+ else throw Error('Unknown action');
+ s.receipts[requestId]=out;return {state:s,...out};
+}
+function view(input,at=Date.now()){const s=clone(input),t=settle(s,at),c=s.settings,base=hash(s),boost=t<s.boostUntil;return {state:s,now:t,hash:base,effectiveHash:base*(boost?c.boost.multiplier:1),boost,level:1+Math.floor(s.user.xp/100),claimCents:Number(BigInt(s.mine.micro)*BigInt(c.centsPerData)/BigInt(c.microPerData)),dailyReady:t>=s.lastDaily+c.daily.intervalMs,ads:counts(s,t),tier:tier(s),seasonEnd:c.season.epoch+(s.season.index+1)*c.season.durationMs,taskBadge:c.tasks.filter(x=>s.tasks[x.id]?.status!=='claimed').length,missions:c.missions.map(m=>({...m,current:Math.min(m.goal,s.stats[m.stat]-s.season.base[m.stat]),claimed:s.season.claimed.includes(m.id)}))};}
+function parseAmount(raw){if(!/^\d{1,9}(\.\d{1,2})?$/.test(String(raw).trim()))return null;const [whole,frac='']=String(raw).trim().split('.');return Number(whole)*100+Number(frac.padEnd(2,'0'));}
+const api={initial,load,settle,apply,view,hash,parseAmount};r.MiningEngine=api;if(typeof module==='object')module.exports=api;})(typeof globalThis!=='undefined'?globalThis:window);
