@@ -1,10 +1,12 @@
-# Bountera — Node Hub prototype
+# Bountera — Network Hub & Node Hub prototype
 
-The app uses the supplied black/graphite/green palette. The main CR balance and Home's next bonus stay white. Navigation: Home → Node → Tasks → Friends → Wallet. Home remains an outline icon.
+The app uses the latest reference's graphite, cyan and blue/lavender palette across every screen. The main CR balance and Home's next bonus stay white. Navigation: Home → Node → Tasks → Friends → Wallet. Home remains an outline icon.
+
+Home now shows Network Hub: a generated digital globe, explicitly simulated network statistics, an animated linear ad progress bar, a five-icon reward track and the existing Watch ad action. Reward amounts and available views reflect the existing configuration, not decorative values from the reference. Unlimited provider views are shown as Unlimited. Daily reward remains accessible below Earn credits. The Tasks summary and completed-task counter are smaller; its play button has been removed.
 
 ## Open the prototype
 
-Open index.html after extracting the ZIP, or open the standalone Bountera.html. All Node features work in the offline demo, with browser storage. The device image is embedded in the single HTML; no external assets or libraries are needed. Farm-Zone-Bot.html remains a compatibility copy.
+Open index.html after extracting the ZIP, or open the standalone Bountera.html. All Node features work in the offline demo, with browser storage. Both device and globe images are embedded in the single HTML; no external assets or libraries are needed. Farm-Zone-Bot.html remains a compatibility copy.
 
 For persistent server demo accounts, install Node.js 24+ and run npm start from the extracted project. Open http://127.0.0.1:4173. No npm dependencies are required. State, ledger and request records are stored in .data/bountera.sqlite. Keep that directory across restarts. File and HTTP previews use separate storage; server demo identity uses a browser cookie.
 
@@ -40,7 +42,7 @@ Open Node → Demo controls to advance node-only time by 1 hour, 4 hours, 1 day 
 
 assets/app-config.js contains Node defaults. assets/node-engine.js implements exact accumulation, upgrade costs, reward eligibility and progression. Buffer arithmetic uses integer micro-CR and BigInt division/remainders; the shared balance remains integer cents. Accrual integrates boost, certification, day and capacity boundaries without a background job.
 
-assets/node-ui.js contains the screen. assets/node.css follows the screenshot composition. assets/theme.css recolors all screens. The Home layout and existing motion code remain underneath the theme. Home animations work in file, static HTTP and server demo previews. Zero ad progress has no highlight. Hidden visual updates stop; Node respects reduced motion.
+assets/node-ui.js contains the Node screen. assets/node.css follows its reference composition. assets/theme.css sets the cool palette across all screens; assets/network-home.css contains the new Home composition and compact Tasks styling. The existing motion controller now drives linear progress, a clipped highlight and confirmed balance updates. Home animations work in file, static HTTP and server demo previews. Zero ad progress has no highlight. Hidden visual updates stop; Node respects reduced motion.
 
 SQLite transactions, collection request IDs and a unique ledger index protect server demo credits. Offline HTML intentionally uses local time/storage and is not a secure source of real-money balances. Production APIs refuse Node demo actions until real integrations are connected. Existing Farm data/history are preserved as legacy data, but its old interface is not loaded.
 
@@ -52,5 +54,5 @@ Run npm test for accounting, motion, authentication, persistence, legacy compati
 
 For GitHub upload the extracted project contents. Exclude .env, .data, database files and credentials. Netlify: build command npm run build; publish directory public; Node 24. This publishes the complete interactive local demo. Persistent server accounts require a Node host with persistent disk, HTTPS and frontend/API at one origin.
 
-The device image was generated with the built-in image generator using the imagegen skill. Asset and exact prompt: docs/node-artwork.md.
+The device and globe images were generated with the built-in image generator using the imagegen skill. Assets and exact prompts: docs/node-artwork.md and docs/network-artwork.md.
 
