@@ -98,3 +98,92 @@
 .app{padding-top:max(var(--system-top-space),env(safe-area-inset-top,0px))}
 .home-screen{min-height:580px}
 @media(max-height:639px){.home-screen .compact-hero{min-height:120px}.home-screen .orbit-rail{top:12%;bottom:18%;gap:3px}.home-screen .orbit-shortcut{min-height:32px;flex-basis:38px;gap:2px;padding:3px}.home-screen .orbit-shortcut svg{width:19px;height:19px}.home-screen .hero-art{height:100%;object-fit:contain}}
+
+/* DePIN glass flight deck — 2026-09-21 reference redesign. */
+:root{--bg:#070c17;--card:#232b38;--line:#69768766;--text:#f2f5fa;--muted:#b5bdcb;--accent:#78fff2;--nav-height:64px;--system-top-space:clamp(56px,10svh,88px)}
+.app{background:linear-gradient(#060c1766,#060b1588),url('depin-space.jpg') center top/cover fixed;position:relative;isolation:isolate}
+.home-screen{min-height:620px}
+.home-screen:before{inset:0;background:url('depin-space.jpg') center top/cover no-repeat;mask-image:none;-webkit-mask-image:none}
+.header.depin-header{position:relative;display:flex;align-items:center;gap:8px;flex:0 0 64px;height:64px;margin:4px 10px 10px;padding:7px 8px 7px 10px;border:1px solid #a9b5c04f;border-radius:19px;background:linear-gradient(115deg,#45546183,#27262eaa);box-shadow:inset 0 1px 1px #ffffff26,0 7px 24px #0004;backdrop-filter:blur(15px);z-index:6}
+.depin-back{display:grid;place-items:center;padding:0;width:22px;flex:0 0 22px;height:36px;background:transparent;color:#fff}
+.depin-back svg{width:18px;height:22px;stroke-width:1.4}
+.depin-title{padding:0;background:transparent;color:#f4f5f8;font-weight:400;font-size:clamp(12px,3.8vw,18px);white-space:nowrap;text-align:left;letter-spacing:-.35px;flex:1;min-width:0}
+.depin-account{display:flex;align-items:center;gap:7px;min-width:0;padding:6px 7px 6px 9px;border:1px solid #bdc4d14d;background:linear-gradient(120deg,#a7b8ca26,#9b97a229);border-radius:12px;height:49px;box-shadow:inset 0 1px 2px #fff1}
+.depin-balance{text-align:right;background:transparent;padding:0;min-width:0;color:var(--text)}
+.depin-balance>span{display:block;color:#c5c7cd;font-size:9px;line-height:1.3;font-weight:400;margin-bottom:3px}
+.depin-balance strong{display:block;font-size:12px;line-height:1.2;font-weight:400;white-space:nowrap;font-variant-numeric:tabular-nums}
+.depin-avatar{border-radius:50%;width:31px;height:31px;flex:0 0 31px;padding:4px;display:grid;place-items:center;background:radial-gradient(ellipse at 27% 28%,#93ddd780,#0e2b3db8 40%,#8f5c9c8c 80%),url('depin-space.jpg') center/cover;border:1px solid #aec6e129;color:#fff}
+.depin-avatar svg{width:23px;height:23px;stroke-width:1.3}
+.home-screen .compact-hero{min-height:170px;isolation:auto;overflow:hidden}
+.home-screen .compact-hero:after{height:30px;background:linear-gradient(transparent,#090d1744);z-index:4}
+.planet-window{mask-image:linear-gradient(#000 90%,transparent);-webkit-mask-image:linear-gradient(#000 90%,transparent);z-index:0}
+.planet-orbit{width:180%;left:9%;top:-10%;mix-blend-mode:normal;mask-image:radial-gradient(circle,#000 57.5%,transparent 62%);-webkit-mask-image:radial-gradient(circle,#000 57.5%,transparent 62%)}
+.planet-orbit:after{content:'';position:absolute;inset:7%;border-radius:50%;background:linear-gradient(125deg,transparent 10%,#04061b35 36%,#01040bc7 69%,#02040aed 95%);pointer-events:none}
+.planet-image{opacity:1;mask-image:none;-webkit-mask-image:none;animation-duration:360s}
+.home-screen .sonde-art{width:70%;height:76%;left:53%;top:53%;z-index:3;mix-blend-mode:normal;filter:drop-shadow(0 10px 15px #03051477)}
+.orbital-trails{position:absolute;inset:0;width:100%;height:100%;z-index:2;fill:none;stroke:#87fff3;stroke-width:.7;opacity:.62;filter:drop-shadow(0 0 3px #66fff4);pointer-events:none}
+.orbital-trails ellipse:nth-child(2){stroke:#bdb0ff;opacity:.65;stroke-width:.45}
+.orbital-trails ellipse:nth-child(3){opacity:.45;stroke-width:.4}
+.orbital-trails circle{fill:#a3fff9;stroke:none}
+.home-screen .orbit-rail{top:18%;bottom:13%;width:50px;gap:10px;z-index:5}
+.home-screen .rail-left{left:12px}.home-screen .rail-right{right:12px}
+.home-screen .orbit-shortcut{position:relative;width:50px;flex:0 1 52px;min-height:42px;gap:3px;padding:5px 3px;border:1px solid #c1e1e67d;border-radius:10px;background:linear-gradient(140deg,#c2d8f033,#b8b2d324 55%,#1d24396e);backdrop-filter:blur(9px);box-shadow:inset 0 0 0 4px #cdd9ef0b,0 3px 13px #06071840;color:#f4f6fc;font-size:8px}
+.orbit-shortcut:before{content:'';position:absolute;width:30%;height:2px;border-radius:3px;top:-1px;left:35%;background:#86fff5;box-shadow:0 0 9px #5ffff3}
+.home-screen .orbit-shortcut svg{width:21px;height:21px;color:#e3fffc;stroke-width:1.3}
+.home-screen .hash-row{font-size:7px;bottom:5px;left:15px;right:15px;color:#d0d5e4;z-index:6}
+.home-screen .mining-zone{margin:4px 14px 0;height:62px;flex-basis:62px}
+.home-screen .claim-button{height:62px;border-radius:17px;border:1px solid #8de5e687;background:linear-gradient(115deg,#6e8fa444,#49445291);backdrop-filter:blur(16px);box-shadow:inset 0 0 0 4px #e1fbff08,0 0 18px #69e7dc0b;padding:7px 14px}
+.home-screen .claim-button:before{display:none}
+.home-screen .claim-label{color:#cbd4e2;letter-spacing:1px;font-weight:400;font-size:8px}
+.home-screen .data-value{font-size:22px;color:#f1ffff;font-weight:500}
+.home-screen .data-value small{font-size:11px}
+.home-screen .claim-bottom{color:#cdd2e2;font-size:10px}
+.home-screen .compact-activities{margin:10px 10px 12px;padding:12px 10px;height:116px;flex-basis:116px;gap:9px;border:1px solid #b4bdcc55;border-radius:22px;background:linear-gradient(115deg,#364b5aab,#27252eba);box-shadow:inset 0 1px 2px #fff2,0 8px 24px #0004;backdrop-filter:blur(18px);align-items:center}
+.home-screen .activity-tile{position:relative;justify-self:center;width:100%;max-width:88px;aspect-ratio:1;min-height:0;align-items:center;justify-content:center;gap:3px;text-align:center;border-radius:50%;padding:8px 3px;border:1px solid #e0e7f060;background:linear-gradient(140deg,#899aae47,#5b657c37);box-shadow:inset 0 0 14px #b9e9ef0a;color:#eef4fc}
+.activity-tile:after{content:'';position:absolute;inset:-5px;border:1px solid #afbdcf40;border-radius:50%;pointer-events:none}
+.home-screen .activity-tile:nth-child(2){border-color:#72fff3;box-shadow:inset 0 0 18px #44e9de21,0 0 12px #50ffdf18;background:linear-gradient(145deg,#53808980,#34485255)}
+.home-screen .activity-tile h3{font-size:7px;font-weight:400;line-height:1.15;letter-spacing:.15px;min-height:0;color:#f0f5ff}
+.home-screen .activity-icon{height:19px;width:19px;align-self:center}
+.home-screen .activity-icon svg{width:17px;height:17px;stroke-width:1.4;color:#d9fffc}
+.home-screen .activity-value{font-size:10px;font-weight:500;letter-spacing:-.3px;color:#f7ffff}
+.bottom-nav{width:calc(100% - 16px);max-width:464px;bottom:max(6px,env(safe-area-inset-bottom));height:58px;padding:6px 4px;background:linear-gradient(120deg,#405365b0,#222331df);border:1px solid #b3c0d24d;border-radius:19px;box-shadow:inset 0 1px 1px #ffffff21,0 0 20px #02071566;backdrop-filter:blur(20px)}
+.nav-item{font-size:9px;color:#bbc4d1;gap:3px;border-radius:12px}
+.nav-item svg{width:20px;height:20px;stroke-width:1.3}
+.nav-item.active{color:#befff7;background:radial-gradient(ellipse at 50% 100%,#57f3e51a,transparent 75%)}
+.nav-item.active:after{content:'';position:absolute;bottom:-3px;left:35%;right:35%;height:2px;border-radius:3px;background:#7ffff0;box-shadow:0 0 8px #6fffe0}
+.nav-badge{background:#c0fff3;color:#203a42;border-color:#35434c;top:-2px}
+.card,.stat-strip,.tabs,.mission-row{background:linear-gradient(125deg,#63778c35,#222432b3);border-color:#abb9cc44;backdrop-filter:blur(12px)}
+dialog{background:linear-gradient(130deg,#34495ef5,#141726fa);border-color:#a4c3d46e}
+@media(max-width:360px){.header.depin-header{gap:5px;margin-left:8px;margin-right:8px;padding-left:7px}.depin-title{font-size:12px}.depin-account{gap:4px;padding-left:6px;padding-right:5px}.depin-balance strong{font-size:10px}.depin-avatar{width:26px;height:26px;flex-basis:26px}.depin-avatar svg{width:20px;height:20px}.home-screen .compact-activities{gap:8px;padding:10px;height:100px;flex-basis:100px}.home-screen .activity-tile{gap:2px;padding:5px 2px}.home-screen .activity-tile h3{font-size:6px}.home-screen .activity-value{font-size:8px}.home-screen .activity-icon,.home-screen .activity-icon svg{width:14px;height:14px}.home-screen .orbit-shortcut{width:44px;font-size:7px}.home-screen .orbit-rail{width:44px}.home-screen .rail-left{left:9px}.home-screen .rail-right{right:9px}}
+@media(max-height:680px){.header.depin-header{height:58px;flex-basis:58px;margin-bottom:6px}.depin-account{height:43px}.home-screen .compact-activities{height:100px;flex-basis:100px;margin-top:8px;margin-bottom:10px}.home-screen .mining-zone,.home-screen .claim-button{height:56px;flex-basis:56px}.home-screen .orbit-rail{top:12%;bottom:12%;gap:5px}.home-screen .orbit-shortcut{flex-basis:42px;min-height:36px}.home-screen .sonde-art{height:82%}}
+/* Legibility and fit on compact Telegram content viewports. */
+.home-screen{min-height:560px}
+.home-screen .activity-tile h3{font-size:8px}
+.home-screen .activity-value{font-size:11px}
+@media(max-width:360px){.home-screen .activity-tile h3{font-size:7px}.home-screen .activity-value{font-size:9px}}
+
+/* Reference geometry measured inside the phone, excluding its frame.
+   Planet rim: ~11% from the left, ~15% from the top of the content screen.
+   Anchor it to the full screen so the header cannot clip its upper limb. */
+.home-screen{--planet-scene-bottom:calc(268px + env(safe-area-inset-bottom))}
+.home-screen>.planet-window{inset:0;z-index:0;mask-image:linear-gradient(#000 calc(100% - var(--planet-scene-bottom) - 28px),transparent calc(100% - var(--planet-scene-bottom)));-webkit-mask-image:linear-gradient(#000 calc(100% - var(--planet-scene-bottom) - 28px),transparent calc(100% - var(--planet-scene-bottom)))}
+.home-screen>.planet-window .planet-orbit{width:180%;left:-4%;top:15%;transform:translateY(-8%)}
+.home-screen .sonde-art{width:62%;height:68%;left:53.5%;top:58%}
+.home-screen .orbital-trails{top:6%;height:94%}
+@media(max-width:360px){.home-screen{--planet-scene-bottom:calc(252px + env(safe-area-inset-bottom))}}
+@media(max-height:680px){.home-screen{--planet-scene-bottom:calc(242px + env(safe-area-inset-bottom))}}
+
+/* Small air gap below the balance panel, curved night side, compact Claim. */
+.home-screen>.planet-window .planet-orbit{top:calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 80px)}
+.planet-orbit:after{background:radial-gradient(ellipse 85% 100% at 0% 0%,transparent 24%,#06081c75 40%,#01030ae8 58%,#000 74%)}
+.home-screen .mining-zone{width:82%;margin-left:auto;margin-right:auto}
+.error-banner{position:fixed;left:50%;transform:translateX(-50%);top:calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 6px);width:calc(100% - 24px);max-width:456px;z-index:90;border:1px solid #a46960;border-radius:12px;box-shadow:0 8px 25px #0006}
+@media(max-height:680px){.home-screen>.planet-window .planet-orbit{top:calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 74px)}}
+
+/* Continuous planet behind the lower UI; no inherited horizon fade. */
+.home-screen>.planet-window{mask-image:none;-webkit-mask-image:none}
+.home-screen .compact-hero:after{display:none}
+.planet-orbit:after{background:radial-gradient(ellipse 100% 100% at 100% 100%,#000 34%,#01030af2 51%,#06071d85 68%,transparent 88%)}
+.home-screen .mining-zone{width:70%}
+.home-screen .claim-button{grid-template-columns:minmax(0,1fr);gap:0}
+.home-screen .compact-activities{position:relative;z-index:2}
