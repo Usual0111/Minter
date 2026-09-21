@@ -1,5 +1,15 @@
 # Bountera artwork
 
+## Current Home scene — 2026-09-21
+
+Home uses the user-supplied planet and space images, plus a transparent cutout of the supplied device:
+
+- `assets/survey-sonde-cutout.png`: transparent cutout of Modular_survey_sonde_in_space_2K_20260921185421.jpeg, prepared with imagegen on 2026-09-21. The original is retained as `assets/survey-sonde.jpg`.
+- `assets/frozen-planet.jpg`: Frozen_exoplanet_in_deep_space_2K_20260921190849.jpeg
+- `assets/deep-space.jpg`: Distant_galaxy_cluster_in_space_2K_20260921191521.jpeg
+
+CSS composes the probe over the starfield and clips the rotating planet to its upper cap. The starfield extends behind the header and reserved system area, ending with a soft fade at the original boundary above Claim. Layer order is space, planet, then probe. The probe PNG uses normal compositing, so the planet does not shine through its body. The planet diameter is 96% of the scene width (previously 132%); the original planet JPEG uses CSS blending. Rotation takes 90 seconds, or 360 seconds with reduced motion, and pauses while the page is hidden. The standalone package embeds all three images. The former orbital hero below is retained only as historical artwork; it is no longer displayed on Home.
+
 Generated with the built-in `image_gen` tool on 2026-09-20. Reference: the user-provided orbital-probe screenshot. The original generated images remain intact; copies are included as application assets. No phone frame, hand or screenshot text is baked into the app.
 
 ## Orbital hero
