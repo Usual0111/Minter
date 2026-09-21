@@ -65,6 +65,34 @@
 .compact-hero .hero-art{width:54%;height:auto;top:56%;mask-image:radial-gradient(ellipse 75% 47% at 50% 38%,#000 58%,transparent 98%);-webkit-mask-image:radial-gradient(ellipse 75% 47% at 50% 38%,#000 58%,transparent 98%)}
 .gems-panel .balance-symbol{color:var(--purple)}
 
+/* Compact shared header: player, centered wordmark, language/menu. */
+.player-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) 76px;gap:6px}
+.player-row .player-panel,.player-row .utility-panel{width:100%}
+.player-row .player-panel{padding:7px;gap:6px}
+.player-row .player-avatar{width:30px;height:30px;flex-basis:30px}
+.player-row .player-details strong{font-size:12px}
+.player-row .player-details>span{font-size:8px}
+.header-wordmark{display:flex;align-items:center;justify-content:center;white-space:nowrap;font-size:clamp(13px,4.8vw,22px);font-weight:800;letter-spacing:-.7px;color:#edf9f7}
+.header-wordmark>span{color:var(--accent)}
+.player-row .utility-panel{padding:3px;gap:0}
+
+/* User-supplied space imagery; keep the existing control layout and scene boundary. */
+.home-screen{position:relative;isolation:isolate;--scene-bottom:277px}
+.home-screen:before{content:'';position:absolute;inset:0 0 calc(var(--scene-bottom) + env(safe-area-inset-bottom));z-index:-1;pointer-events:none;background:url('deep-space.jpg') center top/cover no-repeat;mask-image:linear-gradient(#000 calc(100% - 28px),transparent);-webkit-mask-image:linear-gradient(#000 calc(100% - 28px),transparent)}
+.home-screen .compact-header,.home-screen .compact-hero{background:transparent}
+.home-screen .compact-hero{isolation:auto}
+.home-screen .compact-hero:after{height:30px;z-index:2}
+.planet-window{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;mask-image:linear-gradient(#000 calc(100% - 24px),transparent);-webkit-mask-image:linear-gradient(#000 calc(100% - 24px),transparent)}
+.planet-orbit{position:absolute;width:96%;aspect-ratio:1;left:2%;top:max(57%,calc(100% - 105px));mix-blend-mode:screen}
+.planet-image{display:block;width:100%;height:100%;object-fit:contain;mask-image:radial-gradient(circle,#000 58%,transparent 71%);-webkit-mask-image:radial-gradient(circle,#000 58%,transparent 71%);animation:planet-rotation 90s linear infinite;will-change:transform;opacity:.85}
+.home-screen .sonde-art{width:64%;height:94%;top:46%;object-fit:contain;z-index:1;mix-blend-mode:normal;mask-image:none;-webkit-mask-image:none}
+.compact-hero .online-tag,.compact-hero .sim-tag,.compact-hero .hash-row{z-index:4}
+.compact-hero .hash-row{text-shadow:0 1px 5px #000,0 0 10px #000}
+@keyframes planet-rotation{to{transform:rotate(360deg)}}
+@media(max-height:680px){.home-screen{--scene-bottom:254px}}
+/* Keep the explicitly requested orbital motion gentle with reduced motion enabled. */
+@media(prefers-reduced-motion:reduce){.planet-image{animation:planet-rotation 360s linear infinite!important}}
+
 /* Reserved background above the player card for phone / Telegram chrome. */
 :root{--system-top-space:clamp(64px,11svh,92px)}
 .app{padding-top:max(var(--system-top-space),env(safe-area-inset-top,0px))}
