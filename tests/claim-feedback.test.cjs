@@ -6,7 +6,7 @@ function fixture({empty=true,reject=false}={}){
  const toast={textContent:'',classList:classes},app={get innerHTML(){return markup},set innerHTML(value){markup=value;renders++},querySelector(){return {classList:classes}}},modal={addEventListener(){},querySelectorAll(){return []}};
  const document={hidden:false,documentElement:{},getElementById:id=>({app,modal,toast}[id]),addEventListener:(name,fn)=>events[name]=fn,querySelectorAll:()=>[]};
  const client={ready:true,state,now:()=>time,init:()=>new Promise(()=>{}),refresh:async()=>state,mutate:async()=>{mutations++;if(reject)throw Error('Accumulate at least 0.01 CR / Накопите хотя бы 0.01 CR');throw Error('Unexpected mutation');}};
- const context={MiningConfig:C,MiningEngine:E,MiningClient:client,document,window:{addEventListener(){}},setTimeout:()=>0,clearTimeout(){},setInterval(){},location:{hash:'#/home'}};
+ const context={NodeSystem:require('../assets/node-system.js'),NodeUI:require('../assets/node-ui.js'),MiningConfig:C,MiningEngine:E,MiningClient:client,document,window:{addEventListener(){}},setTimeout:()=>0,clearTimeout(){},setInterval(){},location:{hash:'#/home'}};
  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../assets/app.js'),'utf8'),context);
  return {toast,state,get renders(){return renders},get mutations(){return mutations},get markup(){return markup},click:()=>events.click({target:{closest:()=>({dataset:{action:'claim'},disabled:false})}})};
 }
