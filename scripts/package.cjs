@@ -5,7 +5,7 @@ let html=fs.readFileSync(path.join(root,'index.html'),'utf8'),css=fs.readFileSyn
 const embed=name=>'data:image/'+(/\.jpe?g$/i.test(name)?'jpeg':'png')+';base64,'+fs.readFileSync(path.join(root,'assets',name)).toString('base64');
 for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg'])css=css.replaceAll(`url('${name}')`,`url('${embed(name)}')`);
 html=html.replace('<link rel="stylesheet" href="assets/app.css">',()=>`<style>${css}</style>`);
-for(const name of ['config','engine','client','app']){
+for(const name of ['config','node-system','engine','client','node-ui','app']){
  let js=fs.readFileSync(path.join(root,`assets/${name}.js`),'utf8');
  for(const image of ['depin-probe.png','depin-planet.jpg'])js=js.replaceAll(`assets/${image}`,embed(image));
  html=html.replace(`<script src="assets/${name}.js"></script>`,()=>`<script>${js.replaceAll('</script','<\\/script')}</script>`);
