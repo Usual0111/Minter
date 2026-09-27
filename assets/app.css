@@ -237,3 +237,29 @@ dialog{background:linear-gradient(130deg,#34495ef5,#141726fa);border-color:#a4c3
 @keyframes station-deploy{from{opacity:.3;transform:translate(-50%,-50%) scale(.7) rotate(-8deg)}to{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}}
 @media(max-height:700px){.home-screen .journey-hero{min-height:185px}.journey-caption p{font-size:10px}.journey-selector{margin-bottom:0!important}.journey-training{margin-top:8px}.journey-unlocks{font-size:8px;margin-bottom:6px}.home-screen:has(.journey-welcome) .compact-activities{height:90px;flex-basis:90px}}
 @media(prefers-reduced-motion:reduce){.journey-device,.swarm-orbit,.swarm-dot,.hyperspace i{animation:none!important}.swarm-dot{transform:rotate(var(--angle)) translateX(90px)}.journey-progress span{transition:none}.hyperspace{display:none}}
+/* Restrained tactile motion. Only transform/opacity animate; no perpetual UI shine. */
+:root{--motion-ease:cubic-bezier(.22,.8,.24,1);--motion-fast:160ms}
+button{transition:transform var(--motion-fast) var(--motion-ease),opacity var(--motion-fast) ease}
+button:not(:disabled):active{transform:scale(.965);transition-duration:70ms}
+button:disabled{transition:opacity 140ms ease}
+@media(hover:hover){button:not(:disabled):hover{opacity:.9}}
+.nav-item.active svg{animation:nav-settle 240ms var(--motion-ease) both}
+@keyframes nav-settle{from{transform:translateY(3px) scale(.9);opacity:.65}to{transform:translateY(0) scale(1);opacity:1}}
+.claim-button:before{animation:none!important;display:none}
+.claim-content,.data-value,.claim-bottom,[data-live="balance"]{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum";white-space:nowrap}
+[data-home-live="data"]{display:inline-block;min-width:6.4ch;text-align:right}
+[data-home-live="equivalent"]{display:inline-block;min-width:4ch;text-align:right}
+.credit-feedback{position:fixed;z-index:110;pointer-events:none;font-size:20px;line-height:1;font-weight:600;font-variant-numeric:tabular-nums;color:#b8fff1;text-shadow:0 2px 7px #06111d;transform:translateX(-50%)}
+/* Float below the DePIN header; only dialog content scrolls. */
+dialog{position:fixed;inset:auto;top:var(--dialog-top,calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 76px));left:0;right:0;margin:0 auto;max-height:var(--dialog-height,calc(100dvh - max(var(--system-top-space),env(safe-area-inset-top,0px)) - 92px));max-block-size:var(--dialog-height,calc(100dvh - 180px));overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#61778b transparent;scroll-padding-top:60px}
+dialog::backdrop{backdrop-filter:none;background:#030810b8}
+.modal-head{position:sticky;top:-20px;z-index:2;margin:-20px -20px 16px;padding:18px 20px 14px;background:linear-gradient(125deg,#2c3d50,#1c2434);border-bottom:1px solid #a4c3d426}
+.modal-head h2{min-width:0;font-size:19px}.modal-head .close{flex-shrink:0}
+/* Same alloy-glass construction as the DePIN header and circular action dock. */
+.home-screen .journey-selector{gap:10px;margin-bottom:6px;align-items:stretch}
+.journey-selector button,.journey-phase{position:relative;background:linear-gradient(125deg,#344454bc,#252938c9);border:1px solid #b6c8d54d;box-shadow:inset 0 1px 0 #f2f8ff1c,inset 0 0 0 3px #b6c9e007,0 5px 12px #02050c22;backdrop-filter:blur(6px);border-radius:13px;color:#e0e8ee}
+.journey-selector button{padding:8px 12px;gap:9px;max-width:65%;font-size:11px;min-width:0}.journey-selector button>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.journey-selector small{color:#a6b9c8;font-size:8px;letter-spacing:1.4px}.journey-selector b{color:#b8d0dc;font-size:13px}.journey-selector svg{width:17px;color:#b6d6de}
+.journey-phase{display:flex;align-items:center;justify-content:center;gap:7px;max-width:35%;padding:8px 10px;font-size:9px;text-align:center;line-height:1.35}
+.journey-phase:before{content:'';width:4px;height:4px;border-radius:50%;background:#a4e7dc;box-shadow:0 0 5px #6fe1d54d;flex-shrink:0}
+@media(prefers-reduced-motion:reduce){button{transition:none!important}.nav-item.active svg{animation:none!important}.credit-feedback{display:none}.planet-image{animation:none!important}}
+@media(prefers-reduced-transparency:reduce){.journey-selector button,.journey-phase{background:#263342;backdrop-filter:none}dialog{background:#1b2736}}
