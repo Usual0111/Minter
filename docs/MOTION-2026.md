@@ -25,3 +25,24 @@ Regression checks cover planet-container preservation after Claim, numerical int
 The preview browser currently reports reduced motion, so its screenshots show static end states. Animation scheduling and counter progression were additionally checked with a controlled clock. No FPS or battery measurements on a physical iPhone/Android were performed; zero performance cost cannot be guaranteed. New effects introduce no animation library, canvas, WebGL, or extra image assets.
 
 Files: `assets/motion.js`, `assets/app.js`, `assets/home-ui.js`, `assets/app.css`.
+
+## Claim card and confirmed reward feedback
+
+Home keeps a 48 px footer inside the Collect DATA card. The first-reward offer,
+ad cooldown, welcome-boost countdown and idle hint use this same reserved row.
+The old standalone collected-DATA-reserve link is no longer rendered on Home;
+the underlying DATA balance and exchange accounting are unchanged.
+
+The CTA uses the active tier accent. Its ready state breathes with one opacity
+animation; an unavailable claim does not pulse. A confirmed Home claim uses the
+operation's `collected` DATA amount for the floating label, six short-lived
+particles and lens/exhaust flashes. The device pulses to 103% using the separate
+scale property, preserving its idle transform. The confirmed CR balance counts
+up and briefly pulses. Failed/pending requests show no claim reward effects.
+Effects finish in 220–760 ms and clean up on completion, reduced-motion changes
+or app hiding. Planet DOM remains mounted through claims.
+
+Checks: Home offer/cooldown/boost/idle rendering, exact confirmed feedback,
+particle bounds/cleanup, reduced motion/background behavior and the existing
+mining/economy tests. Browser checks compare activity-dock geometry across
+first claim and rewarded-ad completion, including a narrow mobile viewport.
