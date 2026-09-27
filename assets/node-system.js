@@ -38,7 +38,7 @@ function metrics(s,e,t){const c=cfg(s),g=c.galaxies.find(g=>g.id===e.galaxy),swa
  if(swarm&&n.tier<=3)r=r*BigInt(10000+c.swarmBps)/10000n;
  cap+=r*BigInt(n.bufferHours+2*s.nodeHub.modules.battery);rate+=r;
  }
- if(t<e.overclockUntil)rate*=2n;
+ rate*=BigInt(Math.max(t<e.overclockUntil?2:1,t<(e.welcomeBoostUntil||0)?2:1,t<(e.boost4Until||0)?4:1,t<(e.tutorialRateUntil||0)?e.tutorialMultiplier:1));
  if(t<e.eventUntil)rate*=BigInt(c.eventMultiplier);
  return {rate:safe(Number(rate)),capacity:safe(Number(cap)),swarm};}
 function createEvent(s,t){const h=s.nodeHub,day=Math.floor(t/D);if(h.modules.radar&&h.eventDay!==day){h.radarEpoch??=t;const starts=day*D+(h.radarEpoch%D),galaxy=cfg(s).galaxies[day%2];h.eventDay=day;h.event={id:'meteor-'+day,galaxy:galaxy.id,startsAt:starts,endsAt:starts+cfg(s).eventMs*h.modules.radar,extended:false,used:false};}}
@@ -50,7 +50,7 @@ function settle(s,t){const h=ensure(s,t),c=cfg(s);createEvent(s,t);
   // Fixed boundary integration: opening the screen does not alter income or loss.
   while(from<t||(e.nextLossAt&&e.nextLossAt<=from)){const m=metrics(s,e,from),lossRate=Math.max(0,c.lossBps*(5-h.modules.encryption)/5);
    if(e.nextLossAt&&e.nextLossAt<=from){const loss=Number(BigInt(e.micro)*BigInt(lossRate)/10000n);e.micro-=loss;e.lostMicro+=loss;h.lostMicro+=loss;e.nextLossAt+=H;}
-   let end=Math.min(t,...[e.overclockUntil,e.eventUntil,e.nextLossAt].filter(x=>x>from));
+   let end=Math.min(t,...[e.overclockUntil,e.eventUntil,e.nextLossAt,e.welcomeBoostUntil,e.boost4Until,e.tutorialRateUntil].filter(x=>x>from));
    if(m.rate&&e.micro<m.capacity&&!e.nextLossAt){const until=Number((BigInt(m.capacity-e.micro)*BigInt(H)-BigInt(e.remainder)+BigInt(m.rate)-1n)/BigInt(m.rate));end=Math.min(end,from+Math.max(1,until));}
    const total=BigInt(m.rate)*BigInt(end-from)+BigInt(e.remainder),gain=Number(total/BigInt(H));
    e.micro=Math.min(m.capacity,safe(e.micro+gain));e.remainder=e.micro===m.capacity?0:Number(total%BigInt(H));
@@ -81,8 +81,8 @@ function adReward(s,p,t,id){const h=s.nodeHub,e=p.galaxy?getExp(s,p.galaxy):null
  case'loot':{const amount=e.anomalies*2;h.resources.anomalies=safe(h.resources.anomalies+amount);e.anomalies=0;record(s,'anomaly_reward',t,id,{anomalies:amount});return;}
  case'save':e.nextLossAt=t+D;break;
  case'extend':check(h.event?.id===p.eventId,'Event has changed / Ивент изменился');h.event.endsAt=Math.max(t,h.event.endsAt)+cfg(s).eventExtensionMs;h.event.extended=true;break;
- case'travel':{const remaining=Math.max(0,e.arrivesAt-t),saved=Math.floor(remaining/2);e.arrivesAt-=saved;e.activeAt-=saved;e.travelReduced=true;break;}
- case'deploy':e.activeAt=Math.min(e.activeAt,t);e.lastAt=t;break;}
+ case'travel':{const remaining=Math.max(0,e.arrivesAt-t),saved=Math.floor(remaining/2);e.arrivesAt-=saved;e.activeAt-=saved;if(e.swarmAt)e.swarmAt-=saved;if(e.eventUntil)e.eventUntil-=saved;if(e.tutorialRateUntil)e.tutorialRateUntil-=saved;e.devices.forEach(d=>d.resourceAt=Math.min(d.resourceAt,e.activeAt));e.travelReduced=true;break;}
+ case'deploy':{const saved=Math.max(0,e.activeAt-t);e.activeAt=Math.min(e.activeAt,t);e.swarmAt=e.activeAt;if(e.eventUntil)e.eventUntil-=saved;if(e.tutorialRateUntil)e.tutorialRateUntil-=saved;e.devices.forEach(d=>d.resourceAt=Math.min(d.resourceAt,e.activeAt));e.lastAt=t;}break;}
  record(s,'expedition_ad_'+p.purpose,t,id);
 }
 function apply(s,a,p,t,id,add){const h=s.nodeHub,c=cfg(s);let out={};
@@ -101,3 +101,4 @@ function apply(s,a,p,t,id,add){const h=s.nodeHub,c=cfg(s);let out={};
  return out;}
 const api={config,ensure,settle,apply,available,unlocked,idleHash,fleetHash,metrics,status,cost,adCheck,adReward};root.NodeSystem=api;if(typeof module==='object')module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:window);
+
