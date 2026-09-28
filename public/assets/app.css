@@ -309,3 +309,74 @@ body.force-animations .home-screen .claim-card .claim-button::after{animation:cl
 body.force-animations .claim-slot{animation:claim-slot-in 180ms ease-out both!important}
 body.force-animations .credit-feedback{display:block}
 body.force-animations .claim-effect{display:inline-block}
+/* Canyon / corporate DePIN theme — screenshot reference, September 2026. */
+:root{--bg:#1b1d21;--card:#24262b;--line:#494c51;--text:#f4f4f5;--muted:#939598;--accent:#40cbd0;--cyan:#40cbd0;--nav-height:60px;--system-top-space:0px}
+body{background:#15171b;color:var(--text)}
+.app{background:linear-gradient(#202328,#1b1d21);box-shadow:none;border:0;padding-top:calc(max(env(safe-area-inset-top,0px),var(--tg-content-safe-area-inset-top,0px)) + 14px)}
+.header.depin-header{position:relative;z-index:8;height:42px;min-height:42px;flex:0 0 42px;margin:0 14px 4px;padding:0;display:flex;align-items:center;justify-content:space-between;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.depin-header .depin-title{font-size:23px;font-weight:600;color:#fff;letter-spacing:-.6px;line-height:1;padding:0;text-align:left;flex:none;background:none;border:0}
+.depin-header .depin-account{display:flex;align-items:center;gap:7px;border:1px solid #41444a;border-radius:30px;background:#22252bd9;padding:6px 10px;min-width:0;height:34px;box-shadow:none}
+.depin-header .depin-avatar{width:19px;height:22px;min-width:19px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;color:#94969b}
+.depin-header .depin-avatar svg{width:18px;height:20px;fill:#96989e;stroke-width:1.2}
+.depin-header .depin-balance{padding:0;background:none;border:0;min-width:0;text-align:right}
+.depin-header .depin-balance strong{font-size:15px;font-weight:400;color:#a6a8ad;white-space:nowrap}
+.home-screen{height:100dvh;min-height:660px;padding-bottom:calc(60px + env(safe-area-inset-bottom,0px));overflow:hidden;background:linear-gradient(150deg,#24272b,#1b1c20)}
+.home-screen::before{display:none}
+.home-screen>.planet-window{display:none}
+.home-screen>main{position:relative;display:flex;flex-direction:column;gap:0;min-height:0;padding-bottom:22px}
+.home-screen .journey-hero.canyon-hero{position:relative;flex:1 1 auto;min-height:180px;margin:0;overflow:visible;isolation:isolate;background:none}
+.canyon-hero::before{content:'';position:absolute;z-index:-1;inset:-65px 0 -90px;pointer-events:none;background:linear-gradient(#11171d 0%,transparent 20%,transparent 66%,#23262b 100%),url('canyon-world.png') center center/100% 100% no-repeat}
+.home-screen .canyon-hero:after{display:none}
+.home-screen .canyon-hero .journey-device{position:absolute;left:52%;top:55%;width:74%;height:90%;object-fit:contain;object-position:center;max-width:none;transform:translate(-50%,-50%);filter:none!important;z-index:1;animation:canyon-float 9s ease-in-out infinite!important}
+.home-screen .canyon-hero .carrier-device,.home-screen .canyon-hero .station-device{width:64%;height:82%}
+.canyon-caption{position:relative;z-index:3;text-align:center;flex:0 0 84px;min-height:84px;padding:0 9px;color:#929397;pointer-events:none}
+.canyon-caption h1{font-size:clamp(22px,6.7vw,32px);font-weight:600;letter-spacing:.15px;line-height:1.2;white-space:nowrap;margin:0 0 10px;color:#fff}
+.canyon-caption p{font-size:clamp(11px,3.35vw,16px);font-weight:400;line-height:1.35;margin:0 0 6px;white-space:nowrap}
+.canyon-caption .journey-progress{max-width:65%;margin:6px auto}
+.home-screen .journey-actions{position:relative;z-index:5;width:100%;margin:6px 0 8px;padding:0 14px;flex:0 0 164px;height:164px;min-height:164px;display:flex;justify-content:center;align-items:center;gap:6px}
+.home-screen .journey-actions .claim-card{--claim-accent:#40cbd0!important;position:relative;width:100%;height:164px;min-height:164px;margin:0;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:0;border:0;background:none;box-shadow:none;border-radius:0;overflow:visible;isolation:auto}
+.home-screen .journey-actions .claim-card .claim-button{position:relative;display:flex;align-items:center;justify-content:center;width:146px;height:146px;min-height:146px;flex:0 0 146px;margin:0;padding:14px;border:0;border-radius:50%;background:none;box-shadow:none;backdrop-filter:none;overflow:visible;opacity:1;animation:none!important;transform:none}
+.home-screen .claim-card .claim-button::before,.home-screen .claim-card .claim-button::after{display:none!important}
+.collect-ring{position:absolute;inset:0;width:100%!important;height:100%!important;overflow:visible;pointer-events:none;transform:rotate(-90deg)}
+.collect-ring circle{fill:none;stroke-width:9}
+.collect-ring .ring-track{stroke:#121519}
+.collect-ring .ring-light{stroke:#40cbd0;stroke-linecap:round;stroke-dasharray:40 100;filter:drop-shadow(0 0 5px #40cbd055);animation:ring-breathe 4s ease-in-out infinite}
+.home-screen .claim-card .claim-content{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px}
+.home-screen .claim-card .claim-label{font-size:13px;font-weight:500;letter-spacing:0;color:#fafafa;line-height:1.2;text-transform:uppercase}
+.home-screen .claim-card .data-value{font-size:15px;line-height:1.1;font-weight:400;color:#fff;letter-spacing:0;text-shadow:none}
+.home-screen .claim-card .data-value small{font-size:15px;color:#fff;font-weight:400}
+.home-screen .claim-card .claim-bottom{font-size:14px;color:#97999d;margin:0;gap:3px;line-height:1.1}
+[data-home-live="data"],[data-home-live="equivalent"]{min-width:0;text-align:center}
+.home-screen .claim-card .claim-slot{width:100%;height:18px;min-height:18px;max-height:18px;flex:0 0 18px;border:0;border-radius:0;padding:0;background:none;box-shadow:none;display:flex;flex-direction:row;gap:5px;justify-content:center;color:#a6a9ad;font-size:8px;animation:none!important}
+.home-screen .claim-slot strong{font-size:8px;color:#67c7ca;font-weight:400}
+.home-screen .claim-slot:not([data-action="homeDouble"]){visibility:hidden}
+.home-screen .compact-activities{flex:0 0 80px;height:80px;min-height:80px;margin:4px 14px 0;padding:6px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid #53555a;border-radius:9px;background:none;box-shadow:none;backdrop-filter:none;overflow:hidden}
+.home-screen .compact-activities .activity-tile{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;width:100%;height:100%;min-height:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;color:#ddd;text-align:center;transform:none}
+.home-screen .activity-tile:before,.home-screen .activity-tile:after{display:none}
+.home-screen .activity-tile h3{margin:0;display:block;font-size:12px;line-height:1.2;letter-spacing:0;font-weight:400;text-transform:uppercase;color:#e5e5e5}
+.home-screen .activity-icon{width:26px;height:26px;border:0;border-radius:0;background:none;box-shadow:none;display:grid;place-items:center}
+.home-screen .activity-icon svg{width:26px;height:26px;color:#96989a;stroke-width:2;filter:none}
+.home-screen .journey-training{margin:auto 14px 4px;min-height:80px;justify-content:center}
+.bottom-nav{bottom:0;left:50%;width:100%;max-width:480px;height:calc(60px + env(safe-area-inset-bottom,0px));padding:4px 4px calc(3px + env(safe-area-inset-bottom,0px));border:0;border-radius:0;background:#28292d;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;gap:2px}
+.nav-item{border:1px solid transparent;border-radius:9px;gap:4px;padding:4px 0;color:#86898c;font-size:10px;text-transform:uppercase;background:none;box-shadow:none}
+.nav-item svg{height:24px;width:24px;stroke-width:1.5;fill:none!important;filter:none}
+.nav-item.active{background:linear-gradient(145deg,#57595d,#303238 60%,#45464a);border-color:#66676b;color:#d2d3d4;box-shadow:inset 0 0 10px #ffffff0d}
+.nav-item.active svg{color:#b7b9bb;fill:none!important;filter:none}
+.nav-badge{background:#40cbd0;color:#112429;font-size:8px;min-width:12px;height:12px;line-height:12px}
+.card,.stat-strip,.tabs,.notice,.hub-summary,.node-card,.task-card{background:#26292e;border-color:#46494e;box-shadow:none;backdrop-filter:none}
+.primary{background:linear-gradient(115deg,#4ecbd0,#36abb4);color:#10282d;border:1px solid #6dd0d4;box-shadow:none}
+.secondary,.tabs button.active{background:#34383e;border-color:#53585d;color:#e4e7e9;box-shadow:none}
+.accent,.reward-line{color:#58c6cb}.muted,.subtitle{color:#a0a3a7}
+dialog{background:#24272d;border:1px solid #4f535b;box-shadow:0 16px 50px #0007}.modal-head{background:#292d33;border-bottom-color:#44484e}
+@keyframes canyon-float{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-3px)}}
+@keyframes ring-breathe{0%,100%{opacity:.8}50%{opacity:1}}
+@media(min-height:780px){.home-screen .journey-actions,.home-screen .journey-actions .claim-card{height:184px;min-height:184px;flex-basis:184px}.home-screen .journey-actions .claim-card .claim-button{width:166px;height:166px;min-height:166px;flex-basis:166px}.home-screen .compact-activities{height:88px;min-height:88px;flex-basis:88px}.home-screen .canyon-caption{flex-basis:94px;min-height:94px}}
+@media(max-width:350px){.canyon-caption h1{font-size:21px}.canyon-caption p{font-size:10px}.home-screen .activity-tile h3{font-size:10px}.depin-header .depin-title{font-size:21px}.depin-header .depin-balance strong{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.home-screen .canyon-hero .journey-device,.collect-ring .ring-light{animation:none!important}}
+body.force-animations .home-screen .canyon-hero .journey-device{animation:canyon-float 9s ease-in-out infinite!important}
+body.paused .home-screen .canyon-hero .journey-device,body.paused .collect-ring .ring-light{animation-play-state:paused!important}
+/* Fade the artwork into the page itself, with no rectangular lower edge. */
+.canyon-hero::before{inset:-65px 0 -55px;background:linear-gradient(#11171d,transparent 23%),url('canyon-world.png') center center/100% 100% no-repeat;mask-image:linear-gradient(#000 52%,transparent 100%);-webkit-mask-image:linear-gradient(#000 52%,transparent 100%)}
+.home-screen .canyon-hero .probe-device{width:64%;left:54%;top:51%}
+.node-hub{--hub-line:#46494e}.node-hub .card{background:linear-gradient(135deg,#292c31,#202328);border-color:#46494e;box-shadow:none}
+.hub-tabs{background:#24272c;backdrop-filter:none}.hub-tabs .active{background:#393d43;color:#e5e7e8;box-shadow:none}
