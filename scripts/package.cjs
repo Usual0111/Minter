@@ -3,7 +3,7 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'outputs');
 fs.mkdirSync(out,{recursive:true});
 let html=fs.readFileSync(path.join(root,'index.html'),'utf8'),css=fs.readFileSync(path.join(root,'assets/app.css'),'utf8');
 const embed=name=>'data:image/'+(/\.jpe?g$/i.test(name)?'jpeg':'png')+';base64,'+fs.readFileSync(path.join(root,'assets',name)).toString('base64');
-for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg','canyon-world.png'])css=css.replaceAll(`url('${name}')`,`url('${embed(name)}')`);
+for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg','canyon-world.png','aurora-scanner-scene.png'])css=css.replaceAll(`url('${name}')`,`url('${embed(name)}')`);
 html=html.replace('<link rel="stylesheet" href="assets/app.css">',()=>`<style>${css}</style>`);
 for(const name of ['config','node-system','home-system','cr-session-system','engine','client','node-ui','home-ui','motion','app']){
  let js=fs.readFileSync(path.join(root,`assets/${name}.js`),'utf8');

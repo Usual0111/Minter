@@ -464,3 +464,55 @@ dialog::backdrop{background:rgba(3,9,17,.38);backdrop-filter:blur(12px) saturate
 .modal-head{background:transparent;border:0;border-bottom:1px solid #adcfe521;border-radius:0;padding:0 0 14px;margin-bottom:16px}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){dialog::backdrop{background:rgba(3,9,17,.64)}}
 @media(prefers-reduced-transparency:reduce){dialog::backdrop{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(3,9,17,.72)}}
+/* Aurora silver — reference 1 interface / reference 2 scene composition. */
+.home-screen{position:relative;isolation:isolate;background:#090d14;--accent:#a4e9ba;--muted:#a4a8b1;padding-bottom:90px}
+.home-screen:before{content:'';position:absolute;z-index:-1;pointer-events:none;inset:105px 0 0;background:linear-gradient(0deg,#090d14 0%,transparent 30%),url('aurora-scanner-scene.png') center top/100% auto no-repeat}
+.home-toolbar{display:flex;justify-content:space-between;align-items:center;margin:0 16px 12px;height:38px}
+.home-toolbar button{display:grid;place-items:center;width:38px;height:38px;padding:7px;background:none;border:0;color:#a8abb6}
+.home-toolbar svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.7}
+.home-toolbar .profile-control{border-radius:50%;background:linear-gradient(140deg,#30343e,#1e222d)}
+.home-screen .header.session-header{display:flex;flex-wrap:nowrap;min-height:48px;margin:0 16px;gap:10px;align-items:center;background:none}
+.home-screen .session-header .galaxy-selector{min-width:0;flex:1;padding:0;text-align:left;align-items:flex-start}
+.home-screen .galaxy-selector span{font-size:17px;font-weight:550;line-height:1.2;color:#e6e7ec}
+.home-screen .galaxy-selector small{font-size:13px;margin-top:5px;color:#9b9da8}
+.home-screen .session-wallet{background:repeating-linear-gradient(0deg,#ffffff06 0 1px,transparent 1px 3px),linear-gradient(105deg,#a2a4a8,#f0f0f0 42%,#acadb2 78%,#d6d6d8);border:1px solid #ffffff83;border-radius:9px;box-shadow:0 3px 9px #0005,inset 0 1px 1px #fff9;padding:9px 12px;gap:10px;min-height:44px;flex:0 1 auto}
+.home-screen .session-wallet strong{font-size:21px;font-weight:600;color:#10131b;white-space:nowrap}
+.home-screen .session-wallet svg{width:23px;height:23px;color:#555760;flex-shrink:0}
+.home-screen .journey-hero.session-scene{height:clamp(190px,28dvh,280px);background:none;overflow:visible}
+.home-screen .session-scene:before,.home-screen .session-scene:after{display:none}
+.home-screen .equipment-summary{margin:0 16px 14px;display:block}
+.home-screen .equipment-summary h1{font-size:26px;font-weight:650;letter-spacing:.3px;text-shadow:0 2px 5px #0008}
+.home-screen .equipment-summary h1 span{display:inline-block;font-size:14px;color:#12151c;background:linear-gradient(105deg,#a4a5a8,#eeeeee,#9f9fa5);border:1px solid #fff7;border-radius:7px;padding:5px 9px;text-shadow:none;box-shadow:0 3px 6px #0005;font-weight:500}
+.home-screen .equipment-summary p{font-size:13px;color:#b4b7bf;margin-top:6px;text-shadow:0 1px 4px #000}
+.home-screen .equipment-link{position:absolute;inset:0;opacity:0;width:100%}
+.home-screen .session-panel{display:grid;grid-template-columns:78px minmax(0,1fr);column-gap:10px;row-gap:0;padding:23px 16px 17px;margin:0 16px;border-radius:17px;background:linear-gradient(130deg,#6075828c,#25272fd9 80%);border:1px solid #d9e4ed45;box-shadow:inset 0 1px 1px #fff2,0 8px 25px #0002;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+.home-screen .session-status{grid-column:1;grid-row:1 / 3;position:relative;width:76px;height:76px;margin:0;align-self:center;display:grid;place-items:center}
+.session-orbit{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.session-orbit circle{fill:none;stroke:#91cfa344;stroke-width:5.5}.session-orbit .orbit-fill{stroke:#a1e9b7;stroke-linecap:round;filter:drop-shadow(0 0 4px #7ee7a080);transition:stroke-dashoffset .3s linear}
+.home-screen .session-status h2{font-size:11px;color:#aae5bd;text-align:center;max-width:60px;font-weight:500;line-height:1.25;z-index:1}
+.home-screen .session-amount{grid-column:2;grid-row:1;font-size:clamp(37px,10.5vw,62px);font-weight:650;line-height:1.15;white-space:nowrap;letter-spacing:-1px;color:#f4f5fa;align-self:end;font-variant-numeric:tabular-nums}
+.home-screen .session-amount small{font-size:.43em;letter-spacing:0;color:#f4f5fa}
+.home-screen .session-caption{grid-column:2;grid-row:2;font-size:12px;color:#b8bac3;margin:4px 0 0;line-height:1.3}
+.home-screen .session-details{grid-column:1 / -1;margin:22px 0 12px;display:flex;justify-content:space-between;gap:12px}
+.home-screen .session-details>div:last-child{text-align:right}
+.home-screen .session-details dt{font-size:13px;color:#b5b7bf;margin-bottom:3px}
+.home-screen .session-details dd{font-size:19px;color:#f0f1f6;display:flex;align-items:center;gap:6px;line-height:1.2;font-weight:500}
+.home-screen .session-details dd svg{width:21px;height:21px;color:#c5c7cf}
+.home-screen .session-progress{grid-column:1 / -1;height:7px;margin:0 0 17px;background:#80818e66;border-radius:3px;mask-image:repeating-linear-gradient(to right,#000 0 calc(16.666% - 2px),transparent calc(16.666% - 2px) 16.666%);-webkit-mask-image:repeating-linear-gradient(to right,#000 0 calc(16.666% - 2px),transparent calc(16.666% - 2px) 16.666%)}
+.home-screen .session-progress span{background:linear-gradient(90deg,#f4f5f7,#839ba7,#fafafa);box-shadow:inset 0 1px 2px #fff9;border-radius:3px}
+.home-screen .session-action{grid-column:1 / -1;min-height:40px;display:grid;place-items:center}
+.home-screen .session-confirmed{font-size:14px;line-height:1.4;color:#abe9c6;border:1px solid #ffffff28;background:linear-gradient(135deg,#ffffff1c,#ffffff08);border-radius:22px;padding:7px 12px;margin:0;min-height:0}
+.home-screen .session-cta{border:1px solid #ffffff60;background:linear-gradient(110deg,#adb3ba,#f2f3f5 45%,#a4adb5);color:#151b24;font-weight:600;min-height:44px;height:auto;padding:10px 12px;border-radius:11px;box-shadow:inset 0 1px 1px #fff8}
+.home-screen .session-cta:disabled{opacity:.6}
+.home-screen .session-note{grid-column:1 / -1;font-size:12px;color:#b8bac3;min-height:0;line-height:1.5;margin:16px 0 0;text-align:center}
+.home-screen .session-more{margin:12px 20px 0;color:#b7bbc5;font-size:12px}.session-more summary{cursor:pointer;min-height:32px;padding:8px 0}.home-screen .session-disclaimer{font-size:9px;opacity:.7;margin:5px 16px}
+.home-screen .bottom-nav{background:linear-gradient(100deg,#17212ce8,#10141cec)!important;border-top:1px solid #c5d3e332;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;height:calc(68px + env(safe-area-inset-bottom,0px))}
+.home-screen .nav-item{color:#9398a5;font-size:11px}.home-screen .nav-item svg{width:25px;height:25px}.home-screen .nav-item.active,.home-screen .nav-item.active svg{color:#edf4ff}.home-screen .nav-item.active:after{top:-4px;bottom:auto;width:40px;background:#e5efff;box-shadow:0 6px 17px #b8ddff55}.home-screen .nav-badge{background:#bccbd8;color:#111722}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:370px){.home-screen .session-wallet strong{font-size:18px}.home-screen .galaxy-selector span{font-size:15px}.home-screen .session-panel{padding:20px 13px 15px;grid-template-columns:67px minmax(0,1fr);gap:8px}.home-screen .session-status{width:65px;height:65px}.home-screen .session-amount{font-size:36px}.home-screen .session-caption{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.session-orbit .orbit-fill{transition:none}}
+@media(prefers-reduced-transparency:reduce){.home-screen .session-panel{background:#252d37f2;backdrop-filter:none;-webkit-backdrop-filter:none}}
+.low-effects .home-screen .session-panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:#26313beb}
+.home-screen .header.silver-header{display:block;height:auto;padding:0;margin:0;background:none;border:0;box-shadow:none}
+.home-screen .silver-header .session-header{display:flex;flex-wrap:nowrap;min-height:48px;margin:0 16px;gap:10px;align-items:center;background:none}
+.home-screen::before{display:block}
