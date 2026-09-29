@@ -1,1 +1,0 @@
-{"name":"bountera","version":"5.0.0","private":true,"description":"Bountera orbital DATA mining game demo","scripts":{"start":"node --env-file-if-exists=.env server/index.cjs","build":"node scripts/build-static.cjs","test":"node --test --test-isolation=none tests/*.test.cjs","package":"node scripts/package.cjs"},"engines":{"node":">=24"}}
