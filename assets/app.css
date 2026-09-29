@@ -516,3 +516,63 @@ dialog::backdrop{background:rgba(3,9,17,.38);backdrop-filter:blur(12px) saturate
 .home-screen .header.silver-header{display:block;height:auto;padding:0;margin:0;background:none;border:0;box-shadow:none}
 .home-screen .silver-header .session-header{display:flex;flex-wrap:nowrap;min-height:48px;margin:0 16px;gap:10px;align-items:center;background:none}
 .home-screen::before{display:block}
+/* Reference fidelity: only Telegram space above the galaxy / balance row. */
+.home-screen{font-family:Arial,Helvetica,sans-serif;padding-bottom:calc(78px + env(safe-area-inset-bottom,0px));min-height:100dvh}
+.home-screen::before{top:0;bottom:0;background:linear-gradient(0deg,#090d14 0%,transparent 18%),url('aurora-manta-scene.png') center 0/100% auto no-repeat}
+.home-screen .silver-header .session-header{margin:0 16px;min-height:47px}
+.home-screen .session-header .galaxy-selector span{font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:600}
+.home-screen .session-header .galaxy-selector small{font-size:13px;color:#9296a2}
+.home-screen .session-wallet{border-radius:8px;padding:9px 13px;min-height:45px}
+.home-screen .session-wallet strong{font-family:Arial,Helvetica,sans-serif;font-size:23px;font-weight:650;letter-spacing:-.6px}
+.home-screen .journey-hero.session-scene{height:clamp(178px,51vw,296px)}
+.home-screen .equipment-summary{margin:0 16px 16px}
+.home-screen .equipment-summary h1{font-family:Arial,Helvetica,sans-serif;font-size:27px;font-weight:700;line-height:1.15;letter-spacing:.2px}
+.home-screen .equipment-summary h1 span{font-size:15px;padding:4px 9px;border-radius:7px;margin-left:5px;vertical-align:4px}
+.home-screen .equipment-summary p{font-size:13px;line-height:1.35;margin-top:6px}
+.home-screen .session-panel{grid-template-columns:72px minmax(0,1fr);column-gap:10px;padding:26px 17px 17px;border-radius:17px;background:linear-gradient(130deg,#8195a26e,#292b32e0 75%);border:1px solid #dfe7f54d;backdrop-filter:blur(14px) saturate(110%);-webkit-backdrop-filter:blur(14px) saturate(110%)}
+.home-screen .session-status{width:70px;height:70px}
+.home-screen .session-status h2{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:400;max-width:57px}
+.home-screen .session-amount{font-family:Arial,Helvetica,sans-serif;font-size:clamp(35px,12.6vw,64px);line-height:1.02;font-weight:700;letter-spacing:-1.5px;overflow-wrap:normal}
+.home-screen .session-amount small{font-size:.45em;font-weight:600;letter-spacing:0}
+.home-screen .session-caption{font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:1.3;margin-top:5px;color:#b3b6bf}
+.home-screen .session-details{margin:21px 0 11px}
+.home-screen .session-details dt{font-size:13px;line-height:1.3;font-weight:400}
+.home-screen .session-details dd{font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:500;gap:6px}
+.home-screen .session-details dd svg{width:22px;height:22px;stroke-width:1.7}
+.home-screen .session-progress{height:7px;margin-bottom:17px}
+.home-screen .session-confirmed{font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:400;padding:6px 11px;line-height:1.4}
+.home-screen .session-note{font-size:12.5px;line-height:1.45;margin-top:16px;color:#b9bbc4}
+.home-screen .session-disclaimer{margin:7px 16px 0;font-size:8px;color:#959ca8}
+.home-screen .bottom-nav{font-family:Arial,Helvetica,sans-serif;height:calc(68px + env(safe-area-inset-bottom,0px))}
+.home-screen .nav-item{font-family:Arial,Helvetica,sans-serif;font-size:12px;gap:5px}.home-screen .nav-item svg{width:28px;height:28px}.home-screen .nav-badge{display:none}
+.session-more .session-extras{margin:0}.session-more .daily-strip{padding:10px 0}
+@media(max-width:370px){.home-screen .session-panel{grid-template-columns:62px minmax(0,1fr);padding:23px 14px 16px;column-gap:8px}.home-screen .session-status{width:61px;height:61px}.home-screen .session-status h2{font-size:11px}.home-screen .session-amount{font-size:11.8vw}.home-screen .session-wallet strong{font-size:20px}.home-screen .session-caption{font-size:11px}}
+@media(prefers-reduced-transparency:reduce){.home-screen .session-panel{background:linear-gradient(130deg,#394a56f2,#262830fa);backdrop-filter:none;-webkit-backdrop-filter:none}}
+.low-effects .home-screen .session-panel{background:linear-gradient(130deg,#394a56f2,#262830fa);backdrop-filter:none;-webkit-backdrop-filter:none}
+/* Independent planet and craft layers: no scene replacement on session updates. */
+.home-screen{container-type:inline-size}
+.home-screen::before{background:linear-gradient(0deg,#090d14 0%,transparent 18%),url('aurora-planet-layer.png') center 0/100% auto no-repeat}
+.home-device-layer{position:absolute;z-index:0;pointer-events:none;left:16%;top:28cqw;width:78%;height:auto;display:block;transform-origin:55% 55%;animation:aurora-levitate 6s ease-in-out infinite;will-change:transform}
+.home-screen .silver-header,.home-screen>main{position:relative;z-index:1}
+@keyframes aurora-levitate{0%,100%{transform:translate3d(0,2px,0) rotate(-.35deg)}50%{transform:translate3d(0,-4px,0) rotate(.35deg)}}
+/* Clear smoked glass, with sufficient contrast over the landscape. */
+.home-screen .session-panel{background:linear-gradient(125deg,rgba(114,140,152,.25),rgba(30,34,43,.52) 78%);border-color:rgba(228,239,248,.28);box-shadow:inset 0 1px 1px #ffffff20,0 8px 28px #0002;backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%)}
+.home-screen .session-panel .session-caption,.home-screen .session-panel .session-note,.home-screen .session-panel dt{color:#c3c6cf;text-shadow:0 1px 3px #0005}
+/* Status light, not a progress meter. The segmented bar keeps actual progress. */
+.session-orbit circle{stroke:rgba(123,218,153,.22)}
+.session-orbit .orbit-fill{stroke:#a0edb5;stroke-width:5.5;stroke-linecap:round;stroke-dasharray:68 32;stroke-dashoffset:0;filter:drop-shadow(0 0 3px #84edaa) drop-shadow(0 0 7px #84edaa66);transition:none}
+.home-screen .is-mining .session-orbit{animation:active-orbit 3.6s linear infinite;will-change:transform}
+.home-screen .is-mining .session-status h2{animation:active-label 3.6s ease-in-out infinite;color:#a5eab8;text-shadow:0 0 7px #8ee5a53d}
+@keyframes active-orbit{from{transform:rotate(-90deg)}to{transform:rotate(270deg)}}
+@keyframes active-label{0%,100%{opacity:.84}50%{opacity:1}}
+body.paused .home-device-layer,body.paused .session-orbit,body.paused .session-status h2{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.home-device-layer,.home-screen .is-mining .session-orbit,.home-screen .is-mining .session-status h2{animation:none!important;will-change:auto}}
+@media(prefers-reduced-transparency:reduce){.home-screen .session-panel{background:linear-gradient(125deg,#485763d9,#252b35e8);backdrop-filter:none;-webkit-backdrop-filter:none}}
+.low-effects .home-screen .session-panel{background:linear-gradient(125deg,#485763d9,#252b35e8);backdrop-filter:none;-webkit-backdrop-filter:none}
+/* Clean planet + translucent scanner + craft, independently addressable layers. */
+.home-screen::before{background:linear-gradient(0deg,#090d14 0%,transparent 18%),url('aurora-planet-clean.png') center 0/100% auto no-repeat}
+.home-flight-layer{position:absolute;inset:0;pointer-events:none;z-index:0;transform-origin:55% 52cqw;animation:aurora-levitate 6s ease-in-out infinite;will-change:transform}
+.home-flight-layer .home-device-layer{z-index:1;animation:none;will-change:auto}
+.home-hologram-layer{position:absolute;left:34%;top:57cqw;width:46%;height:auto;z-index:0;pointer-events:none;opacity:.18;mix-blend-mode:screen}
+body.paused .home-flight-layer{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.home-flight-layer{animation:none!important;will-change:auto}}

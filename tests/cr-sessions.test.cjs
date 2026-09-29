@@ -50,7 +50,8 @@ test('SQLite serializes competing launches/claims, lost responses and independen
  }finally{db.close();}
 });
 test('Home renders ready, active, bonus, completed and exhausted states without DATA or old ring',()=>{
- const ui=UI.create(helpers);let s=fresh(),html=ui.render(E.view(s,T));assert(html.includes('Start mining'));assert(html.includes('Weekly goal'));assert(!html.includes('collect-ring'));assert(!html.includes('DATA'));
+ const ui=UI.create(helpers);let s=fresh(),html=ui.render(E.view(s,T));assert(html.includes('Start mining'));assert(!html.includes('Weekly goal')); // Extra rewards now live inside the galaxy menu.
+assert(!html.includes('collect-ring'));assert(!html.includes('DATA'));
  s=act(s,'sessionStart');html=ui.render(E.view(s,T+300000));assert(html.includes('Watch ad · +0.25 CR'));assert(html.includes('Equipment ↗'));
  let o=E.apply(s,'adStart',{purpose:'sessionBonus',sessionId:session(s).id},T+300000,'ui-ad');s=act(o.state,'adConfirm',{id:o.ad.id},T+303000);html=ui.render(E.view(s,T+303000));assert(html.includes('Bonus activated'));assert(!html.includes('homeSessionBonus'));
  html=ui.render(E.view(s,T+D));assert(html.includes('Collect 1.25 CR'));assert(!html.includes('homeSessionBonus'));

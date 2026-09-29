@@ -1,0 +1,7 @@
+# Manta Home — 2026-09-30
+
+Asset: assets/aurora-manta-scene.png. Created with built-in image_gen.
+
+Prompt: Create a portrait production background artwork for this exact supplied Bountera screenshot. Reproduce its background scene and spacecraft as closely as possible, but remove ALL UI, typography, cards, bars, icons, numbers, Telegram status, phone status and interface. 1024x1536. Wide silver manta-shaped triangular spacecraft exactly as reference, front round dark optical camera at lower left, smoothly curved brushed metal upper wings, dark charcoal lower hull, thin white edge lights. NOT an elongated scanner cylinder. Position device bounding box x18%-88%, y23%-50%; same diagonal orientation as screenshot, rear upper right, camera lower left. Curved planet horizon at y29%, peach white thin atmospheric glow, pale taupe cratered terrain and slate teal basins, rocky ridges below, same terrain reference. Subtle fine white-blue scanning projection falling below the craft into planet terrain. Top22% clean near black navy sky, no stars clutter. Planet terrain continues behind bottom60% of canvas, naturally darkened toward bottom but not blacked out. No small moon. Photorealistic high quality render, match reference lighting and device identity. No readable text, no UI, no watermark.
+
+Removed the Home back/profile toolbar. Telegram top reserve remains 56px plus safe area and 8px. Extra rewards, profile and settings remain accessible inside the galaxy selector. Balances and session values reflect actual game state, not numbers baked into the reference.
