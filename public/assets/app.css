@@ -177,7 +177,7 @@
 .home-screen>.planet-window .planet-orbit{top:calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 80px)}
 .planet-orbit:after{background:radial-gradient(ellipse 85% 100% at 0% 0%,transparent 24%,#06081c75 40%,#01030ae8 58%,#000 74%)}
 .home-screen .mining-zone{width:82%;margin-left:auto;margin-right:auto}
-.error-banner{position:fixed;left:50%;transform:translateX(-50%);top:calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 6px);width:calc(100% - 24px);max-width:456px;z-index:90;border:1px solid #a46960;border-radius:12px;box-shadow:0 8px 25px #0006}
+.error-banner{position:fixed;left:50%;transform:translateX(-50%);top:calc(max(var(--system-top-space),env(safe-area-inset-top,0px),var(--tg-content-safe-area-inset-top,0px)) + 6px);width:calc(100% - 24px);max-width:456px;z-index:90;border:1px solid #a46960;border-radius:12px;box-shadow:0 8px 25px #0006}
 @media(max-height:680px){.home-screen>.planet-window .planet-orbit{top:calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 74px)}}
 
 /* Continuous planet behind the lower UI; no inherited horizon fade. */
@@ -251,7 +251,7 @@ button:disabled{transition:opacity 140ms ease}
 [data-home-live="equivalent"]{display:inline-block;min-width:4ch;text-align:right}
 .credit-feedback{position:fixed;z-index:110;pointer-events:none;font-size:20px;line-height:1;font-weight:600;font-variant-numeric:tabular-nums;color:#b8fff1;text-shadow:0 2px 7px #06111d;transform:translateX(-50%)}
 /* Region container: small dialogs center below the DePIN header top edge; tall dialogs clamp at that edge and scroll inside. */
-dialog{position:fixed;inset:auto;top:var(--dialog-top,calc(max(var(--system-top-space),env(safe-area-inset-top,0px)) + 4px));bottom:16px;left:0;right:0;margin:0;padding:0;width:auto;max-width:none;height:auto;max-height:none;display:flex;overflow:visible;background:transparent;border:0;box-shadow:none}dialog:not([open]){display:none!important}
+dialog{position:fixed;inset:auto;top:var(--dialog-top,calc(max(var(--system-top-space),env(safe-area-inset-top,0px),var(--tg-content-safe-area-inset-top,0px)) + 4px));bottom:16px;left:0;right:0;margin:0;padding:0;width:auto;max-width:none;height:auto;max-height:none;display:flex;overflow:visible;background:transparent;border:0;box-shadow:none}dialog:not([open]){display:none!important}
 dialog::backdrop{backdrop-filter:none;background:#030810b8}
 .modal-head{position:static;display:flex;justify-content:space-between;gap:15px;align-items:center;margin:0 0 16px;padding:12px 14px;background:linear-gradient(125deg,#2c3d50,#1c2434);border:1px solid #a4c3d426;border-radius:14px;flex-shrink:0}
 .modal-head h2{min-width:0;font-size:19px}.modal-head .close{flex-shrink:0}
@@ -313,7 +313,11 @@ body.force-animations .claim-effect{display:inline-block}
 :root{--bg:#1b1d21;--card:#24262b;--line:#494c51;--text:#f4f4f5;--muted:#939598;--accent:#40cbd0;--cyan:#40cbd0;--nav-height:60px;--system-top-space:0px}
 body{background:#15171b;color:var(--text)}
 .app{background:linear-gradient(#202328,#1b1d21);box-shadow:none;border:0;padding-top:calc(max(env(safe-area-inset-top,0px),var(--tg-content-safe-area-inset-top,0px)) + 14px)}
-.header.depin-header{position:relative;z-index:8;height:42px;min-height:42px;flex:0 0 42px;margin:0 14px 4px;padding:0;display:flex;align-items:center;justify-content:space-between;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+/* Telegram mini app chrome: default headroom when the runtime inset is unavailable. */
+:root{--tg-content-safe-area-inset-top:56px}
+.depin-header .depin-logo{width:21px;height:24px;flex:0 0 auto;color:#fff}
+.depin-header .depin-title{display:inline-flex;align-items:center;gap:8px}
+.header.depin-header{position:relative;z-index:8;height:42px;min-height:42px;flex:0 0 42px;margin:0 14px 6px;padding:0;display:flex;align-items:center;justify-content:space-between;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 .depin-header .depin-title{font-size:23px;font-weight:600;color:#fff;letter-spacing:-.6px;line-height:1;padding:0;text-align:left;flex:none;background:none;border:0}
 .depin-header .depin-account{display:flex;align-items:center;gap:7px;border:1px solid #41444a;border-radius:30px;background:#22252bd9;padding:6px 10px;min-width:0;height:34px;box-shadow:none}
 .depin-header .depin-avatar{width:19px;height:22px;min-width:19px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;color:#94969b}
@@ -333,29 +337,29 @@ body{background:#15171b;color:var(--text)}
 .canyon-caption h1{font-size:clamp(22px,6.7vw,32px);font-weight:600;letter-spacing:.15px;line-height:1.2;white-space:nowrap;margin:0 0 10px;color:#fff}
 .canyon-caption p{font-size:clamp(11px,3.35vw,16px);font-weight:400;line-height:1.35;margin:0 0 6px;white-space:nowrap}
 .canyon-caption .journey-progress{max-width:65%;margin:6px auto}
-.home-screen .journey-actions{position:relative;z-index:5;width:100%;margin:6px 0 8px;padding:0 14px;flex:0 0 164px;height:164px;min-height:164px;display:flex;justify-content:center;align-items:center;gap:6px}
-.home-screen .journey-actions .claim-card{--claim-accent:#40cbd0!important;position:relative;width:100%;height:164px;min-height:164px;margin:0;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:0;border:0;background:none;box-shadow:none;border-radius:0;overflow:visible;isolation:auto}
-.home-screen .journey-actions .claim-card .claim-button{position:relative;display:flex;align-items:center;justify-content:center;width:146px;height:146px;min-height:146px;flex:0 0 146px;margin:0;padding:14px;border:0;border-radius:50%;background:none;box-shadow:none;backdrop-filter:none;overflow:visible;opacity:1;animation:none!important;transform:none}
+.home-screen .journey-actions{position:relative;z-index:5;width:100%;margin:4px 0 8px;padding:0 14px;flex:0 0 142px;height:142px;min-height:142px;display:flex;justify-content:center;align-items:center;gap:6px}
+.home-screen .journey-actions .claim-card{--claim-accent:#40cbd0!important;position:relative;width:100%;height:142px;min-height:142px;margin:0;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:0;border:0;background:none;box-shadow:none;border-radius:0;overflow:visible;isolation:auto}
+.home-screen .journey-actions .claim-card .claim-button{position:relative;display:flex;align-items:center;justify-content:center;width:124px;height:124px;min-height:124px;flex:0 0 124px;margin:0;padding:12px;border:0;border-radius:50%;background:none;box-shadow:none;backdrop-filter:none;overflow:visible;opacity:1;animation:none!important;transform:none}
 .home-screen .claim-card .claim-button::before,.home-screen .claim-card .claim-button::after{display:none!important}
 .collect-ring{position:absolute;inset:0;width:100%!important;height:100%!important;overflow:visible;pointer-events:none;transform:rotate(-90deg)}
 .collect-ring circle{fill:none;stroke-width:9}
 .collect-ring .ring-track{stroke:#121519}
 .collect-ring .ring-light{stroke:#40cbd0;stroke-linecap:round;stroke-dasharray:40 100;filter:drop-shadow(0 0 5px #40cbd055);animation:ring-breathe 4s ease-in-out infinite}
-.home-screen .claim-card .claim-content{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px}
-.home-screen .claim-card .claim-label{font-size:13px;font-weight:500;letter-spacing:0;color:#fafafa;line-height:1.2;text-transform:uppercase}
-.home-screen .claim-card .data-value{font-size:15px;line-height:1.1;font-weight:400;color:#fff;letter-spacing:0;text-shadow:none}
-.home-screen .claim-card .data-value small{font-size:15px;color:#fff;font-weight:400}
-.home-screen .claim-card .claim-bottom{font-size:14px;color:#97999d;margin:0;gap:3px;line-height:1.1}
+.home-screen .claim-card .claim-content{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5px}
+.home-screen .claim-card .claim-label{font-size:12px;font-weight:500;letter-spacing:0;color:#fafafa;line-height:1.2;text-transform:uppercase}
+.home-screen .claim-card .data-value{font-size:14px;line-height:1.1;font-weight:400;color:#fff;letter-spacing:0;text-shadow:none}
+.home-screen .claim-card .data-value small{font-size:14px;color:#fff;font-weight:400}
+.home-screen .claim-card .claim-bottom{font-size:13px;color:#97999d;margin:0;gap:3px;line-height:1.1}
 [data-home-live="data"],[data-home-live="equivalent"]{min-width:0;text-align:center}
 .home-screen .claim-card .claim-slot{width:100%;height:18px;min-height:18px;max-height:18px;flex:0 0 18px;border:0;border-radius:0;padding:0;background:none;box-shadow:none;display:flex;flex-direction:row;gap:5px;justify-content:center;color:#a6a9ad;font-size:8px;animation:none!important}
 .home-screen .claim-slot strong{font-size:8px;color:#67c7ca;font-weight:400}
 .home-screen .claim-slot:not([data-action="homeDouble"]){visibility:hidden}
-.home-screen .compact-activities{flex:0 0 80px;height:80px;min-height:80px;margin:4px 14px 0;padding:6px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid #53555a;border-radius:9px;background:none;box-shadow:none;backdrop-filter:none;overflow:hidden}
-.home-screen .compact-activities .activity-tile{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;width:100%;height:100%;min-height:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;color:#ddd;text-align:center;transform:none}
+.home-screen .compact-activities{flex:0 0 66px;height:66px;min-height:66px;margin:4px 14px 0;padding:5px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid #53555a;border-radius:9px;background:none;box-shadow:none;backdrop-filter:none;overflow:hidden}
+.home-screen .compact-activities .activity-tile{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:100%;height:100%;min-height:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;color:#ddd;text-align:center;transform:none}
 .home-screen .activity-tile:before,.home-screen .activity-tile:after{display:none}
-.home-screen .activity-tile h3{margin:0;display:block;font-size:12px;line-height:1.2;letter-spacing:0;font-weight:400;text-transform:uppercase;color:#e5e5e5}
-.home-screen .activity-icon{width:26px;height:26px;border:0;border-radius:0;background:none;box-shadow:none;display:grid;place-items:center}
-.home-screen .activity-icon svg{width:26px;height:26px;color:#96989a;stroke-width:2;filter:none}
+.home-screen .activity-tile h3{margin:0;display:block;font-size:10px;line-height:1.2;letter-spacing:0;font-weight:400;text-transform:uppercase;color:#e5e5e5}
+.home-screen .activity-icon{width:20px;height:20px;border:0;border-radius:0;background:none;box-shadow:none;display:grid;place-items:center}
+.home-screen .activity-icon svg{width:20px;height:20px;color:#96989a;stroke-width:2;filter:none}
 .home-screen .journey-training{margin:auto 14px 4px;min-height:80px;justify-content:center}
 .bottom-nav{bottom:0;left:50%;width:100%;max-width:480px;height:calc(60px + env(safe-area-inset-bottom,0px));padding:4px 4px calc(3px + env(safe-area-inset-bottom,0px));border:0;border-radius:0;background:#28292d;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;gap:2px}
 .nav-item{border:1px solid transparent;border-radius:9px;gap:4px;padding:4px 0;color:#86898c;font-size:10px;text-transform:uppercase;background:none;box-shadow:none}
@@ -370,7 +374,7 @@ body{background:#15171b;color:var(--text)}
 dialog{background:#24272d;border:1px solid #4f535b;box-shadow:0 16px 50px #0007}.modal-head{background:#292d33;border-bottom-color:#44484e}
 @keyframes canyon-float{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-3px)}}
 @keyframes ring-breathe{0%,100%{opacity:.8}50%{opacity:1}}
-@media(min-height:780px){.home-screen .journey-actions,.home-screen .journey-actions .claim-card{height:184px;min-height:184px;flex-basis:184px}.home-screen .journey-actions .claim-card .claim-button{width:166px;height:166px;min-height:166px;flex-basis:166px}.home-screen .compact-activities{height:88px;min-height:88px;flex-basis:88px}.home-screen .canyon-caption{flex-basis:94px;min-height:94px}}
+@media(min-height:780px){.home-screen .journey-actions,.home-screen .journey-actions .claim-card{height:160px;min-height:160px;flex-basis:160px}.home-screen .journey-actions .claim-card .claim-button{width:140px;height:140px;min-height:140px;flex-basis:140px}.home-screen .compact-activities{height:72px;min-height:72px;flex-basis:72px}.home-screen .canyon-caption{flex-basis:94px;min-height:94px}}
 @media(max-width:350px){.canyon-caption h1{font-size:21px}.canyon-caption p{font-size:10px}.home-screen .activity-tile h3{font-size:10px}.depin-header .depin-title{font-size:21px}.depin-header .depin-balance strong{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.home-screen .canyon-hero .journey-device,.collect-ring .ring-light{animation:none!important}}
 body.force-animations .home-screen .canyon-hero .journey-device{animation:canyon-float 9s ease-in-out infinite!important}

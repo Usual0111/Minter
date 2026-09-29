@@ -20,4 +20,4 @@ test('server minimum-claim rejection remains toast-only and does not insert a ba
  assert.equal(f.mutations,1);assert.equal(f.toast.textContent,'Accumulate at least 0.01 CR');assert(!f.markup.includes('class="error-banner"'));assert.equal(f.state.balance.cr,balance);
 });
 
-test('successful Home Claim updates controls without replacing the planet container',async()=>{const f=fixture({empty:false,persistent:true});await f.click();assert.equal(f.mutations,1);assert.equal(f.renders,0);assert(f.parts.main.innerHTML.includes('journey-hero'));assert(f.parts['.header'].outerHTML.includes('DEPIN'));});
+test('successful Home Claim updates controls without replacing the planet container',async()=>{const f=fixture({empty:false,persistent:true});await f.click();assert.equal(f.mutations,1);assert.equal(f.renders,0);assert(f.parts.main.innerHTML.includes('journey-hero'));assert(f.parts['.header'].outerHTML.includes('Bountera'));});
