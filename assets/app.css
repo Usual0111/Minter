@@ -576,3 +576,9 @@ body.paused .home-device-layer,body.paused .session-orbit,body.paused .session-s
 .home-hologram-layer{position:absolute;left:34%;top:57cqw;width:46%;height:auto;z-index:0;pointer-events:none;opacity:.18;mix-blend-mode:screen}
 body.paused .home-flight-layer{animation-play-state:paused!important}
 @media(prefers-reduced-motion:reduce){.home-flight-layer{animation:none!important;will-change:auto}}
+/* Match the phone reference: move artwork only, without reflowing any UI. */
+.home-screen{--home-artwork-offset:max(0px,calc(var(--app-top-reserve) - 56px))}
+.home-screen::before{background-position:0 0,center var(--home-artwork-offset)}
+.home-flight-layer{top:var(--home-artwork-offset);bottom:calc(-1 * var(--home-artwork-offset))}
+/* The mask feathers both arc ends; orbit duration, glow and label stay unchanged. */
+.session-orbit .orbit-mask{stroke:none;fill:url(#active-edge-fade)}
