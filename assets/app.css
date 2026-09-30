@@ -511,8 +511,6 @@ dialog::backdrop{background:rgba(3,9,17,.38);backdrop-filter:blur(12px) saturate
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media(max-width:370px){.home-screen .session-wallet strong{font-size:18px}.home-screen .galaxy-selector span{font-size:15px}.home-screen .session-panel{padding:20px 13px 15px;grid-template-columns:67px minmax(0,1fr);gap:8px}.home-screen .session-status{width:65px;height:65px}.home-screen .session-amount{font-size:36px}.home-screen .session-caption{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.session-orbit .orbit-fill{transition:none}}
-@media(prefers-reduced-transparency:reduce){.home-screen .session-panel{background:#252d37f2;backdrop-filter:none;-webkit-backdrop-filter:none}}
-.low-effects .home-screen .session-panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:#26313beb}
 .home-screen .header.silver-header{display:block;height:auto;padding:0;margin:0;background:none;border:0;box-shadow:none}
 .home-screen .silver-header .session-header{display:flex;flex-wrap:nowrap;min-height:48px;margin:0 16px;gap:10px;align-items:center;background:none}
 .home-screen::before{display:block}
@@ -547,8 +545,6 @@ dialog::backdrop{background:rgba(3,9,17,.38);backdrop-filter:blur(12px) saturate
 .home-screen .nav-item{font-family:Arial,Helvetica,sans-serif;font-size:12px;gap:5px}.home-screen .nav-item svg{width:28px;height:28px}.home-screen .nav-badge{display:none}
 .session-more .session-extras{margin:0}.session-more .daily-strip{padding:10px 0}
 @media(max-width:370px){.home-screen .session-panel{grid-template-columns:62px minmax(0,1fr);padding:23px 14px 16px;column-gap:8px}.home-screen .session-status{width:61px;height:61px}.home-screen .session-status h2{font-size:11px}.home-screen .session-amount{font-size:11.8vw}.home-screen .session-wallet strong{font-size:20px}.home-screen .session-caption{font-size:11px}}
-@media(prefers-reduced-transparency:reduce){.home-screen .session-panel{background:linear-gradient(130deg,#394a56f2,#262830fa);backdrop-filter:none;-webkit-backdrop-filter:none}}
-.low-effects .home-screen .session-panel{background:linear-gradient(130deg,#394a56f2,#262830fa);backdrop-filter:none;-webkit-backdrop-filter:none}
 /* Independent planet and craft layers: no scene replacement on session updates. */
 .home-screen{container-type:inline-size}
 .home-screen::before{background:linear-gradient(0deg,#090d14 0%,transparent 18%),url('aurora-planet-layer.png') center 0/100% auto no-repeat}
@@ -556,7 +552,7 @@ dialog::backdrop{background:rgba(3,9,17,.38);backdrop-filter:blur(12px) saturate
 .home-screen .silver-header,.home-screen>main{position:relative;z-index:1}
 @keyframes aurora-levitate{0%,100%{transform:translate3d(0,2px,0) rotate(-.35deg)}50%{transform:translate3d(0,-4px,0) rotate(.35deg)}}
 /* Clear smoked glass, with sufficient contrast over the landscape. */
-.home-screen .session-panel{background:linear-gradient(125deg,rgba(114,140,152,.25),rgba(30,34,43,.52) 78%);border-color:rgba(228,239,248,.28);box-shadow:inset 0 1px 1px #ffffff20,0 8px 28px #0002;backdrop-filter:blur(18px) saturate(125%);-webkit-backdrop-filter:blur(18px) saturate(125%)}
+.home-screen .session-panel{background:linear-gradient(135deg,rgba(255,255,255,.13),rgba(255,255,255,.035) 48%,rgba(255,255,255,.055));border-color:rgba(255,255,255,.32);box-shadow:inset 0 1px 1px #ffffff59,inset 0 -1px 1px #ffffff12,0 8px 28px #0002;backdrop-filter:blur(24px) saturate(85%);-webkit-backdrop-filter:blur(24px) saturate(85%)}
 .home-screen .session-panel .session-caption,.home-screen .session-panel .session-note,.home-screen .session-panel dt{color:#c3c6cf;text-shadow:0 1px 3px #0005}
 /* Status light, not a progress meter. The segmented bar keeps actual progress. */
 .session-orbit circle{stroke:rgba(123,218,153,.22)}
@@ -567,18 +563,20 @@ dialog::backdrop{background:rgba(3,9,17,.38);backdrop-filter:blur(12px) saturate
 @keyframes active-label{0%,100%{opacity:.84}50%{opacity:1}}
 body.paused .home-device-layer,body.paused .session-orbit,body.paused .session-status h2{animation-play-state:paused!important}
 @media(prefers-reduced-motion:reduce){.home-device-layer,.home-screen .is-mining .session-orbit,.home-screen .is-mining .session-status h2{animation:none!important;will-change:auto}}
-@media(prefers-reduced-transparency:reduce){.home-screen .session-panel{background:linear-gradient(125deg,#485763d9,#252b35e8);backdrop-filter:none;-webkit-backdrop-filter:none}}
-.low-effects .home-screen .session-panel{background:linear-gradient(125deg,#485763d9,#252b35e8);backdrop-filter:none;-webkit-backdrop-filter:none}
 /* Clean planet + translucent scanner + craft, independently addressable layers. */
 .home-screen::before{background:linear-gradient(0deg,#090d14 0%,transparent 18%),url('aurora-planet-clean.png') center 0/100% auto no-repeat}
 .home-flight-layer{position:absolute;inset:0;pointer-events:none;z-index:0;transform-origin:55% 52cqw;animation:aurora-levitate 6s ease-in-out infinite;will-change:transform}
 .home-flight-layer .home-device-layer{z-index:1;animation:none;will-change:auto}
-.home-hologram-layer{position:absolute;left:34%;top:57cqw;width:46%;height:auto;z-index:0;pointer-events:none;opacity:.18;mix-blend-mode:screen}
+.home-hologram-layer{position:absolute;left:34%;top:57cqw;width:46%;height:auto;z-index:0;pointer-events:none;opacity:.26;mix-blend-mode:screen}
 body.paused .home-flight-layer{animation-play-state:paused!important}
 @media(prefers-reduced-motion:reduce){.home-flight-layer{animation:none!important;will-change:auto}}
-/* Match the phone reference: move artwork only, without reflowing any UI. */
-.home-screen{--home-artwork-offset:max(0px,calc(var(--app-top-reserve) - 56px))}
-.home-screen::before{background-position:0 0,center var(--home-artwork-offset)}
+/* Shared width-scaled scene coordinates: safe area moves planet and craft equally. */
+.home-screen{--home-artwork-offset:max(0px,calc(var(--app-top-reserve) - 56px));--home-planet-gap:8cqw}
+.home-screen::before{background-position:0 0,center calc(var(--home-artwork-offset) + var(--home-planet-gap))}
 .home-flight-layer{top:var(--home-artwork-offset);bottom:calc(-1 * var(--home-artwork-offset))}
 /* The mask feathers both arc ends; orbit duration, glow and label stay unchanged. */
 .session-orbit .orbit-mask{stroke:none;fill:url(#active-edge-fade)}
+
+/* Keep the session glass translucent even in automatic low-effects mode. */
+.low-effects .home-screen .session-panel{backdrop-filter:blur(18px) saturate(85%);-webkit-backdrop-filter:blur(18px) saturate(85%)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.home-screen .session-panel{background:rgba(65,65,65,.55)}}
