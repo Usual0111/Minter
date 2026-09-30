@@ -8,7 +8,7 @@ for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg','canyon
 html=html.replace('<link rel="stylesheet" href="assets/app.css">',()=>`<style>${css}</style>`);
 for(const name of ['config','node-system','home-system','cr-session-system','engine','client','node-ui','home-ui','motion','app']){
  let js=fs.readFileSync(path.join(root,`assets/${name}.js`),'utf8');
- for(const image of ['depin-probe.png','depin-planet.jpg','home-carrier.png','home-station.png','canyon-probe.png','aurora-device-layer.png','aurora-scanner-hologram.png'])js=js.replaceAll(`assets/${image}`,embed(image));
+ for(const image of ['session-coin.png','depin-probe.png','depin-planet.jpg','home-carrier.png','home-station.png','canyon-probe.png','aurora-device-layer.png','aurora-scanner-hologram.png'])js=js.replaceAll(`assets/${image}`,embed(image));
  html=html.replace(`<script src="assets/${name}.js"></script>`,()=>`<script>${js.replaceAll('</script','<\\/script')}</script>`);
 }
 for(const name of ['Bountera.html','Farm-Zone-Bot.html'])fs.writeFileSync(path.join(out,name),html);

@@ -6,6 +6,10 @@ export interface CRSession {
   baseCents: Cents; bonusOfferCents: Cents; bonusCents: Cents;
   bonusEligibleAt: UnixMs; bonusOperation: string | null;
   claimedAt: UnixMs | null; claimOperation: string | null; source: 'free' | 'ad';
+  /** Absent on legacy sessions, which retain one bonus and their original deadline. */
+  maxBoosts?: number; boostReductionMs?: number; boostOperations?: string[];
+  /** Presentation-only progress anchor captured at a confirmed time reduction. */
+  progressAt?: UnixMs; progressBase?: number;
 }
 export interface CRSessionView {
   phase: 'ready' | 'ad-start' | 'active' | 'completed' | 'unavailable';
@@ -16,6 +20,7 @@ export interface CRSessionView {
   freeLeft: number; adLeft: number; nextFreeAt: UnixMs | null;
   canStartFree: boolean; canStartAd: boolean; canBonus: boolean; canClaim: boolean;
   adPending: boolean; adNextAt: UnixMs; bonusOfferCents: Cents;
+  boostsUsed: number; maxBoosts: number; boostReductionMs: number; bonusCents: Cents;
   weeklyCompleted: number; weeklyGoal: number; weekEndsAt: UnixMs;
 }
 export interface SessionClaimResult {
