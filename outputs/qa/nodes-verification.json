@@ -1,0 +1,14 @@
+{
+  "otherScreensUnchanged": true,
+  "existingCssPreserved": true,
+  "otherNodeFunctionsPreserved": true,
+  "nodesStylesScoped": true,
+  "standaloneInlineScripts": 11,
+  "standaloneArtworkEmbedded": true,
+  "gameTests": "97 passed",
+  "mobileWidthsVerified": [
+    320,
+    390
+  ],
+  "cardAspectRatio": 2.06
+}

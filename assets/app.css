@@ -548,7 +548,7 @@ dialog::backdrop{background:rgba(3,9,17,.38);backdrop-filter:blur(12px) saturate
 /* Independent planet and craft layers: no scene replacement on session updates. */
 .home-screen{container-type:inline-size}
 .home-screen::before{background:linear-gradient(0deg,#090d14 0%,transparent 18%),url('aurora-planet-layer.png') center 0/100% auto no-repeat}
-.home-device-layer{position:absolute;z-index:0;pointer-events:none;left:16%;top:28cqw;width:78%;height:auto;display:block;transform-origin:55% 55%;animation:aurora-levitate 6s ease-in-out infinite;will-change:transform}
+.home-device-layer{position:absolute;z-index:0;pointer-events:none;left:16%;top:22cqw;width:78%;height:auto;display:block;transform-origin:55% 55%;animation:aurora-levitate 6s ease-in-out infinite;will-change:transform}
 .home-screen .silver-header,.home-screen>main{position:relative;z-index:1}
 @keyframes aurora-levitate{0%,100%{transform:translate3d(0,2px,0) rotate(-.35deg)}50%{transform:translate3d(0,-4px,0) rotate(.35deg)}}
 /* Clear smoked glass, with sufficient contrast over the landscape. */
@@ -630,10 +630,42 @@ body.paused .home-flight-layer{animation-play-state:paused!important}
 .session-control .session-control-note{margin:6px 0 0;height:14px;font-size:11px;font-weight:400;line-height:14px;text-align:center;color:#a4afb9;white-space:nowrap}
 @media(max-width:340px){.session-control .session-control-boosts{font-size:11px}.session-control-boosts>span:first-child{gap:5px}.session-control-marks i{width:6px}}
 
-/* One viewport-sized scroll surface, including when a mobile preview is resized.
-   Do not let the document scrollbar reduce the scene width or expose a second canvas. */
-html,body{width:100%;height:100%;min-width:0;overflow:hidden}
-#app{position:fixed;inset:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-#app::-webkit-scrollbar{display:none}
-#app>.app{width:100%;height:auto;min-height:100%}
-#app>.loading{min-height:100%}
+/* Nodes reference: all geometry follows the second, compact Cygnus card. */
+html:has(.nodes-screen){scrollbar-width:none}
+html:has(.nodes-screen)::-webkit-scrollbar{display:none}
+.app.nodes-screen{container-type:inline-size;--muted:#a5a4a8;--accent:#d5d5da;background:linear-gradient(135deg,#191a1e,#17171c);padding-top:calc(max(env(safe-area-inset-top,0px),var(--app-system-top,0px)) + var(--app-chrome-top,0px) + min(3.9vw,18.72px));padding-bottom:calc(min(22vw,105.6px) + max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)));color:#fafafa}
+.nodes-screen .nodes-header{display:flex;justify-content:flex-end;padding:0 3.6cqw;margin-bottom:6cqw;height:8cqw;background:none}
+.nodes-screen .nodes-balance{display:flex;align-items:center;gap:1.3cqw;padding:0 1.8cqw;height:8cqw;min-width:28.5cqw;border:1px solid #42414c;border-radius:5cqw;background:linear-gradient(130deg,#23242e,#22232c);box-shadow:inset 0 1px #ffffff08;color:#aaa9b0;font-size:3.8cqw;font-weight:400;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nodes-screen .nodes-balance svg{width:4.8cqw;height:4.8cqw;fill:currentColor;stroke:none}
+.nodes-screen .node-hub{padding:0 3.6cqw}
+.nodes-screen .hub-tabs{position:relative;top:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));height:12.2cqw;gap:0;padding:1.15cqw;margin:0 0 6.4cqw;border-radius:8cqw;border:1px solid #5b5b63;background:linear-gradient(170deg,#3d3e43,#2a2b30 48%,#34353a);box-shadow:inset 0 1px 1px #ffffff22}
+.nodes-screen .hub-tabs button{display:flex;align-items:center;justify-content:center;min-width:0;padding:0;border-radius:6cqw;border:1px solid transparent;background:none;color:#a6a5aa;font-size:3.9cqw;font-weight:400;box-shadow:none}
+.nodes-screen .hub-tabs button.active{background:linear-gradient(155deg,#66666c88,#47474d88);border:1px solid #7f7f8599;color:#fff;box-shadow:inset 0 1px #ffffff15,0 1px 5px #0002}
+.nodes-screen .orbit-heading{display:flex;align-items:center;justify-content:space-between;gap:2cqw;margin:0;height:7cqw}
+.nodes-screen .orbit-heading h1{font-size:6.95cqw;line-height:1.08;letter-spacing:-.17cqw;font-weight:700;margin:0}
+.nodes-screen .orbit-heading .hub-chip{display:flex;align-items:center;justify-content:center;min-width:8.8cqw;height:6.4cqw;padding:0 1.5cqw;font-size:3.4cqw;line-height:1;border:1px solid #4d4c53;border-radius:2.2cqw;color:#a7a6ab;background:linear-gradient(135deg,#26262d99,#25252a66);box-shadow:inset 0 1px #ffffff07;white-space:nowrap}
+.nodes-screen .orbit-subtitle{font-size:3.8cqw;line-height:1.2;margin:3.7cqw 0 5.2cqw;color:#a5a3aa;letter-spacing:-.03cqw}
+.nodes-screen .orbit-cards{display:grid;grid-template-columns:minmax(0,1fr);gap:6cqw}
+.nodes-screen .orbit-card{position:relative;display:block;width:100%;aspect-ratio:2.06;min-height:0;margin:0;padding:0!important;border-radius:5.2cqw;border:1px solid #85848e88;background:linear-gradient(135deg,#5d5963,#49434f);box-shadow:inset 0 1px #dce0ed44,inset 0 0 15px #ffffff06;overflow:hidden;text-align:left;isolation:isolate;opacity:1;filter:none}
+.nodes-screen .orbit-art{position:absolute;inset:0;z-index:-1;background:#23252d url('nodes-canyon-reference.png') bottom/100% 84% no-repeat;opacity:.65;pointer-events:none}
+.nodes-screen .orbit-card>h2,.nodes-screen .orbit-card>span:not(.orbit-art),.nodes-screen .orbit-card>p{position:absolute;margin:0;padding:0;font-weight:400;line-height:1.1;color:#aba8af}
+.nodes-screen .orbit-card .orbit-name{top:9.6%;left:5%;max-width:73%;font-size:6.3cqw;font-weight:700;letter-spacing:-.13cqw;color:#fff}
+.nodes-screen .orbit-card .orbit-sector{top:27%;left:5%;font-size:3.9cqw}
+.nodes-screen .orbit-card .orbit-slots{top:11%;right:5%;font-size:3.2cqw;white-space:nowrap}
+.nodes-screen .orbit-card .orbit-type{top:51%;left:5%;font-size:3.8cqw}
+.nodes-screen .orbit-card .orbit-tag{top:51%;left:44%;font-size:3.8cqw}
+.nodes-screen .orbit-card .orbit-yield{top:69%;left:5%;font-size:3.8cqw}
+.nodes-screen .orbit-yield b{font-weight:400;color:#fff}
+.nodes-screen .orbit-card .orbit-status{top:82%;left:5%;display:flex;align-items:center;gap:1.7cqw;font-size:3.8cqw;color:#fff;white-space:nowrap}
+.nodes-screen .orbit-status i{width:2.3cqw;height:2.3cqw;border-radius:50%;background:#95939b;box-shadow:none}
+.nodes-screen .orbit-status.accent i{background:#72c9cc}
+.nodes-screen .orbit-card:disabled{opacity:1;filter:none}
+.nodes-screen .orbit-card:disabled .orbit-status{color:#bbb6bf;font-size:3.3cqw}
+.nodes-screen .orbit-overview>.hub-ad-cooldown{display:none}
+.nodes-screen .bottom-nav{height:calc(14.7cqw + max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)));padding:1cqw 1.3cqw calc(1cqw + max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)));border:0;border-top:1px solid #ffffff06;background:#29292e!important;box-shadow:none}
+.nodes-screen .nav-item{height:12.9cqw;min-height:0;min-width:0;border-radius:2.2cqw;border:1px solid transparent;gap:1.1cqw;color:#929097;font-size:2.85cqw;font-weight:400;text-transform:uppercase}
+.nodes-screen .nav-item svg{width:6.3cqw;height:6.3cqw;stroke-width:1.65;color:inherit;filter:none}
+.nodes-screen .nav-item.active{border:1px solid #77757f;background:linear-gradient(130deg,#64636b88,#44434a88);color:#fff;box-shadow:inset 0 1px #ffffff15}
+.nodes-screen .nav-item.active svg{color:#fff}
+.nodes-screen .nav-item.active:after{display:none}
+.nodes-screen .nav-badge{top:0;right:calc(50% - 6cqw);height:3.9cqw;min-width:3.9cqw;padding:0 .6cqw;line-height:3.5cqw;border-radius:1.5cqw;border:1px solid #35737e;background:#5fc7da;color:#123a44;font-size:2.6cqw;box-shadow:0 0 0 1px #12191a88}
