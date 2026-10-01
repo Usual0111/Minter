@@ -1,0 +1,26 @@
+{
+  "modelVersion": 3,
+  "sessionDurationMs": 600000,
+  "automaticTests": 124,
+  "failedTests": 0,
+  "cssUnchanged": true,
+  "otherScreenMarkupPreserved": true,
+  "homeGeometryMatchesPreviousVersion": true,
+  "standaloneInlineScriptsParsed": 13,
+  "standaloneManualClaimVerified": true,
+  "browserVerified": {
+    "timerStartsAfterConfirmation": true,
+    "initialTimer": "10:00",
+    "readyMinedCR": "0.3500",
+    "readyStatus": "Добыча завершена",
+    "readyButton": "Получить 0,35 CR",
+    "balanceBeforeClaimCR": "550.00",
+    "readyRewardSurvivesReload": true,
+    "balanceAfterClaimCR": "550.35",
+    "startButtonReturns": true,
+    "claimRequiresAd": false
+  },
+  "readyRewardsSurviveDayReset": true,
+  "lateConfirmationsRequireManualClaim": true,
+  "sevenThirtySecondViewsTestPassed": true
+}

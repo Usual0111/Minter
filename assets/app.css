@@ -669,3 +669,99 @@ html:has(.nodes-screen)::-webkit-scrollbar{display:none}
 .nodes-screen .nav-item.active svg{color:#fff}
 .nodes-screen .nav-item.active:after{display:none}
 .nodes-screen .nav-badge{top:0;right:calc(50% - 6cqw);height:3.9cqw;min-width:3.9cqw;padding:0 .6cqw;line-height:3.5cqw;border-radius:1.5cqw;border:1px solid #35737e;background:#5fc7da;color:#123a44;font-size:2.6cqw;box-shadow:0 0 0 1px #12191a88}
+
+/* Continuous reward mining: only lower Home controls and Nodes model cards. */
+html:has(.reward-control){scrollbar-width:none}
+html:has(.reward-control)::-webkit-scrollbar{display:none}
+.home-screen .reward-control{padding:16px 18px;margin-bottom:22px}
+.reward-control .reward-rate{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;font-size:12px;line-height:16px;color:#a4afb9;font-variant-numeric:tabular-nums}
+.reward-control .reward-rate>span:last-child{color:#e8edf2;white-space:nowrap}
+.reward-charge{margin-top:13px}
+.reward-charge>div:first-child{display:flex;align-items:center;justify-content:space-between;color:#a4afb9;font-size:12px;line-height:16px}
+.reward-charge b{font-weight:500;color:#f5f7fa;font-variant-numeric:tabular-nums}
+.reward-charge-bar{position:relative;height:3px;background:#303a43;margin-top:9px;border-radius:2px;overflow:hidden}
+.reward-charge-bar i{display:block;width:100%;height:100%;background:#e8edf2;transform-origin:left}
+.reward-charge-stages{display:grid;grid-template-columns:repeat(5,1fr);font-size:11px;line-height:14px;margin-top:5px;color:#697783;text-align:right}
+.reward-charge-stages span{position:relative}
+.reward-charge-stages span:before{content:'';position:absolute;right:0;top:-8px;width:1px;height:5px;background:#697783}
+.reward-charge-stages .reached{color:#e8edf2}.reward-charge-stages .reached:before{background:#e8edf2}.reward-charge-stages .next{color:#8bbab7}
+.reward-control .session-control-action{margin-top:13px;height:70px}
+.reward-control .session-control-note{font-size:11px;white-space:normal;line-height:14px;min-height:14px}
+.home-device-layer{aspect-ratio:3/2;object-fit:contain}
+.home-screen:has(.reward-control){height:auto;min-height:100dvh;padding-bottom:calc(90px + max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)))}
+.nodes-screen .reward-models{display:grid;gap:14px}
+.nodes-screen .reward-model{margin:0;padding:0;overflow:hidden;background:linear-gradient(145deg,#36363e,#25262e);border-color:#72717c66}
+.reward-model-image{height:150px;position:relative;background:radial-gradient(ellipse at 50% 60%,#484650,#24262c)}
+.reward-model-image img{width:100%;height:100%;object-fit:contain;padding:9px 35px}
+.reward-model-image>span{position:absolute;top:13px;left:16px;font-size:12px;color:#e1dfe6}
+.reward-model-copy{padding:15px 16px}
+.reward-model-copy h2{font-size:20px}.reward-model-copy p{margin-top:9px;font-size:13px;line-height:1.45;color:#b9b6c2}.reward-model-copy b{color:#fff;font-variant-numeric:tabular-nums}
+.reward-model-copy .hub-chip{font-size:11px}.reward-model-copy button{margin-top:13px;min-height:48px;border-radius:13px;background:#f5f7fa;color:#111920}
+.reward-model-copy button:disabled{opacity:1;background:#383a44;color:#91959f}
+.demo-reward-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.demo-reward-controls .full{grid-column:1/-1;margin:0}
+
+/* Home's graphite / silver palette on other screens. Home remains untouched. */
+html:has(.app:not(.home-screen)){scrollbar-width:none}
+html:has(.app:not(.home-screen))::-webkit-scrollbar{display:none}
+.app:not(.home-screen){--bg:#090d14;--card:#101820;--line:#ffffff26;--text:#f5f7fa;--muted:#a4afb9;--accent:#e8edf2;--cyan:#9dcec7;--purple:#bccbd8;--hub-line:#ffffff26;background:#090d14;color:#f5f7fa;padding-bottom:calc(90px + max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)))}
+.app:not(.home-screen) .accent{color:#e8edf2}
+.app:not(.home-screen) :is(.muted,.subtitle){color:#a4afb9}
+.app:not(.home-screen) :is(.card,.stat-strip,.mission-row,.hub-summary){background:rgba(16,24,32,.94);border-color:#ffffff26}
+.app:not(.home-screen) :is(.primary,.wallet-link,.boost-pill){background:#f5f7fa;color:#101820;border-color:#ffffff60}
+.app:not(.home-screen) :is(.secondary,.chip,.check,.menu-list button){background:#28333d;color:#d1d9df;border-color:#ffffff26}
+.app:not(.home-screen) :is(.tabs,.hub-tabs){background:linear-gradient(125deg,#1e2833,#10141c);border-color:#ffffff26}
+.app:not(.home-screen) :is(.tabs,.hub-tabs) button{color:#a4afb9}
+.app:not(.home-screen) :is(.tabs,.hub-tabs) button.active{background:linear-gradient(135deg,#bccbd833,#bccbd814);border-color:#ffffff32;color:#f5f7fa}
+.app:not(.home-screen) :is(.notice,.ad-card){background:rgba(16,24,32,.94);border-color:#ffffff26;color:#a4afb9}
+.app:not(.home-screen) :is(input,select){background:#101820;border-color:#ffffff26;color:#f5f7fa}
+.app:not(.home-screen) input::placeholder{color:#697783}
+.app:not(.home-screen) :is(.label,.field-with-unit span,.task-card p,.empty,.demo-note,.hub-eyebrow,.hub-ad-cooldown,.hub-back,.hub-stats span,.module-copy p,.probe-copy p,.probe-stats,.reward-model-copy p){color:#a4afb9}
+.app:not(.home-screen) :is(.gems,.rarity,.rarity-2,.rarity-3,.reward-line,.quote strong,.pack-price b,.hub-resources .hub-chip:first-child,.probe-stats b,.hub-stats strong,.hub-stats strong span){color:#e8edf2}
+.app:not(.home-screen) :is(.task-icon,.discount,.career-table tr.current td){background:#28333d;color:#e8edf2}
+.app:not(.home-screen) :is(.career-table td,.career-table th,.history-row,.hub-deploy-row){border-color:#ffffff26}
+.app:not(.home-screen) :is(.bar,.module-levels i){background:#303a43}
+.app:not(.home-screen) .bar>span{background:#e8edf2}
+.app:not(.home-screen) .module-levels .filled{background:#e8edf2;box-shadow:0 0 9px #bccbd833}
+.app:not(.home-screen) :is(.hub-chip,.tier-label){background:#ffffff0a;border-color:#ffffff26;color:#d1d9df}
+.app:not(.home-screen) :is(.hub-chip.violet,.hub-chip.danger){color:#d1d9df;border-color:#ffffff26}
+.app:not(.home-screen) :is(.hub-heading>svg,.empty svg,.module-art svg,.probe-copy>.rarity,.hub-discovery>svg,.hub-discovery p){color:#bccbd8}
+.app:not(.home-screen) .hub-discovery{background:#ffffff0a}
+.app:not(.home-screen) .hub-warning{background:#ffffff0a;border-color:#ffffff26;color:#d1d9df}
+.app:not(.home-screen) .hub-event{border-color:#ffffff26!important}
+.app:not(.home-screen) :is(.hub-event p,.hub-event [data-node-live],.hub-deploy-row small,.galaxy-copy p,.galaxy-copy small){color:#a4afb9}
+.app:not(.home-screen) :is(.expedition-amount,.galaxy-copy p b){color:#e8edf2}
+.app:not(.home-screen) .expedition-status{background:#10182099;border-color:#ffffff26;color:#d1d9df}
+.app:not(.home-screen) .session-header .galaxy-selector{color:#e6e7ec}
+.app:not(.home-screen) :is(.session-header .galaxy-selector small,.session-menu){color:#9398a5}
+.app:not(.home-screen) :is(.session-wallet,.nodes-balance){background:repeating-linear-gradient(0deg,#ffffff06 0 1px,transparent 1px 3px),linear-gradient(105deg,#a2a4a8,#f0f0f0 42%,#acadb2 78%,#d6d6d8);border-color:#ffffff83;box-shadow:0 3px 9px #0005,inset 0 1px 1px #fff9;color:#10131b}
+.app:not(.home-screen) .session-wallet strong{color:#10131b}
+.app:not(.home-screen) :is(.session-wallet svg,.nodes-balance svg){color:#555760}
+.app:not(.home-screen) .orbit-subtitle{color:#a4afb9}
+.app:not(.home-screen) .orbit-card{background:linear-gradient(125deg,#1e2833,#101820);border-color:#ffffff26;box-shadow:inset 0 1px #ffffff10,inset 0 0 15px #ffffff06}
+.app:not(.home-screen) .orbit-art{background-color:#101820}
+.app:not(.home-screen) .orbit-card>span:not(.orbit-art),.app:not(.home-screen) .orbit-card>p{color:#a4afb9}
+.app:not(.home-screen) .orbit-card :is(.orbit-name,.orbit-status,.orbit-yield b){color:#f5f7fa}
+.app:not(.home-screen) .orbit-status i{background:#9398a5}
+.app:not(.home-screen) .orbit-status.accent i{background:#9dcec7}
+.app:not(.home-screen) .orbit-card:disabled .orbit-status{color:#a4afb9}
+.app:not(.home-screen) .reward-model{background:rgba(16,24,32,.94);border-color:#ffffff26}
+.app:not(.home-screen) .reward-model-image{background:radial-gradient(ellipse at 50% 60%,#28333d,#101820)}
+.app:not(.home-screen) .reward-model-image>span{color:#e8edf2}
+.app:not(.home-screen) .reward-model-copy button:disabled{background:#28333d;color:#8f9aa5}
+
+/* Match Home navigation geometry, icons, labels and active marker on every tab. */
+.app:not(.home-screen) .bottom-nav{bottom:0;left:50%;width:100%;max-width:480px;height:calc(72px + env(safe-area-inset-bottom,0px));padding:4px 6px calc(4px + max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)));gap:2px;border:0;border-top:1px solid #c5d3e332;border-radius:0;box-shadow:none;background:linear-gradient(100deg,#17212ce8,#10141cec)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;font-family:Arial,Helvetica,sans-serif}
+.app:not(.home-screen) .nav-item{height:auto;min-width:44px;min-height:44px;padding:4px 0;gap:5px;border:0;border-radius:0;background:none;box-shadow:none;color:#9398a5;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:400;text-transform:none}
+.app:not(.home-screen) .nav-item svg{width:28px;height:28px;stroke-width:1.7;filter:none;color:inherit}
+.app:not(.home-screen) .nav-item.active,.app:not(.home-screen) .nav-item.active svg{color:#edf4ff}
+.app:not(.home-screen) .nav-item.active:after{content:'';display:block;position:absolute;top:-4px;bottom:auto;left:35%;right:35%;width:40px;height:2px;border-radius:4px;background:#e5efff;box-shadow:0 6px 17px #b8ddff55}
+.app:not(.home-screen) .nav-badge{display:none}
+
+/* Dialogs inherit the same palette only while a non-Home screen is open. */
+body:has(.app:not(.home-screen)) :is(dialog,#toast){--accent:#e8edf2;--muted:#a4afb9}
+body:has(.app:not(.home-screen)) .modal-box{background:linear-gradient(145deg,#17212cf5,#10141cfa);border-color:#ffffff26;color:#f5f7fa}
+body:has(.app:not(.home-screen)) .modal-box :is(.primary,.wallet-link){background:#f5f7fa;color:#101820;border-color:#ffffff60}
+body:has(.app:not(.home-screen)) .modal-box :is(.secondary,.close,.check,.menu-list button){background:#28333d;color:#d1d9df;border-color:#ffffff26}
+body:has(.app:not(.home-screen)) .modal-box :is(.card,.notice,.ad-visual){background:#101820;border-color:#ffffff26;color:#a4afb9}
+body:has(.app:not(.home-screen)) .modal-box :is(input,select){background:#101820;border-color:#ffffff26}
+body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
