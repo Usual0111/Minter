@@ -766,6 +766,11 @@ body:has(.app:not(.home-screen)) .modal-box :is(.card,.notice,.ad-visual){backgr
 body:has(.app:not(.home-screen)) .modal-box :is(input,select){background:#101820;border-color:#ffffff26}
 body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 
-/* Lift only the Home content below mining status; keep the scene layers aligned. */
-.home-screen{--home-content-lift:8cqw;--home-artwork-offset:calc(var(--app-top-reserve) + 21cqw - var(--home-content-lift))}
-.home-screen .session-total+.session-scene{margin-top:calc(-1 * var(--home-content-lift))}
+/* Daily charge is a quiet row outside the compact Home session panel. */
+.home-screen .session-panel.reward-control{margin-bottom:0}
+.home-screen .reward-daily-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 18px 22px;font-size:12px;line-height:16px;color:#a4afb9;background:none;border:0;box-shadow:none}
+.home-screen .reward-daily-row b{font-weight:500;color:#c3cbd2;font-variant-numeric:tabular-nums}
+.home-screen .reward-daily-row b{position:relative}
+.home-screen .reward-daily-dots{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);display:flex;gap:4px}
+.home-screen .reward-daily-dots i{width:4px;height:4px;border-radius:50%;background:#47515b}
+.home-screen .reward-daily-dots i.filled{background:#c3cbd2}
