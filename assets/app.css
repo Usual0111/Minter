@@ -765,3 +765,7 @@ body:has(.app:not(.home-screen)) .modal-box :is(.secondary,.close,.check,.menu-l
 body:has(.app:not(.home-screen)) .modal-box :is(.card,.notice,.ad-visual){background:#101820;border-color:#ffffff26;color:#a4afb9}
 body:has(.app:not(.home-screen)) .modal-box :is(input,select){background:#101820;border-color:#ffffff26}
 body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
+
+/* Lift only the Home content below mining status; keep the scene layers aligned. */
+.home-screen{--home-content-lift:8cqw;--home-artwork-offset:calc(var(--app-top-reserve) + 21cqw - var(--home-content-lift))}
+.home-screen .session-total+.session-scene{margin-top:calc(-1 * var(--home-content-lift))}
