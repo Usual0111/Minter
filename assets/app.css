@@ -774,3 +774,44 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 .home-screen .reward-daily-dots{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);display:flex;gap:4px}
 .home-screen .reward-daily-dots i{width:4px;height:4px;border-radius:50%;background:#47515b}
 .home-screen .reward-daily-dots i.filled{background:#c3cbd2}
+
+/* Speed occupies the existing mining-status line without changing its height. */
+.home-screen .session-total .sector-count.mining-speed{font-size:13px;line-height:18px;white-space:nowrap;color:#a4afb9;background:none;border:0;box-shadow:none;text-shadow:none}
+.home-screen .mining-speed-label{color:#a4afb9}
+.home-screen .mining-speed-value{color:#a8d8d2;font-variant-numeric:tabular-nums}
+
+/* Reference session panel: graphite glass, matching rounded corners and inset controls. */
+.home-screen .session-panel.session-control.reference-session-panel{position:relative;isolation:isolate;margin:6px 18px 16px;padding:14px 18px 18px;border-radius:22px;border:1px solid #b7b7c35c;background:radial-gradient(ellipse at 30% -15%,#ffffff12,transparent 58%),linear-gradient(135deg,#30303555,#25252945 55%,#30303655);box-shadow:inset 0 1px 1px #ffffff24,inset 0 -1px 9px #ffffff0a,0 12px 28px #0005;color:#f4f3f8;overflow:hidden;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.home-screen .session-reference-heading{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.home-screen .session-reference-heading h1{display:flex;align-items:baseline;gap:6px;min-width:0;font-size:24px;line-height:29px;font-weight:700;letter-spacing:-.4px}
+.home-screen .session-model-link{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;color:#f7f6fa}
+.home-screen .session-reference-brand{flex-shrink:0;font-size:12px;line-height:16px;font-weight:400;letter-spacing:0;color:#aaa9af;white-space:nowrap}
+.home-screen .session-reference-tier{flex-shrink:0;border:1px solid #ffffff33;border-radius:9px;padding:3px 8px;font-size:12px;line-height:16px;font-weight:400;color:#b9b8bf;white-space:nowrap}
+.home-screen .session-reference-title{margin:10px 0 7px;font-size:16px;line-height:21px;font-weight:400;color:#ecebf0;letter-spacing:0}
+.home-screen .reference-session-panel .session-control-metrics dt{font-size:12px;line-height:16px;color:#aaa9b0}
+.home-screen .reference-session-panel .session-control-metrics dd{font-size:22px;line-height:28px;font-weight:600;color:#f6f5fb;letter-spacing:0}
+.home-screen .reference-session-panel .reward-daily-row{margin:6px 0 0;font-size:12px;line-height:16px;color:#aaa9b0}
+.home-screen .reference-session-panel .reward-daily-row b{color:#b8b7bf;font-weight:400}
+.home-screen .reference-session-panel .reward-daily-dots i{background:#55545c}
+.home-screen .reference-session-panel .reward-daily-dots i.filled{background:#e3e1e8}
+.home-screen .reference-session-panel .session-control-progress{height:4px;margin:12px 0 0;background:#414149;border-radius:2px}
+.home-screen .reference-session-panel .session-control-progress>span{background:#e3e1e8;border-radius:0}
+.home-screen .reference-session-panel .session-control-action{height:auto;min-height:0;margin-top:13px}
+.home-screen .reference-session-panel .session-control-button{position:relative;isolation:isolate;height:51px;min-height:51px;border:2px solid #dadadab8;border-radius:999px;font-size:16px;line-height:21px;font-weight:500;background:radial-gradient(ellipse at 50% 0%,#ffffffad,transparent 53%),radial-gradient(ellipse at 50% 100%,#ffffffb0,transparent 52%),linear-gradient(100deg,#8e8e8e,#d5d5d5 47%,#a9a9a9);color:#080e13;box-shadow:inset 0 1px 1px #f6f6f680,inset 0 -1px 2px #20202080,0 3px 10px #0005,0 0 14px #ffffff22}
+.home-screen .reference-session-panel .session-control-button:before{content:'';position:absolute;inset:3px;z-index:-1;border:1px solid #ffffffc2;border-radius:inherit;box-shadow:inset 0 1px 3px #ffffff55,inset 0 -1px 3px #ffffff44;pointer-events:none}
+.home-screen .reference-session-panel .session-control-button:disabled{background:#38383f;border-color:#8b8b8b55;color:#aaa9b2;box-shadow:none}
+.home-screen .reference-session-panel .session-control-button:disabled:before{border-color:#c4c4c433;box-shadow:none}
+.home-screen .reference-session-panel .session-control-note{color:#aaa9b0}
+@media(max-width:370px){
+ .home-screen .session-panel.session-control.reference-session-panel{padding:12px 14px 14px}
+ .home-screen .session-reference-heading h1{font-size:20px;line-height:24px}
+ .home-screen .session-reference-brand{font-size:10px}
+ .home-screen .session-reference-tier{font-size:11px;line-height:14px;padding:2px 6px}
+ .home-screen .session-reference-title{font-size:14px;line-height:18px;margin:8px 0 5px}
+ .home-screen .reference-session-panel .session-control-metrics dt{font-size:11px;line-height:14px}
+ .home-screen .reference-session-panel .session-control-metrics dd{font-size:20px;line-height:24px}
+ .home-screen .reference-session-panel .reward-daily-row{margin-top:5px;font-size:11px;line-height:14px}
+ .home-screen .reference-session-panel .session-control-progress{margin-top:10px}
+ .home-screen .reference-session-panel .session-control-action{margin-top:11px}
+ .home-screen .reference-session-panel .session-control-button{height:45px;min-height:45px;font-size:14px}
+}

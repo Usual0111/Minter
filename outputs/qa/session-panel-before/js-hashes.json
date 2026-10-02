@@ -1,0 +1,50 @@
+[
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\app.js",
+    "Hash": "96DC848DD270193A5D1EBD466CA6F0583F3824CB268369EE29127ECDDA5995F1"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\client.js",
+    "Hash": "15C5D3EA0DC2DA3F08975E06619B664DA6988068426753569DE27131C7E8FE99"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\config.js",
+    "Hash": "9F3370A7E3659F7CA351C58BAAAD57C3B2157E8C8B47190C9D9C2B0D8B2E5C52"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\cr-session-system.js",
+    "Hash": "559CD83AD4345F51D5700BE05AE4F539D213071C8242DDA6B5126E7276206B2C"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\engine.js",
+    "Hash": "0B6E36F48FD9A31E3EB3C9130D15C96A65E6F0D7D35457CF91B4CADF63E82036"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\home-system.js",
+    "Hash": "937D570342E287FEEC977948B4B4368E295B2A1DD3FC3FD31F492C865B3F1C8C"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\home-ui.js",
+    "Hash": "F47345E55914C41F74808E0CBD7DA2CF8064257D129956F7E9680B4DA94F11D5"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\motion.js",
+    "Hash": "A6200FE0AB35E42EB3A80E0D2D6DE969B87EE7728E58854FFDD95D62405EDF47"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\node-system.js",
+    "Hash": "257DD854E44E47A4CE926D7DEC9468B1918BD631C639EDD585E8BE888236EC19"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\node-ui.js",
+    "Hash": "B11E89EC68843645B6446DD426066F628765E8B8A48FADF84884C143F34EB68F"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\reward-adapter.js",
+    "Hash": "64E36976170C2A86BE931160C1A9D88F5458F6A751F1DBC41203543DE3B2A9DE"
+  },
+  {
+    "Path": "C:\\Test AI Code\\Bountera-Clean-20261001\\assets\\reward-mining-system.js",
+    "Hash": "22344C94B7115CE5A7497A063A3CDB19DF068EDA86CDF96CBE5FF0C35EBCD645"
+  }
+]
