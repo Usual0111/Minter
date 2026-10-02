@@ -802,6 +802,13 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 .home-screen .reference-session-panel .session-control-button:disabled{background:#38383f;border-color:#8b8b8b55;color:#aaa9b2;box-shadow:none}
 .home-screen .reference-session-panel .session-control-button:disabled:before{border-color:#c4c4c433;box-shadow:none}
 .home-screen .reference-session-panel .session-control-note{color:#aaa9b0}
+
+/* The original balance footprint reserves the header geometry for the compact badge. */
+.home-screen .silver-header .session-wallet{position:relative;background:none;border-color:transparent;box-shadow:none}
+.home-screen .silver-header .session-wallet>strong,.home-screen .silver-header .session-wallet>.home-balance-reserve{visibility:hidden}
+.home-screen .silver-header .home-balance-badge{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:5px;height:30px;padding:0 8px;border:1px solid #ffffff0d;border-radius:999px;background:linear-gradient(135deg,#2a2d34,#20232a);box-shadow:inset 0 1px 1px #ffffff08;color:#dce0e5}
+.home-screen .silver-header .home-balance-value{font-size:14px;line-height:18px;font-weight:400;letter-spacing:0;color:#dce0e5;white-space:nowrap;font-variant-numeric:tabular-nums}
+.home-screen .silver-header .session-wallet .home-balance-coin{width:18px;height:18px;flex-shrink:0}
 @media(max-width:370px){
  .home-screen .session-panel.session-control.reference-session-panel{padding:12px 14px 14px}
  .home-screen .session-reference-heading h1{font-size:20px;line-height:24px}
@@ -815,3 +822,25 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
  .home-screen .reference-session-panel .session-control-action{margin-top:11px}
  .home-screen .reference-session-panel .session-control-button{height:45px;min-height:45px;font-size:14px}
 }
+
+/* Reference proportions for the session card and its daily-charge row only. */
+.home-screen .session-panel.session-control.reference-session-panel{margin:6px 2.3cqw 0;padding:6.2cqw 7.25cqw 7.2cqw;border-radius:6.6cqw}
+.home-screen .session-reference-heading{justify-content:center;gap:0}
+.home-screen .session-reference-heading h1{justify-content:center;gap:0;font-size:6.3cqw;line-height:7cqw;font-weight:400;letter-spacing:0;white-space:nowrap}
+.home-screen .session-reference-tier{padding:0;border:0;border-radius:0;font-size:inherit;line-height:inherit;font-weight:inherit;white-space:pre}
+.home-screen .session-reference-title{margin:.8cqw 0 0;text-align:center;font-size:4.2cqw;line-height:5.5cqw;font-weight:400}
+.home-screen .reference-session-panel .session-control-progress{height:2.9cqw;margin:6cqw 0 0;border-radius:999px}
+.home-screen .reference-session-panel .session-control-progress>span{border-radius:inherit}
+.home-screen .reference-session-panel .session-control-metrics{margin:2.7cqw 0 0;gap:2cqw}
+.home-screen .reference-session-panel .session-control-metrics dt{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap}
+.home-screen .reference-session-panel .session-control-metrics dd{font-size:4.2cqw;line-height:5.5cqw;font-weight:400}
+.home-screen .reference-session-panel .session-reward-value{display:flex;align-items:center;justify-content:flex-end;gap:1.1cqw}
+.home-screen .reference-session-panel .session-reward-coin{width:4.3cqw;height:4.3cqw;flex-shrink:0}
+.home-screen .reference-session-panel .session-control-action{margin-top:6.2cqw}
+.home-screen .reference-session-panel .session-control-button{height:13.5cqw;min-height:13.5cqw;border-radius:3.3cqw;font-size:4.6cqw;line-height:5.8cqw}
+.home-screen .reference-daily-charge{flex-direction:column;justify-content:center;gap:3.8cqw;margin:6.8cqw 9.55cqw 12.3cqw;font-size:4.2cqw;line-height:5.5cqw;color:#aaa9b0}
+.home-screen .reference-daily-charge b{color:#b8b7bf;font-weight:600}
+.home-screen .reference-daily-charge b>span{font-weight:400}
+.home-screen .reference-daily-charge .reward-daily-dots{position:static;transform:none;width:100%;justify-content:space-between;gap:0}
+.home-screen .reference-daily-charge .reward-daily-dots i{width:2.1cqw;height:2.1cqw;flex-shrink:0;background:#55545c}
+.home-screen .reference-daily-charge .reward-daily-dots i.filled{background:#e3e1e8}
