@@ -844,3 +844,24 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 .home-screen .reference-daily-charge .reward-daily-dots{position:static;transform:none;width:100%;justify-content:space-between;gap:0}
 .home-screen .reference-daily-charge .reward-daily-dots i{width:2.1cqw;height:2.1cqw;flex-shrink:0;background:#55545c}
 .home-screen .reference-daily-charge .reward-daily-dots i.filled{background:#e3e1e8}
+
+/* Contract content follows the existing card; the artwork and upper composition retain their coordinates. */
+.home-screen .mining-contract-row{display:flex;align-items:center;justify-content:space-between;gap:8px;width:calc(100% - 4.6cqw);margin:12px 2.3cqw 0;padding:0 7.25cqw;min-height:32px;background:none;border:0;box-shadow:none;font-size:12px;line-height:17px;color:#aaa9b0;text-align:left}
+.home-screen .mining-contract-row span:last-child{flex-shrink:0;color:#d8d9dd;font-variant-numeric:tabular-nums}
+.home-screen .mining-contract-row.contract-complete{justify-content:center}
+.home-screen>main>.mining-contract-row{flex:none}
+.mining-contract-card p,.next-contract p,.sponsor-campaign p,.node-career-goal p{margin:8px 0;color:#a4afb9;font-size:13px;line-height:1.5}
+.mining-contract-card .contract-result,.sponsor-campaign .contract-result{color:#e8edf2}
+.mining-contract-card button,.sponsor-campaign button{margin-top:10px}
+.next-contract{padding:12px 16px}
+.next-contract h3{font-size:14px}
+.campaign-empty{margin:0 0 18px;line-height:1.5}
+.contract-conditions{margin:0 0 16px}
+.contract-conditions>div{margin:12px 0}
+.contract-conditions dt{color:#a4afb9;font-size:12px;margin-bottom:4px}
+.contract-conditions dd{margin:0;color:#e8edf2;font-size:14px;line-height:1.5}
+.contract-conditions~button{margin-top:16px}
+dialog.contract-sheet{top:auto;bottom:0;align-items:flex-end;justify-content:center;max-height:min(85dvh,var(--dialog-height,85dvh))}
+dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh;border-radius:22px 22px 0 0;background:#101820f5;color:#e8edf2;overflow:auto;padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
+.mining-history-breakdown{line-height:1.6}
+@media(max-width:350px){.home-screen .mining-contract-row{padding:0 4cqw;font-size:11px;gap:5px}}

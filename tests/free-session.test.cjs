@@ -1,0 +1,67 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const E=require('../assets/engine.js'),C=require('../assets/config.js'),R=require('../assets/reward-mining-system.js'),UI=require('../assets/home-ui.js'),{Store}=require('../server/store.cjs');
+const T=Date.UTC(2026,9,1,12),DAY=86400000,END=T+600000;let seq=0;
+const fresh=(config=C)=>E.view(E.initial(config,T),T).state,act=(s,a,p={},t=T)=>E.apply(s,a,p,t,`${a}-free-test-${++seq}`),free=(s,t=T,q=E.view(s,t).rewardMining.freeSession)=>act(s,'rewardFreeStart',q,t),current=s=>s.rewardMining.sessions.find(x=>x.id===s.rewardMining.currentId);
+function show(s,t){const o=act(s,'rewardAdOffer',E.view(s,t).rewardMining.offer,t);assert(o.event);return act(o.state,'rewardAdShow',{eventId:o.event.id},t);}
+function watch(s,t){const o=show(s,t);return act(o.state,'rewardAdConfirm',{eventId:o.event.id},t+3000);}
+const tier=(s,n)=>{s.rewardMining.selected='reward-t'+n;s.rewardMining.unlocked=['reward-t1','reward-t2','reward-t3'];return s;};
+
+test('free start reserves its separate allocation without ads, quota or balance credit',()=>{
+ let s=fresh(),balance=JSON.stringify(s.balance),stats=JSON.stringify(s.stats);const q=E.view(s,T).rewardMining.freeSession,o=free(s,T,q);s=o.state;
+ assert(o.freeStarted);assert.equal(current(s).startedAt,T);assert.equal(current(s).endsAt,END);assert.equal(current(s).rewardCents,5);assert.equal(current(s).freeBaseCents,5);assert.equal(current(s).adRewardCents,0);
+ assert.equal(JSON.stringify(s.balance),balance);assert.equal(JSON.stringify(s.stats),stats);assert.equal(s.rewardMining.day.total,0);assert.equal(s.rewardMining.day.committedCents,0);assert.equal(Object.keys(s.rewardMining.events).length,0);
+ const d=s.rewardMining.freeDays[Math.floor(T/DAY)];assert.equal(d.allocatedCents,5);assert.equal(d.committedCents,5);assert.equal(d.started,1);assert.equal(d.paidCents,0);assert.equal(s.ledger.find(x=>x.type==='reward_free_reservation').cr,0);
+ assert(free(s,T,q).freeOfferChanged);assert.equal(free(s,T,q).state.rewardMining.sessions.length,1);
+});
+test('free reward completes without ads, persists across days and pays only once on claim',()=>{
+ let s=free(fresh()).state;for(let i=0;i<4;i++){s=act(E.load(s),'refresh',{},END+i*DAY).state;const x=E.view(s,END+i*DAY).rewardMining;assert.equal(x.status,'ready');assert.equal(x.readyCents,5);assert.equal(x.accumulatedMicroCents,5000000);assert.equal(x.freeSession.reason,'session');assert.equal(s.balance.cr,C.initialCRCents);}
+ s=act(s,'rewardClaim',{},END+3*DAY).state;s=act(s,'rewardClaim',{},END+3*DAY).state;assert.equal(s.balance.cr,C.initialCRCents+5);assert.equal(s.ledger.filter(x=>x.type==='reward_session_credit').length,1);assert.equal(s.rewardMining.freeDays[Math.floor(T/DAY)].paidCents,5);assert.equal(s.rewardMining.freeDays[Math.floor((T+3*DAY)/DAY)].paidCents,0);assert.equal(E.view(s,END+3*DAY).rewardMining.freeSession.reason,'available');
+});
+test('unused starts do not accumulate and completed same-day free launch cannot be reused',()=>{
+ let s=free(fresh()).state;s=act(s,'rewardClaim',{},END).state;assert(free(s,END).freeOfferChanged);s=act(E.load(s),'refresh',{},T+5*DAY).state;assert.equal(E.view(s,T+5*DAY).rewardMining.freeSession.remainingStarts,1);s=free(s,T+5*DAY).state;assert.equal(current(s).rewardCents,5);assert.equal(s.rewardMining.freeDays[Math.floor((T+5*DAY)/DAY)].committedCents,5);
+});
+test('stale day or reward promises do not consume a free launch',()=>{
+ const s=fresh(),q=E.view(s,T).rewardMining.freeSession;assert(free(s,T+DAY,q).freeOfferChanged);assert.equal(free(s,T+DAY,q).state.rewardMining.freeDays[Math.floor((T+DAY)/DAY)].started,0);s.rewardMining.settings.freeSession.rewardCents=4;assert(free(s,T,q).freeOfferChanged);assert.equal(s.rewardMining.freeDays[q.dayKey].committedCents,0);
+});
+test('free starts require a preallocated budget, fixed independently for each day',()=>{
+ const config={...C,rewardMining:{freeSession:{dailyBudgetCents:0}}};let s=fresh(config);assert.equal(E.view(s,T).rewardMining.freeSession.reason,'unavailable');assert(free(s).freeOfferChanged);s.rewardMining.settings.freeSession.dailyBudgetCents=5;assert(free(s).freeOfferChanged);assert(free(s,T+DAY).freeStarted);s=fresh();s.rewardMining.settings.freeSession.enabled=false;assert(free(s).freeOfferChanged);
+});
+test('free launch works with unavailable ads, full ad quotas or cooldown but not an open ad',()=>{
+ for(const reason of ['unavailable','daily','cooldown']){const s=fresh();if(reason==='unavailable')for(const a of R.defaults.sources)s.rewardMining.providers[a.id]={available:false};if(reason==='daily')s.rewardMining.day.total=75;if(reason==='cooldown')s.rewardMining.nextAdAt=END;assert.equal(E.view(s,T).rewardMining.offer.reason,reason);assert(free(s).freeStarted);}
+ const o=show(fresh(),T);assert.equal(E.view(o.state,T).rewardMining.freeSession.reason,'pending');assert(free(o.state).freeOfferChanged);
+});
+test('optional ads increase the free session without mined jumps or moving its deadline',()=>{
+ let s=free(fresh()).state;const before=E.view(s,T+3000).rewardMining.accumulatedMicroCents;s=watch(s,T).state;assert.equal(current(s).rewardCents,40);assert.equal(current(s).adRewardCents,35);assert.equal(current(s).endsAt,END);assert.equal(E.view(s,T+3000).rewardMining.accumulatedMicroCents,before);
+ const o=show(s,T+63000),mined=E.view(o.state,T+66000).rewardMining.accumulatedMicroCents;s=act(o.state,'rewardAdConfirm',{eventId:o.event.id},T+66000).state;assert.equal(E.view(s,T+66000).rewardMining.accumulatedMicroCents,mined);assert.equal(current(s).rewardCents,60);assert.equal(current(s).endsAt,END);assert.equal(s.rewardMining.sessions.length,1);assert.equal(s.balance.cr,C.initialCRCents);
+ s=act(s,'rewardClaim',{},END).state;assert.equal(s.balance.cr,C.initialCRCents+60);assert.equal(s.rewardMining.freeDays[Math.floor(T/DAY)].paidCents,5);assert.equal(s.rewardMining.day.committedCents,55);
+});
+test('ads crossing the free deadline wait for confirmation or cancellation without auto credit',()=>{
+ for(const outcome of ['confirmed','cancelled','error']){const o=show(free(fresh()).state,END-1000);let s=act(o.state,'refresh',{},END).state;assert.equal(current(s).status,'finishing');assert.equal(s.balance.cr,C.initialCRCents);s=outcome==='confirmed'?act(s,'rewardAdConfirm',{eventId:o.event.id},END+2000).state:act(s,'rewardAdFinish',{eventId:o.event.id,outcome},END+2000).state;assert.equal(E.view(s,END+2000).rewardMining.readyCents,outcome==='confirmed'?40:5);assert.equal(s.balance.cr,C.initialCRCents);}
+});
+test('expired free boost can be collected late once without paying its base budget twice',()=>{
+ const o=show(free(fresh()).state,END-1000),late=END+299000;let s=act(o.state,'rewardClaim',{},late).state;assert.equal(s.balance.cr,C.initialCRCents+5);s=act(s,'rewardAdConfirm',{eventId:o.event.id},late+1).state;assert.equal(E.view(s,late+1).rewardMining.readyCents,35);s=act(s,'rewardClaim',{},late+2).state;s=act(s,'rewardAdConfirm',{eventId:o.event.id},late+3).state;s=act(s,'rewardClaim',{},late+4).state;assert.equal(s.balance.cr,C.initialCRCents+40);assert.equal(s.rewardMining.freeDays[Math.floor(T/DAY)].paidCents,5);assert.equal(s.ledger.filter(x=>x.type==='reward_session_adjustment').length,1);
+});
+test('Tier preserves exact ad rewards while all free and ad sessions stay ten minutes',()=>{
+ for(const [n,premium,normal,bps] of [[1,35,20,0],[2,36.75,21,500],[3,38.5,22,1000]]){const s=tier(fresh(),n);let q=E.view(s,T).rewardMining.offer;assert.equal(q.rewardCents,premium);assert.equal(q.baseRewardCents,35);assert.equal(q.rewardBonusBps,bps);assert.equal(q.durationMs,600000);s.rewardMining.cursor=1;q=E.view(s,T).rewardMining.offer;assert.equal(q.rewardCents,normal);const out=free(s);assert.equal(current(out.state).rewardCents,5);assert.equal(current(out.state).durationMs,600000);}
+});
+test('new Tier can be installed only after collection and affects future offers',()=>{let s=watch(free(fresh()).state,T).state;s.rewardMining.contracts.completed=6;s.user.xp=0;s.rewardMining.parts=9;s=act(s,'rewardUnlock',{id:'reward-t2'},T+63000).state;assert.throws(()=>act(s,'rewardSelect',{id:'reward-t2'},T+63000),/Collect/);assert.equal(current(s).endsAt,END);assert.equal(current(s).rewardCents,40);s=act(s,'rewardClaim',{},END).state;s=act(s,'rewardSelect',{id:'reward-t2'},END).state;assert.equal(E.view(s,END).rewardMining.offer.rewardCents,21);const o=show(s,END);o.state.rewardMining.settings.tiers[1].rewardBonusBps=1000;s=act(o.state,'rewardAdConfirm',{eventId:o.event.id},END+3000).state;assert.equal(current(s).rewardCents,21);});
+test('Tier 3 still admits all 75 views and budgets the boosted totals separately from free funding',()=>{
+ let s=free(tier(fresh(),3)).state;for(let i=0;i<75;i++){const at=T+i*63000;if(E.view(s,at).rewardMining.readyCents)s=act(s,'rewardClaim',{},at).state;s=watch(s,at).state;}
+ assert.deepEqual(s.rewardMining.day.counts,{premium:25,'normal-a':25,'normal-b':25});assert.equal(s.rewardMining.day.committedCents,2062.5);assert.equal(s.rewardMining.freeDays[Math.floor(T/DAY)].committedCents,5);assert.equal(E.view(s,T+75*63000).rewardMining.offer.reason,'daily');s=act(s,'rewardClaim',{},T+75*63000+600000).state;assert.equal(s.balance.cr+(s.balance.crRemainderMicroCents||0)/R.defaults.unit,C.initialCRCents+2082.5);
+});
+test('actual boosted amounts must fit provider funds; sponsored campaigns require eligible models',()=>{
+ let s=tier(fresh(),3);s.rewardMining.providers.premium={budgetCents:38};assert.equal(E.view(s,T).rewardMining.offer.source,'normal-a');s.rewardMining.providers['normal-a']={budgetCents:21};s.rewardMining.providers['normal-b']={budgetCents:21};assert.equal(E.view(s,T).rewardMining.offer.reason,'unavailable');
+ s=tier(fresh(),3);s.rewardMining.settings.sources=[{id:'sponsor',rewardCents:20,quota:25,campaignId:'test-campaign',bonusEligible:false}];assert.equal(E.view(s,T).rewardMining.offer.reason,'unavailable');s.rewardMining.settings.tiers[2].campaignIds=['test-campaign'];const q=E.view(s,T).rewardMining.offer;assert.equal(q.source,'sponsor');assert.equal(q.campaignId,'test-campaign');assert.equal(q.rewardCents,20);assert.equal(watch(s,T).state.rewardMining.day.counts.sponsor,1);
+});
+test('v3 migration preserves active or ready funds, history, deadlines and reserved ad promises',()=>{
+ let o=show(tier(fresh(),2),T),s=o.state;s.rewardMining.version=3;s.rewardMining.settings.dailyBudgetCents=1875;delete s.rewardMining.settings.freeSession;delete s.rewardMining.freeDays;delete s.rewardMining.freeReservations;for(const n of s.rewardMining.settings.tiers){delete n.rewardBonusBps;delete n.campaignIds;}s.rewardMining.events[o.event.id].rewardCents=35;
+ const saved=JSON.stringify(s.balance),ledger=JSON.stringify(s.ledger);s=E.view(E.load(s),T).state;assert.equal(s.rewardMining.version,5);assert.equal(JSON.stringify(s.balance),saved);assert.equal(JSON.stringify(s.ledger),ledger);s=act(s,'rewardAdConfirm',{eventId:o.event.id},T+3000).state;assert.equal(current(s).rewardCents,35);assert.equal(current(s).endsAt,T+603000);s.rewardMining.version=3;const ready=E.view(s,T+603000);assert.equal(ready.rewardMining.readyCents,35);assert.equal(ready.state.balance.cr,C.initialCRCents);
+});
+test('transactional free starts are per-player, persisted and protected against repeated requests',()=>{
+ const db=new Store(':memory:');try{db.ensure('free-a',{},T);db.ensure('free-b',{},T);const q=E.view(db.read('free-a'),T).rewardMining.freeSession;assert(db.act('free-a','rewardFreeStart',q,'free-first-request',T).freeStarted);assert(db.act('free-a','rewardFreeStart',q,'free-first-request',T+1).replayed);assert(db.act('free-a','rewardFreeStart',q,'free-second-request',T+1).freeOfferChanged);assert(db.act('free-b','rewardFreeStart',q,'free-other-player',T).freeStarted);assert.equal(db.read('free-a').rewardMining.sessions.length,1);db.ensure('free-a',{},T+3*DAY);assert.equal(E.view(db.read('free-a'),T+3*DAY).rewardMining.readyCents,5);db.act('free-a','rewardClaim',{},'free-claim-request',T+3*DAY);db.act('free-a','rewardClaim',{},'free-claim-request',T+3*DAY+1);db.act('free-a','rewardClaim',{},'free-claim-repeat',T+3*DAY+2);assert.equal(db.read('free-a').balance.cr,C.initialCRCents+5);assert.equal(db.read('free-b').balance.cr,C.initialCRCents);assert.equal(db.read('free-a').rewardMining.freeDays[Math.floor(T/DAY)].paidCents,5);}finally{db.close();}
+});
+test('Home offers a free start without changing markup and never starts an ad for that action',async()=>{
+ let v=E.view(fresh(),T),calls=0,ads=0,resolve;const helpers={t:en=>en,loc:x=>Array.isArray(x)?x[0]:x,icon:()=>'',btn:(l,a)=>`<button data-action="${a}">${l}</button>`,cr:x=>(x/100).toFixed(2),view:()=>v,render(){},busy:()=>false,toast(){},watchRewardAd:async()=>ads++,action:(a,p)=>{calls++;assert.equal(a,'rewardFreeStart');assert.equal(p.rewardCents,5);return new Promise(r=>resolve=r);}},ui=UI.create(helpers),intent=ui.actionKey(v.rewardMining);
+ assert(ui.render(v).includes('Start node + 0.05 CR · free'));const p=ui.click('homeRewardFree',intent);assert(ui.render(v).includes('Starting node…'));await ui.click('homeRewardFree',intent);assert.equal(calls,1);resolve({freeStarted:true});await p;assert.equal(ads,0);v=E.view(fresh(),T+DAY);await ui.click('homeRewardFree',intent);assert.equal(calls,1);
+ v=E.view(act(free(fresh()).state,'rewardClaim',{},END).state,END);assert.equal(ui.control(v.rewardMining).label,'Start node + 0.35 CR · ad');
+});
