@@ -891,7 +891,7 @@ dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh
 @media(max-width:350px){.home-screen .node-panel-heading{grid-template-columns:54px minmax(0,1fr) 54px}.home-screen .node-heading-center h1{font-size:6cqw}}
 
 /* Screenshot proportions are confined to the existing mining panel. */
-.home-screen .session-panel.session-control.reference-session-panel{margin:6px 3.49cqw 0;padding:4.07cqw 4.65cqw 4.46cqw;border-radius:5.23cqw;border:1px solid #aaa0a55c;background:radial-gradient(ellipse at 38% -12%,#ffffff1a,transparent 67%),linear-gradient(120deg,#273940a1,#39373c99 64%,#282931c9);box-shadow:inset 0 1px 1px #ffffff21,inset 0 -1px 3px #ffffff09,0 9px 22px #0005;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);font-family:Arial,Helvetica,sans-serif}
+.home-screen .session-panel.session-control.reference-session-panel{margin:calc(6px + 5.7cqw) 3.49cqw 0;padding:4.07cqw 4.65cqw 4.46cqw;border-radius:5.23cqw;border:1px solid #aaa0a55c;background:radial-gradient(ellipse at 38% -12%,#ffffff1a,transparent 67%),linear-gradient(120deg,#273940a1,#39373c99 64%,#282931c9);box-shadow:inset 0 1px 1px #ffffff21,inset 0 -1px 3px #ffffff09,0 9px 22px #0005;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);font-family:Arial,Helvetica,sans-serif}
 .home-screen .reference-session-panel .node-panel-heading{height:auto;display:flex;justify-content:center;margin:0}
 .home-screen .reference-session-panel .node-panel-heading h1{display:flex;align-items:baseline;justify-content:center;gap:1.55cqw;font-size:5.43cqw;line-height:6.4cqw;font-weight:700;letter-spacing:0}
 .home-screen .reference-session-panel .session-reference-tier{font-size:5.04cqw;line-height:6.4cqw;font-weight:400;color:#eeedf0;white-space:nowrap}
