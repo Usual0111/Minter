@@ -20,6 +20,13 @@ test('free reward completes without ads, persists across days and pays only once
 test('unused starts do not accumulate and completed same-day free launch cannot be reused',()=>{
  let s=free(fresh()).state;s=act(s,'rewardClaim',{},END).state;assert(free(s,END).freeOfferChanged);s=act(E.load(s),'refresh',{},T+5*DAY).state;assert.equal(E.view(s,T+5*DAY).rewardMining.freeSession.remainingStarts,1);s=free(s,T+5*DAY).state;assert.equal(current(s).rewardCents,5);assert.equal(s.rewardMining.freeDays[Math.floor((T+5*DAY)/DAY)].committedCents,5);
 });
+test('one daily free start is followed by confirmed ten-minute ad starts priced without another free base',()=>{
+ let s=free(fresh()).state;s=act(s,'rewardClaim',{},END).state;let at=END+1000;
+ for(const price of [35,20]){const before=s.balance.cr,q=E.view(s,at).rewardMining.offer;assert.equal(q.rewardCents,price);const shown=show(s,at);assert.equal(shown.state.rewardMining.sessions.length,s.rewardMining.sessions.length);s=act(shown.state,'rewardAdConfirm',{eventId:shown.event.id},at+3000).state;const x=current(s);assert.equal(x.startedAt,at+3000);assert.equal(x.durationMs,600000);assert.equal(x.endsAt,at+603000);assert.equal(x.freeBaseCents,0);assert.equal(x.adRewardCents,price);assert.equal(x.rewardCents,price);assert.equal(s.balance.cr,before);s=act(s,'rewardClaim',{},x.endsAt).state;assert.equal(s.balance.cr,before+price);assert.equal(E.view(s,x.endsAt).rewardMining.freeSession.remainingStarts,0);assert.notEqual(E.view(s,x.endsAt).rewardMining.freeSession.reason,'available');at=x.endsAt+1000;}
+});
+test('Home previews ten minutes and distinguishes a free start, paid start and voluntary boost in Russian',()=>{
+ const ui=UI.create({t:(_,ru)=>ru,loc:x=>Array.isArray(x)?x[1]:x,icon:()=>'',btn:(l,a)=>`<button data-action="${a}">${l}</button>`});let v=E.view(fresh(),T);assert.equal(ui.control(v.rewardMining).label,'Начать · Бесплатно · +0,05 CR');assert(ui.render(v).includes('data-session-live="time">10:00'));let s=act(free(fresh()).state,'rewardClaim',{},END).state;v=E.view(s,END);assert.equal(ui.control(v.rewardMining).label,'Начать · ▶ реклама · +0,35 CR');const out=watch(s,END+1000);v=E.view(out.state,END+64000);assert.equal(ui.control(v.rewardMining).label,'Добавить +0,20 CR · ▶ реклама');
+});
 test('stale day or reward promises do not consume a free launch',()=>{
  const s=fresh(),q=E.view(s,T).rewardMining.freeSession;assert(free(s,T+DAY,q).freeOfferChanged);assert.equal(free(s,T+DAY,q).state.rewardMining.freeDays[Math.floor((T+DAY)/DAY)].started,0);s.rewardMining.settings.freeSession.rewardCents=4;assert(free(s,T,q).freeOfferChanged);assert.equal(s.rewardMining.freeDays[q.dayKey].committedCents,0);
 });
@@ -62,6 +69,6 @@ test('transactional free starts are per-player, persisted and protected against 
 });
 test('Home offers a free start without changing markup and never starts an ad for that action',async()=>{
  let v=E.view(fresh(),T),calls=0,ads=0,resolve;const helpers={t:en=>en,loc:x=>Array.isArray(x)?x[0]:x,icon:()=>'',btn:(l,a)=>`<button data-action="${a}">${l}</button>`,cr:x=>(x/100).toFixed(2),view:()=>v,render(){},busy:()=>false,toast(){},watchRewardAd:async()=>ads++,action:(a,p)=>{calls++;assert.equal(a,'rewardFreeStart');assert.equal(p.rewardCents,5);return new Promise(r=>resolve=r);}},ui=UI.create(helpers),intent=ui.actionKey(v.rewardMining);
- assert(ui.render(v).includes('Start node + 0.05 CR · free'));const p=ui.click('homeRewardFree',intent);assert(ui.render(v).includes('Starting node…'));await ui.click('homeRewardFree',intent);assert.equal(calls,1);resolve({freeStarted:true});await p;assert.equal(ads,0);v=E.view(fresh(),T+DAY);await ui.click('homeRewardFree',intent);assert.equal(calls,1);
- v=E.view(act(free(fresh()).state,'rewardClaim',{},END).state,END);assert.equal(ui.control(v.rewardMining).label,'Start node + 0.35 CR · ad');
+ assert(ui.render(v).includes('Start · Free · +0.05 CR'));const p=ui.click('homeRewardFree',intent);assert(ui.render(v).includes('Starting node…'));await ui.click('homeRewardFree',intent);assert.equal(calls,1);resolve({freeStarted:true});await p;assert.equal(ads,0);v=E.view(fresh(),T+DAY);await ui.click('homeRewardFree',intent);assert.equal(calls,1);
+ v=E.view(act(free(fresh()).state,'rewardClaim',{},END).state,END);assert.equal(ui.control(v.rewardMining).label,'Start · ▶ ad · +0.35 CR');
 });
