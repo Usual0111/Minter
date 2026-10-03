@@ -918,3 +918,20 @@ dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh
 .home-screen .reference-session-panel .session-control-button{height:11.82cqw;min-height:11.82cqw;border:2px solid #edededba;border-radius:2.71cqw;font-size:4.65cqw;line-height:5.81cqw;font-weight:400;letter-spacing:0;background:radial-gradient(ellipse at 50% 0%,#ffffff70,transparent 62%),linear-gradient(105deg,#999b9c,#d6d6d5 48%,#aaaeb0);color:#080a0c;box-shadow:inset 0 1px 2px #ffffff91,inset 0 -1px 2px #30303077,0 3px 9px #0004,0 0 9px #ffffff12}
 .home-screen .reference-session-panel .session-control-button:before{inset:.58cqw;border-radius:2.04cqw;border:1px solid #ffffffc4;box-shadow:inset 0 1px 2px #ffffff75,inset 0 -1px 2px #ffffff40}
 .home-screen .reference-session-panel .session-control-button:disabled{background:linear-gradient(105deg,#73777a,#a3a6a6 48%,#797b80);border-color:#c0c3c388;color:#34383e;box-shadow:inset 0 1px 2px #ffffff40,0 3px 9px #0004}
+
+/* Copy stays inside the existing button bounds; speed layers share the same line. */
+.home-screen .reference-session-panel .free-mining-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;pointer-events:none}
+.home-screen .reference-session-panel .free-mining-title{font-size:16px;line-height:18px;font-weight:500;color:#111820}
+.home-screen .reference-session-panel .free-mining-subtitle{font-size:12px;line-height:14px;font-weight:400;color:#505963}
+.home-screen .mining-speed-dot,.home-screen .mining-speed-arrow,.home-screen .mining-speed-value{color:#afe3df}
+.home-screen .mining-speed-old{color:#a6b0bc}
+.home-screen .mining-speed-transition{display:inline-grid;vertical-align:top;line-height:inherit}
+.home-screen .mining-speed-transition>span{grid-area:1/1;white-space:pre}
+.home-screen .mining-speed-outgoing{animation:speed-outgoing 2850ms ease-out var(--speed-delay,0ms) both}
+.home-screen .mining-speed-delta{animation:speed-delta 2850ms ease-out var(--speed-delay,0ms) both}
+.home-screen .mining-speed-incoming{animation:speed-incoming 2850ms ease-out var(--speed-delay,0ms) both}
+.home-screen .mining-speed-accessible{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap}
+@keyframes speed-outgoing{0%,5.263158%{opacity:1;transform:translateY(0)}12.280702%,100%{opacity:0;transform:translateY(-3px)}}
+@keyframes speed-delta{0%,5.263158%{opacity:0;transform:translateY(3px)}12.280702%,92.982456%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-3px)}}
+@keyframes speed-incoming{0%,92.982456%{opacity:0;transform:translateY(3px)}100%{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){body:not(.force-animations) .home-screen .mining-speed-outgoing,body:not(.force-animations) .home-screen .mining-speed-delta{display:none}body:not(.force-animations) .home-screen .mining-speed-incoming{opacity:1;transform:none}}
