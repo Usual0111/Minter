@@ -1,0 +1,50 @@
+[
+  {
+    "state": "start",
+    "long": 0.947807,
+    "moving": 0,
+    "status": "active",
+    "source": "assets/aurora-device-layer-lights-off.png",
+    "transform": "translate3d(0px, -0.9303px, 0px)"
+  },
+  {
+    "state": "active",
+    "long": 0.68,
+    "moving": 0,
+    "status": "active",
+    "source": "assets/aurora-device-layer-lights-off.png",
+    "transform": "translate3d(0px, -1.923px, 0px)"
+  },
+  {
+    "state": "boost",
+    "long": 0.68,
+    "moving": 0.98,
+    "status": "active",
+    "source": "assets/aurora-device-layer-lights-off.png",
+    "transform": "translate3d(0px, 0.176px, 0px)"
+  },
+  {
+    "state": "ready",
+    "long": 0.64,
+    "moving": 0,
+    "status": "ready",
+    "source": "assets/aurora-device-layer-lights-off.png",
+    "transform": "translate3d(0px, -0.9123px, 0px)"
+  },
+  {
+    "state": "claim",
+    "long": 0.246547,
+    "moving": 0.98,
+    "status": "idle",
+    "source": "assets/aurora-device-layer-lights-off.png",
+    "transform": "translate3d(0px, -0.5854px, 0px)"
+  },
+  {
+    "state": "collected",
+    "long": 0,
+    "moving": 0,
+    "status": "idle",
+    "source": "assets/aurora-device-layer-lights-off.png",
+    "transform": "translate3d(0px, -0.0494px, 0px)"
+  }
+]
