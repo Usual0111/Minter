@@ -44,6 +44,12 @@ export interface MiningSnapshot {
   remainingMs: number; progress: number; status: 'idle' | 'active' | 'finishing' | 'ready';
   offer: AdOffer; adPending: boolean; maxDailyViews: number;
   contracts: ContractSnapshot; campaigns: SponsoredCampaign[]; canSelectNode: boolean;
+  viewBonuses: {today: ViewBonus[]; pending: ViewBonus[]; timezone: 'UTC'};
+}
+export interface ViewBonus {
+  dayKey: number; views: number; rewardCents: number; progress: number;
+  funded: boolean; reservationId: string; earnedAt: number | null; claimedAt: number | null;
+  status: 'locked' | 'ready' | 'claimed' | 'unavailable'; creditOperation?: string;
 }
 export interface MiningContract {
   id: string; name: [string, string]; views: number; progress: number;

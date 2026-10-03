@@ -865,3 +865,27 @@ dialog.contract-sheet{top:auto;bottom:0;align-items:flex-end;justify-content:cen
 dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh;border-radius:22px 22px 0 0;background:#101820f5;color:#e8edf2;overflow:auto;padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
 .mining-history-breakdown{line-height:1.6}
 @media(max-width:350px){.home-screen .mining-contract-row{padding:0 4cqw;font-size:11px;gap:5px}}
+
+/* Compact node controls reuse the original title + subtitle height. */
+.home-screen .node-panel-heading{height:13.3cqw;display:grid;grid-template-columns:60px minmax(0,1fr) 60px;gap:0;align-items:center}
+.home-screen .node-heading-center{min-width:0;text-align:center}
+.home-screen .node-heading-center h1{font-size:6.3cqw;line-height:7cqw}
+.home-screen .node-heading-center .session-reference-tier{display:block;margin-top:2px;font-size:13px;line-height:17px;color:#aaa9b0;white-space:normal}
+.home-screen .node-header-control{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:44px;min-height:44px;padding:0;background:none;border:0;box-shadow:none;color:#aaa9b0}
+.home-screen .node-header-caption{font-size:10px;line-height:12px;font-weight:400}
+.home-screen .node-contract-ring{display:grid;place-items:center;width:34px;height:34px;position:relative;font-size:11px;line-height:14px;color:#d8e5e7;font-variant-numeric:tabular-nums}
+.home-screen .node-contract-ring svg{position:absolute;inset:0;width:34px;height:34px;fill:none;stroke-width:2;transform:rotate(-90deg)}
+.home-screen .node-contract-ring .ring-track{stroke:#69717b66}
+.home-screen .node-contract-ring .ring-value{stroke:#a5d6d4;stroke-linecap:butt}
+.home-screen .node-contract-ring.is-complete>span{font-size:16px;color:#a5d6d4}
+.home-screen .node-bonus-gift{height:34px;position:relative;display:grid;place-items:center}
+.home-screen .node-bonus-gift svg{width:24px;height:24px;stroke:#b5b8c2}
+.home-screen .node-bonus-dot{position:absolute;width:5px;height:5px;right:-3px;top:3px;border-radius:50%;background:#d6b879;animation:none;box-shadow:none}
+.home-screen .node-bonus-dot[hidden]{display:none}
+.node-bonus-item{padding:12px 0 16px;border-bottom:1px solid #a4afb919}
+.node-bonus-item h3{font-size:15px;font-weight:500}
+.node-bonus-item p{margin:7px 0;line-height:1.5}
+.node-bonus-value{font-size:14px;color:#e8edf2}
+.node-bonus-item button{margin-top:8px}
+.node-bonus-views{margin:16px 0 8px}
+@media(max-width:350px){.home-screen .node-panel-heading{grid-template-columns:54px minmax(0,1fr) 54px}.home-screen .node-heading-center h1{font-size:6cqw}}
