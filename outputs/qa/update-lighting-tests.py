@@ -1,0 +1,13 @@
+from pathlib import Path
+p=Path('tests/home-device-motion.test.cjs')
+s=p.read_text(encoding='utf8')
+s=s.replace('assert.equal(+f.long.style.opacity,.1)','assert.equal(+f.long.style.opacity,.34)')
+s=s.replace('assert.equal(f.m.sample().light,.035)','assert.equal(f.m.sample().light,.48)')
+s=s.replace('opacity<=.25','opacity<=1')
+s=s.replace('assert(!/filter|brightness|camera|lens/i.test(M.lights()));', '''assert(M.lights().includes('stdDeviation="2"'));''')
+s=s.replace("mask=JSON.parse(fs.readFileSync('outputs/qa/device-strip-mask-data.json','utf8'));","mask=JSON.parse(fs.readFileSync('outputs/qa/device-unlit-strip-mask-data.json','utf8'));")
+s=s.replace(".digest('hex'),mask.sourceSha256)",".digest('hex'),mask.originalSha256)")
+s=s.replace("assert.equal(f.node.style.transform,f.svg.style.transform);assert(!/rotate|scale/.test(f.node.style.transform));","assert.equal(f.node.style.transform,undefined);assert.equal(f.svg.style.transform,undefined);assert(!/rotate|scale/.test(f.rig.style.transform));")
+s=s.replace("assert(Object.keys(f.node.style).every(k=>k==='transform'));","assert.equal(Object.keys(f.node.style).length,0);assert(Object.keys(f.rig.style).every(k=>k==='transform'));")
+s=s.replace("test('pixel masks are tied to the unchanged original artwork", "test('gray insert masks preserve the original artwork")
+p.write_text(s,encoding='utf8')

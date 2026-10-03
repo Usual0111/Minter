@@ -935,3 +935,15 @@ dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh
 @keyframes speed-delta{0%,5.263158%{opacity:0;transform:translateY(3px)}12.280702%,92.982456%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-3px)}}
 @keyframes speed-incoming{0%,92.982456%{opacity:0;transform:translateY(3px)}100%{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){body:not(.force-animations) .home-screen .mining-speed-outgoing,body:not(.force-animations) .home-screen .mining-speed-delta{display:none}body:not(.force-animations) .home-screen .mining-speed-incoming{opacity:1;transform:none}}
+
+/* The landscape and scanner stay fixed. The craft and light masks share
+   one coordinate system and one small vertical translation. */
+.home-screen .home-flight-layer{animation:none!important;transform:none;will-change:auto}
+.home-device-rig{position:absolute;left:16%;top:22cqw;width:78%;aspect-ratio:3/2;z-index:1;pointer-events:none;overflow:visible;will-change:transform}
+.home-screen .home-flight-layer .home-device-layer{left:0;top:0;width:100%;height:100%;animation:none!important;will-change:auto}
+.home-device-lights{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:3/2;z-index:2;pointer-events:none;overflow:visible;mix-blend-mode:screen}
+.home-device-lights path{fill:none;stroke:#eaf2ff;stroke-linecap:round;stroke-linejoin:round}
+.home-device-lights .craft-long-light,.home-device-lights .craft-short-light{fill:#eaf2ff;stroke:none}
+.home-device-lights mask path{fill:white;stroke:none}
+.home-device-lights .craft-long-light,.home-device-lights .craft-travelling-light,.home-device-lights .craft-short-light{opacity:0}
+@media(prefers-reduced-motion:reduce){.home-device-rig{will-change:auto}}

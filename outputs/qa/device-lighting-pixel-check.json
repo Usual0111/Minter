@@ -1,0 +1,107 @@
+[
+  {
+    "width": 360,
+    "states": {
+      "start": {
+        "pixels": 690,
+        "maxChannelDifference": 117
+      },
+      "active": {
+        "pixels": 642,
+        "maxChannelDifference": 88
+      },
+      "pulse": {
+        "pixels": 666,
+        "maxChannelDifference": 109
+      },
+      "boost": {
+        "pixels": 697,
+        "maxChannelDifference": 114
+      },
+      "ready": {
+        "pixels": 606,
+        "maxChannelDifference": 67
+      },
+      "claim": {
+        "pixels": 637,
+        "maxChannelDifference": 107
+      },
+      "collected": {
+        "pixels": 0,
+        "maxChannelDifference": 0
+      }
+    },
+    "cameraUnchanged": true,
+    "differencesConfinedToStrips": true
+  },
+  {
+    "width": 390,
+    "states": {
+      "start": {
+        "pixels": 860,
+        "maxChannelDifference": 104
+      },
+      "active": {
+        "pixels": 825,
+        "maxChannelDifference": 87
+      },
+      "pulse": {
+        "pixels": 866,
+        "maxChannelDifference": 111
+      },
+      "boost": {
+        "pixels": 868,
+        "maxChannelDifference": 102
+      },
+      "ready": {
+        "pixels": 752,
+        "maxChannelDifference": 65
+      },
+      "claim": {
+        "pixels": 746,
+        "maxChannelDifference": 96
+      },
+      "collected": {
+        "pixels": 0,
+        "maxChannelDifference": 1
+      }
+    },
+    "cameraUnchanged": true,
+    "differencesConfinedToStrips": true
+  },
+  {
+    "width": 430,
+    "states": {
+      "start": {
+        "pixels": 1082,
+        "maxChannelDifference": 115
+      },
+      "active": {
+        "pixels": 1070,
+        "maxChannelDifference": 93
+      },
+      "pulse": {
+        "pixels": 1098,
+        "maxChannelDifference": 116
+      },
+      "boost": {
+        "pixels": 1107,
+        "maxChannelDifference": 112
+      },
+      "ready": {
+        "pixels": 993,
+        "maxChannelDifference": 71
+      },
+      "claim": {
+        "pixels": 901,
+        "maxChannelDifference": 105
+      },
+      "collected": {
+        "pixels": 0,
+        "maxChannelDifference": 1
+      }
+    },
+    "cameraUnchanged": true,
+    "differencesConfinedToStrips": true
+  }
+]
