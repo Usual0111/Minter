@@ -30,12 +30,13 @@ function enterPage(node){
  pageEntrance?.cancel();if(!node||quiet()||!node.animate)return null;
  const platform=root.Telegram?.WebApp?.platform;
  if(!platform||platform==='unknown')return animate(node,[{opacity:.35,transform:'translateY(7px)'},{opacity:1,transform:'translateY(0)'}],{duration:220});
- const original={opacity:node.style.opacity,willChange:node.style.willChange};let pending=0,animation=null,done=false;
- const restore=()=>{if(done)return;done=true;if(pending)cancelAnimationFrame(pending);node.style.opacity=original.opacity;node.style.willChange=original.willChange;if(pageEntrance===entry)pageEntrance=null;};
+ const original={transform:node.style.transform,willChange:node.style.willChange};let pending=0,animation=null,done=false;
+ const restore=()=>{if(done)return;done=true;if(pending)cancelAnimationFrame(pending);node.style.transform=original.transform;node.style.willChange=original.willChange;if(pageEntrance===entry)pageEntrance=null;};
  const entry={cancel(){restore();animation?.cancel();}};pageEntrance=entry;
- // Paint the new content once before fading; never move the whole Mini App page.
- node.style.willChange='opacity';node.style.opacity='.82';
- pending=requestAnimationFrame(()=>{pending=requestAnimationFrame(()=>{pending=0;if(node.isConnected===false||quiet()){entry.cancel();return;}animation=animate(node,[{opacity:.82},{opacity:1}],{duration:140,easing:'ease-out'});node.style.opacity=original.opacity;if(animation)animation.finished.then(restore,restore);else restore();});});
+ // Prepare the new content before a short lift; avoid fading a whole page layer.
+ const settled=original.transform||'translate3d(0,0,0)',lifted='translate3d(0,4px,0)'+(original.transform?' '+original.transform:'');
+ node.style.willChange='transform';node.style.transform=lifted;
+ pending=requestAnimationFrame(()=>{pending=requestAnimationFrame(()=>{pending=0;if(node.isConnected===false||quiet()){entry.cancel();return;}animation=animate(node,[{transform:lifted},{transform:settled}],{duration:180,easing:'cubic-bezier(.22,.8,.24,1)'});node.style.transform=original.transform;if(animation)animation.finished.then(restore,restore);else restore();});});
  return entry;
 }
 function credit(amount){if(!(amount>0)||quiet())return;document.querySelector('.credit-feedback')?.remove();const anchor=document.querySelector('[data-action="homeCollect"],.depin-balance');if(!anchor)return;const r=anchor.getBoundingClientRect(),el=document.createElement('div');el.className='credit-feedback';el.textContent='+'+(amount/100).toFixed(2)+' CR';el.setAttribute('aria-hidden','true');el.style.left=(r.left+r.width/2)+'px';el.style.top=Math.max(100,r.top-4)+'px';document.body.append(el);const a=animate(el,[{opacity:0,transform:'translate(-50%,8px) scale(.94)'},{opacity:1,offset:.2,transform:'translate(-50%,-4px) scale(1)'},{opacity:0,transform:'translate(-50%,-36px) scale(1)'}],{duration:850});if(a)a.finished.then(()=>el.remove(),()=>el.remove());else el.remove();animate(anchor,[{transform:'scale(.975)'},{transform:'scale(1)'}],{duration:260});}
