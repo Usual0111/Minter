@@ -1138,6 +1138,10 @@ body,#app .app,#modal,#toast{font-family:var(--ui-font);font-size:var(--ui-text-
 #app .home-screen .reference-session-panel .session-control-metrics dt{font-size:var(--ui-text-label);line-height:17px;font-weight:500}
 #app .home-screen .reference-session-panel .session-control-metrics dd{font-size:20px;line-height:24px;font-weight:700;font-variant-numeric:tabular-nums}
 #app .home-screen .reference-session-panel .session-reward-value{gap:var(--ui-space-2)}
+.home-screen .session-reward-number{display:inline-block;transform-origin:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.home-screen .session-reward-number.is-reward-credit{animation:session-reward-credit 600ms ease-out both}
+@keyframes session-reward-credit{0%{transform:scale(1);color:var(--ui-text)}35%{transform:scale(1.03);color:#D4B6EF}100%{transform:scale(1);color:var(--ui-text)}}
+@media(prefers-reduced-motion:reduce){body:not(.force-animations) .home-screen .session-reward-number.is-reward-credit{animation:none;transform:none}}
 #app .home-screen .reference-session-panel .session-reward-coin{width:20px;height:20px}
 #app .home-screen .reference-session-panel .continuous-mining-progress{height:var(--ui-progress-height)}
 #app .home-screen .reference-session-panel .session-control-button{height:var(--ui-cta-height);min-height:var(--ui-cta-height);padding:var(--ui-space-2) var(--ui-space-6);font-size:14px;line-height:20px;font-weight:650}
