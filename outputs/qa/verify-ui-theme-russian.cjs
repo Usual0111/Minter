@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict'),path=require('node:path');
+const {chromium}=require('C:/Users/Lenovo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const root=path.resolve(__dirname,'../..');
+(async()=>{const browser=await chromium.launch({headless:true,channel:'chrome'});try{
+ for(const width of [360,390,430]){
+  const page=await browser.newPage({viewport:{width,height:844}});await page.route('https://telegram.org/**',r=>r.abort());await page.addInitScript(()=>{window.requestAnimationFrame=()=>1;window.setInterval=()=>1;Date.now=()=>Date.UTC(2026,9,4,12);Object.defineProperty(performance,'now',{value:()=>0});});
+  const entry='file:///'+root.replaceAll('\\','/')+'/outputs/Bountera.html#/home';await page.goto(entry,{waitUntil:'commit'});await page.waitForSelector('.reference-session-panel');
+  await page.evaluate(()=>{const s=MiningClient.state;s.user.language='ru';localStorage.setItem(MiningConfig.storageKey,JSON.stringify(s));});await page.reload({waitUntil:'commit'});await page.waitForSelector('.reference-session-panel');await page.evaluate(()=>document.fonts.ready);
+  const idle=await page.evaluate(()=>{const b=document.querySelector('.session-control-button'),r=b.getBoundingClientRect();return {height:r.height,width:r.width,scroll:b.scrollWidth,client:b.clientWidth,font:getComputedStyle(b).fontFamily,title:b.textContent};});assert.equal(idle.height,56);assert(idle.font.includes('Bountera Inter'));assert(idle.title.includes('Начать добычу'));assert(idle.scroll<=idle.client+1);
+  await page.screenshot({path:path.join(__dirname,`ui-theme-russian-home-${width}.png`)});
+  await page.evaluate(()=>{const T=Date.now()-10000,E=MiningEngine,C=MiningConfig;let s=E.initial(C,T);s.user.language='ru';const act=(a,p,at,key)=>{const o=E.apply(s,a,p,at,key);s=o.state;return o;};act('rewardFreeStart',E.view(s,T).rewardMining.freeSession,T,'ui-free');const o=act('rewardAdOffer',E.view(s,T+1000).rewardMining.offer,T+1000,'ui-offer');act('rewardAdShow',{eventId:o.event.id},T+1000,'ui-show');act('rewardAdConfirm',{eventId:o.event.id},T+4000,'ui-confirm');localStorage.setItem(C.storageKey,JSON.stringify(s));});
+  await page.reload({waitUntil:'commit'});await page.waitForSelector('.session-control-button:disabled');await page.evaluate(()=>document.fonts.ready);const cool=await page.locator('.session-control-button').evaluate(b=>({height:b.getBoundingClientRect().height,scroll:b.scrollWidth,client:b.clientWidth,text:b.textContent,bg:getComputedStyle(b).backgroundColor}));assert(cool.text.includes('Следующее усиление через'));assert.equal(cool.bg,'rgb(20, 20, 27)');assert(cool.scroll<=cool.client+1);await page.screenshot({path:path.join(__dirname,`ui-theme-russian-cooldown-${width}.png`)});
+  for(const route of ['nodes','tasks','friends','wallet']){await page.evaluate(r=>location.hash='#/'+r,route);await page.waitForTimeout(180);await page.evaluate(async()=>{await document.fonts.ready;document.getAnimations().forEach(a=>a.finish());});assert(await page.evaluate(()=>document.getElementById('app').scrollWidth<=innerWidth),'No horizontal page overflow: '+route);await page.screenshot({path:path.join(__dirname,`ui-theme-russian-${route}-${width}.png`)});}
+  await page.close();
+ }
+ console.log('Russian text checked on 360 / 390 / 430 px: Inter, free / cooldown labels, disabled colors, button sizes and no horizontal page overflow.');
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

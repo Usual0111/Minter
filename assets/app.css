@@ -989,3 +989,204 @@ html.tma-viewport,html.tma-viewport body{height:100%;overflow:hidden}
 .home-screen .mined-counter-digit{position:relative;display:inline-block;--digit-trail:0}
 .home-screen .mined-counter-core{opacity:calc(1 - var(--digit-trail));transition:opacity 180ms ease-out}
 .home-screen .mined-counter-digit::after{content:attr(data-digit);position:absolute;inset:0;pointer-events:none;opacity:var(--digit-trail);filter:var(--digit-blur,url(#mined-digit-soft));transition:opacity 180ms ease-out}
+
+/* Aurora Reach reference skin. UI sizing is applied in the following block;
+   scene assets, their geometry and mining behavior remain authored. */
+:root{--ui-bg:#030405;--ui-glow:#101b32;--ui-work:#080811;--ui-surface:#0d0d10;--ui-surface-2:#14141b;--ui-border:#24242c;--ui-divider:#3b3c48;--ui-text:#f5f5f7;--ui-muted:#96969f;--ui-off:#666674;--ui-accent:#9825e8;--ui-hover:#ac36f3;--ui-selected:#291e43;--ui-selected-line:#8662df;--ui-focus:#c2a7ed;--ui-info:#71cbc9;--ui-warn:#a7954d;--ui-radius-button:6px;--ui-radius-card:10px;--ui-radius-pill:999px;--ui-shadow:0 8px 24px #00000073;--ui-cta-shadow:0 0 24px #9825e833;--bg:var(--ui-bg);--card:var(--ui-surface);--line:var(--ui-border);--text:var(--ui-text);--muted:var(--ui-muted);--accent:var(--ui-accent);--cyan:var(--ui-info);--purple:var(--ui-focus)}
+body{background:var(--ui-bg);color:var(--ui-text)}
+#app .app{--bg:var(--ui-bg);--card:var(--ui-surface);--line:var(--ui-border);--text:var(--ui-text);--muted:var(--ui-muted);--accent:var(--ui-accent);--cyan:var(--ui-info);--purple:var(--ui-focus);--hub-line:var(--ui-border);background:radial-gradient(ellipse 120% 380px at 50% 0,var(--ui-glow),transparent),var(--ui-bg);color:var(--ui-text)}
+#app .app :is(h1,h2,h3,.page-title,.section-heading,.reference-total,.balance,.expedition-amount,.data-value){color:var(--ui-text);text-shadow:none}
+#app .app :is(.muted,.subtitle,.small.muted,.label,.field-with-unit span,.demo-note,.empty,.task-card p,.hub-eyebrow,.hub-ad-cooldown,.module-copy p,.probe-copy p,.probe-stats,.reward-model-copy p,.reward-model-copy .small,.galaxy-copy p,.galaxy-copy small,.hub-event p,.mining-contract-card p,.next-contract p,.sponsor-campaign p,.node-career-goal p){color:var(--ui-muted)}
+#app .app :is(.accent,.reward-line,.gems,.rarity,.rarity-2,.rarity-3,.pack-price b,.quote strong,.contract-result){color:var(--ui-focus)}
+#app .app :is(.card,.stat-strip,.mission-row,.hub-summary,.node-card,.task-card,.orbit-card,.reward-model,.notice,.ad-card){background:var(--ui-surface);border-color:var(--ui-border);border-radius:var(--ui-radius-card);box-shadow:var(--ui-shadow);backdrop-filter:none;-webkit-backdrop-filter:none}
+#app .app :is(.task-icon,.discount,.career-table tr.current td,.hub-discovery,.module-levels i){background:var(--ui-surface-2);color:var(--ui-muted)}
+#app .app :is(.career-table td,.career-table th,.history-row,.hub-deploy-row){border-color:var(--ui-divider)}
+#app .app :is(.notice,.ad-card){color:var(--ui-muted)}
+
+/* Existing calls to action and secondary controls retain their exact boxes. */
+#app .app :is(.primary,.wallet-link,.boost-pill){background:var(--ui-accent);border-color:var(--ui-accent);color:var(--ui-text);border-radius:var(--ui-radius-button);box-shadow:var(--ui-cta-shadow)}
+#app .app :is(.secondary,.check,.menu-list button){background:var(--ui-surface-2);border-color:var(--ui-border);color:var(--ui-text);border-radius:var(--ui-radius-button);box-shadow:none}
+#app .app :is(.chip,.hub-chip,.tier-label,.session-mode){background:var(--ui-surface-2);border-color:var(--ui-border);color:var(--ui-muted);border-radius:var(--ui-radius-pill);box-shadow:none}
+#app .app :is(.hub-chip.violet,.hub-chip.danger,.tier-label){background:var(--ui-selected);border-color:var(--ui-selected-line);color:var(--ui-focus)}
+#app .app :is(.hub-back,.session-menu,.small-icon){color:var(--ui-muted);background:none;box-shadow:none}
+#app .app :is(input,select,textarea){background:var(--ui-surface-2);border-color:var(--ui-border);border-radius:var(--ui-radius-button);color:var(--ui-text)}
+#app .app :is(input,textarea)::placeholder{color:var(--ui-muted)}
+#app .app :is(button,input,select,textarea,a):focus-visible,#modal :is(button,input,select,textarea,a):focus-visible{outline:2px solid var(--ui-focus);outline-offset:2px}
+#app .app :is(.primary,.secondary,.wallet-link,.boost-pill,.hub-ad):disabled{background:var(--ui-surface-2);border-color:var(--ui-border);color:var(--ui-off);box-shadow:none}
+
+/* Segmented tabs, list selections and the unchanged full-width progress tracks. */
+#app .app :is(.tabs,.hub-tabs){background:var(--ui-surface-2);border-color:var(--ui-border);border-radius:var(--ui-radius-card);box-shadow:none;backdrop-filter:none}
+#app .app :is(.tabs,.hub-tabs) button{background:none;border-color:transparent;border-radius:var(--ui-radius-button);color:var(--ui-muted);box-shadow:none}
+#app .app :is(.tabs,.hub-tabs) button.active{background:var(--ui-accent);border-color:var(--ui-selected-line);color:var(--ui-text);box-shadow:none}
+#app .app :is(.check.active,.pack.active,.menu-list button.active){background:var(--ui-selected);border-color:var(--ui-selected-line);color:var(--ui-focus)}
+#app .app :is(.bar,.continuous-mining-progress){background:var(--ui-divider);box-shadow:none}
+#app .app :is(.bar,.continuous-mining-progress)>span{background:var(--ui-accent);box-shadow:none}
+#app .app .module-levels .filled{background:var(--ui-accent);box-shadow:none}
+
+/* Home header, counter and session panel colors. */
+#app .home-screen .silver-header .galaxy-selector span{color:var(--ui-text)}
+#app .app .galaxy-selector small{color:var(--ui-muted)}
+#app .app :is(.session-wallet,.nodes-balance){background:var(--ui-surface);border-color:var(--ui-border);color:var(--ui-text);box-shadow:none}
+#app .home-screen .silver-header .session-wallet{background:none;border-color:transparent;box-shadow:none}
+#app .home-screen .silver-header .home-balance-badge{background:var(--ui-surface);border-color:var(--ui-border);color:var(--ui-text);box-shadow:none}
+#app .home-screen .silver-header .home-balance-value,#app .app .session-wallet strong{color:var(--ui-text)}
+#app .app :is(.home-balance-coin,.nodes-balance-coin){color:var(--ui-muted)}
+#app .app :is(.home-balance-coin,.nodes-balance-coin) circle:first-child{fill:none;stroke:var(--ui-muted)}
+#app .app :is(.home-balance-coin,.nodes-balance-coin) circle:nth-child(2){stroke:var(--ui-border)}
+#app .app :is(.home-balance-coin,.nodes-balance-coin) path{stroke:var(--ui-muted)}
+#app .home-screen .session-total>p,#app .home-screen .sector-count{color:var(--ui-muted)}
+#app .home-screen :is(.mining-speed-dot,.mining-speed-arrow,.mining-speed-value){color:var(--ui-hover)}
+#app .home-screen :is(.mining-speed-label,.mining-speed-old){color:var(--ui-muted)}
+#app .home-screen .reference-session-panel{background:var(--ui-surface);border-color:var(--ui-border);border-radius:24px;box-shadow:var(--ui-shadow);backdrop-filter:none;-webkit-backdrop-filter:none}
+#app .home-screen .reference-session-panel .session-model-link{color:var(--ui-text);text-shadow:none}
+#app .home-screen .reference-session-panel .session-reference-tier{background:var(--ui-selected);border-color:var(--ui-selected-line);border-radius:var(--ui-radius-pill);color:var(--ui-focus)}
+#app .home-screen .node-panel-tile{background:var(--ui-surface-2);border-color:var(--ui-border);border-radius:var(--ui-radius-button);box-shadow:inset 0 0 0 1px var(--ui-border);color:var(--ui-text)}
+#app .home-screen :is(.node-panel-tile .node-card-icon,.node-panel-tile .node-card-icon svg){background:none;color:var(--ui-muted);stroke:var(--ui-muted);box-shadow:none}
+#app .home-screen :is(.node-card-caption,.node-card-copy strong){color:var(--ui-text)}
+#app .home-screen .node-contract-value.is-complete{color:var(--ui-hover)}
+#app .home-screen .node-bonus-dot{background:var(--ui-warn);box-shadow:none}
+#app .home-screen .reference-session-panel .session-control-metrics dt{color:var(--ui-muted)}
+#app .home-screen .reference-session-panel .session-control-metrics dd{color:var(--ui-text)}
+#app .home-screen .reference-session-panel .session-control-button{background:var(--ui-accent);color:var(--ui-text);border-radius:12px;box-shadow:var(--ui-cta-shadow)}
+#app .home-screen .reference-session-panel .free-mining-title{color:var(--ui-text)}
+#app .home-screen .reference-session-panel .free-mining-subtitle{color:#f5f5f7d1}
+#app .home-screen .reference-session-panel .session-control-button:disabled{background:var(--ui-surface-2);color:var(--ui-off);box-shadow:none}
+
+/* Nodes artworks stay intact; only their surrounding UI surfaces are recolored. */
+#app .nodes-screen :is(.orbit-sector,.orbit-slots,.orbit-type,.orbit-tag,.orbit-yield,.hub-stats span,.hub-event [data-node-live]){color:var(--ui-muted)}
+#app .nodes-screen :is(.orbit-name,.orbit-status,.orbit-yield b,.hub-stats strong,.hub-stats strong span,.probe-stats b){color:var(--ui-text)}
+#app .nodes-screen .orbit-status i{background:var(--ui-muted);box-shadow:none}
+#app .nodes-screen .orbit-status.accent i{background:var(--ui-info)}
+#app .nodes-screen .orbit-card:disabled .orbit-status{color:var(--ui-off)}
+#app .app :is(.hub-heading>svg,.empty svg,.module-art svg,.probe-copy>.rarity,.hub-discovery>svg,.hub-discovery p){color:var(--ui-focus)}
+#app .app .hub-warning,#app .app .error-banner{background:#a7954d14;border-color:var(--ui-warn);color:var(--ui-warn);box-shadow:none}
+#app .app .hub-event{border-color:var(--ui-selected-line)!important}
+
+/* Navigation keeps its size, safe-area framing, icon positions and active marker. */
+#app .app .bottom-nav{background:var(--ui-work)!important;border-top-color:var(--ui-border);box-shadow:none;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#app .app .nav-item,#app .app .nav-item svg{background:none;color:var(--ui-off);box-shadow:none;filter:none}
+#app .app .nav-item.active,#app .app .nav-item.active svg{background:none;color:var(--ui-hover);box-shadow:none}
+#app .app .nav-item.active:after{background:var(--ui-accent);box-shadow:none}
+
+/* The same reference skin on existing sheets, inputs, rewards and confirmation dialogs. */
+#modal{background:transparent;border-color:var(--ui-border);border-radius:var(--ui-radius-card);color:var(--ui-text);box-shadow:none;backdrop-filter:none}
+#modal.contract-sheet{background:transparent;box-shadow:none}
+#modal .modal-box{background:var(--ui-surface);color:var(--ui-text);border-radius:var(--ui-radius-card);border-color:var(--ui-border);box-shadow:var(--ui-shadow)}
+#modal .modal-head{background:var(--ui-surface);border-bottom-color:var(--ui-border)}
+#modal :is(.muted,.subtitle,.label,.small.muted,.demo-note,.contract-conditions dt){color:var(--ui-muted)}
+#modal :is(h1,h2,h3,.contract-conditions dd,.node-bonus-value){color:var(--ui-text);text-shadow:none}
+#modal :is(.primary,.wallet-link){background:var(--ui-accent);border-color:var(--ui-accent);color:var(--ui-text);border-radius:var(--ui-radius-button);box-shadow:var(--ui-cta-shadow)}
+#modal :is(.secondary,.chip,.check,.menu-list button){background:var(--ui-surface-2);border-color:var(--ui-border);color:var(--ui-text);border-radius:var(--ui-radius-button);box-shadow:none}
+#modal :is(input,select,textarea){background:var(--ui-surface-2);border-color:var(--ui-border);border-radius:var(--ui-radius-button);color:var(--ui-text)}
+#modal :is(input,textarea)::placeholder{color:var(--ui-muted)}
+#modal :is(.primary,.secondary,.check):disabled{background:var(--ui-surface-2);color:var(--ui-off);border-color:var(--ui-border);box-shadow:none}
+#modal :is(.node-bonus-item,.history-row,.career-table td,.career-table th){border-color:var(--ui-divider)}
+#modal :is(.bar,.daily-bar){background:var(--ui-divider);box-shadow:none}
+#modal :is(.bar,.daily-bar)>span{background:var(--ui-accent);box-shadow:none}
+#modal .close{color:var(--ui-muted);background:none;box-shadow:none}
+#toast{background:var(--ui-surface-2);color:var(--ui-text);border-color:var(--ui-border);box-shadow:var(--ui-shadow)}
+@media(hover:hover){#app .app :is(.primary,.wallet-link,.boost-pill,.session-control-button):not(:disabled):hover,#modal .primary:not(:disabled):hover{background:var(--ui-hover)}#app .app :is(.secondary,.node-panel-tile):not(:disabled):hover,#modal .secondary:not(:disabled):hover{background:#1b1b24;border-color:var(--ui-divider)}#app .app .nav-item:not(.active):hover{color:var(--ui-muted)}}
+
+/* UI sizing from the reference. Inter is bundled for offline use.
+   Scene artwork is outside this grid and keeps its previous coordinates. */
+@font-face{font-family:"Bountera Inter";src:url('InterVariable.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+:root{--ui-font:"Bountera Inter",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--ui-space-1:4px;--ui-space-2:8px;--ui-space-3:12px;--ui-space-4:16px;--ui-space-5:20px;--ui-space-6:24px;--ui-space-7:32px;--ui-space-8:48px;--ui-text-body:14px;--ui-text-title:32px;--ui-text-section:22px;--ui-text-panel:16px;--ui-text-brand:18px;--ui-text-control:13px;--ui-text-label:12px;--ui-text-badge:11px;--ui-control-height:40px;--ui-touch-height:44px;--ui-cta-height:56px;--ui-nav-height:60px;--ui-icon:18px;--ui-icon-nav:20px;--ui-progress-height:4px;--ui-header-height:56px;--ui-home-total-height:119px;--ui-home-stage-gap:16px;--ui-home-legacy-tail:309px}
+body,#app .app,#modal,#toast{font-family:var(--ui-font);font-size:var(--ui-text-body);line-height:1.45}
+#app .app :is(button,input,select,textarea),#modal :is(button,input,select,textarea){font-family:var(--ui-font)}
+#app .app .page{padding:var(--ui-space-4) var(--ui-space-4) 0}
+#app .app :is(.page-title,.hub-heading h1){font-size:var(--ui-text-title);font-weight:750;line-height:1.1;letter-spacing:-.02em}
+#app .app :is(.section-heading,.hub-heading h2){font-size:var(--ui-text-section);font-weight:700;line-height:1.2}
+#app .app :is(.card h3,.mission-row h3,.hub-summary h3,.reward-model-copy h3){font-size:var(--ui-text-panel);font-weight:700;line-height:1.2}
+#app .app :is(.subtitle,.card p,.task-card p,.module-copy p,.reward-model-copy p){font-size:var(--ui-text-body);line-height:1.45}
+#app .app :is(.card,.mission-row,.hub-summary,.stat-strip){padding:var(--ui-space-4)}
+#app .app :is(.card,.mission-row){margin-bottom:var(--ui-space-3)}
+#app .app :is(.primary,.secondary,.wallet-link,.boost-pill),#modal :is(.primary,.secondary){min-height:var(--ui-touch-height);padding:var(--ui-space-2) var(--ui-space-4);font-size:var(--ui-text-control);font-weight:650;line-height:1.4}
+#app .app :is(.primary.full,.wallet-link){min-height:var(--ui-cta-height)}
+#app .app :is(.primary,.secondary,.wallet-link,.boost-pill)>svg,#modal :is(.primary,.secondary)>svg{width:var(--ui-icon);height:var(--ui-icon);stroke-width:1.75}
+#app .app :is(input,select,textarea),#modal :is(input,select,textarea){min-height:var(--ui-touch-height);padding:var(--ui-space-2) var(--ui-space-3);font-size:var(--ui-text-body);line-height:1.4}
+#app .app :is(.label,.field-with-unit span),#modal .label{font-size:var(--ui-text-label);font-weight:500;line-height:1.4}
+#app .app :is(.chip,.hub-chip,.tier-label){min-height:22px;padding:var(--ui-space-1) var(--ui-space-2);font-size:var(--ui-text-badge);line-height:1.2;font-weight:550}
+#app .app :is(.tabs,.hub-tabs){gap:var(--ui-space-1);padding:var(--ui-space-1);min-height:var(--ui-touch-height)}
+#app .app :is(.tabs,.hub-tabs) button{min-height:36px;padding:var(--ui-space-2);font-size:var(--ui-text-control);line-height:1.2;font-weight:550}
+
+/* Home's UI reflows without touching the absolutely positioned craft or planet. */
+#app .home-screen .silver-header .session-header{height:var(--ui-header-height);min-height:var(--ui-header-height);margin:0 var(--ui-space-4);gap:var(--ui-space-3)}
+#app .home-screen .silver-header .galaxy-selector{min-height:var(--ui-touch-height);gap:0}
+#app .home-screen .silver-header .galaxy-selector span{font-size:var(--ui-text-brand);font-weight:700;line-height:1.2}
+#app .home-screen .silver-header .galaxy-selector small{font-size:var(--ui-text-control);font-weight:500;line-height:1.4;margin-top:var(--ui-space-1)}
+#app .home-screen .silver-header .session-wallet{min-height:var(--ui-touch-height);height:var(--ui-touch-height);padding:0;flex:0 0 auto;gap:0}
+#app .home-screen .silver-header .session-wallet>strong,#app .home-screen .silver-header .session-wallet>.home-balance-reserve{display:none}
+#app .home-screen .silver-header .home-balance-badge{position:static;height:36px;padding:0 var(--ui-space-3);gap:var(--ui-space-2);transform:none}
+#app .home-screen .silver-header .home-balance-value{font-size:var(--ui-text-body);font-weight:600;line-height:1.4}
+#app .home-screen .session-total{display:flex;flex-direction:column;align-items:center;gap:var(--ui-space-2);height:var(--ui-home-total-height);padding:var(--ui-space-3) var(--ui-space-4) 0}
+#app .home-screen .session-total>p{font-size:var(--ui-text-label);font-weight:500;line-height:17px}
+#app .home-screen .reference-total{font-size:56px;font-weight:800;line-height:1;letter-spacing:-.04em;gap:var(--ui-space-3);font-variant-numeric:tabular-nums}
+#app .home-screen .reference-total img{width:40px;height:40px}
+#app .home-screen .session-total .sector-count{font-size:var(--ui-text-control);font-weight:500;line-height:18px;margin:0;letter-spacing:0}
+#app .home-screen .journey-hero.session-scene{height:calc(54cqw - var(--ui-home-stage-gap))}
+#app .home-screen .reference-session-panel{height:auto;min-height:0;margin:var(--ui-space-4) var(--ui-space-4) 0;padding:var(--ui-space-4);grid-template-rows:20px var(--ui-touch-height) 40px var(--ui-progress-height) var(--ui-cta-height);gap:var(--ui-space-3);font-family:var(--ui-font)}
+#app .home-screen .reference-session-panel .node-panel-heading{height:20px}
+#app .home-screen .reference-session-panel .node-panel-heading h1{font-size:var(--ui-text-panel);font-weight:700;line-height:20px}
+#app .home-screen .reference-session-panel .session-reference-tier{height:22px;padding:var(--ui-space-1) var(--ui-space-2);font-size:var(--ui-text-badge);font-weight:600;line-height:12px}
+#app .home-screen .reference-session-panel .node-panel-tiles{gap:var(--ui-space-2)}
+#app .home-screen .reference-session-panel .node-panel-tile{height:var(--ui-touch-height);min-height:var(--ui-touch-height);padding:0 var(--ui-space-3);gap:var(--ui-space-2);justify-content:center;text-align:center}
+#app .home-screen .reference-session-panel .node-card-icon,#app .home-screen .reference-session-panel .node-card-icon svg{width:var(--ui-icon);height:var(--ui-icon);stroke-width:2.6}
+#app .home-screen .reference-session-panel .node-card-copy{gap:var(--ui-space-1)}
+#app .home-screen .reference-session-panel :is(.node-card-caption,.node-card-copy strong){font-size:var(--ui-text-control);font-weight:600;line-height:18px}
+#app .home-screen .reference-session-panel .session-mining-row{height:40px;gap:var(--ui-space-4)}
+#app .home-screen .reference-session-panel .session-control-metrics dt{font-size:var(--ui-text-label);line-height:17px;font-weight:500}
+#app .home-screen .reference-session-panel .session-control-metrics dd{font-size:20px;line-height:24px;font-weight:700;font-variant-numeric:tabular-nums}
+#app .home-screen .reference-session-panel .session-reward-value{gap:var(--ui-space-2)}
+#app .home-screen .reference-session-panel .session-reward-coin{width:20px;height:20px}
+#app .home-screen .reference-session-panel .continuous-mining-progress{height:var(--ui-progress-height)}
+#app .home-screen .reference-session-panel .session-control-button{height:var(--ui-cta-height);min-height:var(--ui-cta-height);padding:var(--ui-space-2) var(--ui-space-6);font-size:14px;line-height:20px;font-weight:650}
+#app .home-screen .reference-session-panel .free-mining-copy{gap:var(--ui-space-1)}
+#app .home-screen .reference-session-panel .free-mining-title{font-size:14px;font-weight:700;line-height:20px;letter-spacing:.02em}
+#app .home-screen .reference-session-panel .free-mining-subtitle{font-size:var(--ui-text-label);font-weight:500;line-height:17px}
+
+/* Keep the old painted canvas height independent of the new UI's content height. */
+.app.home-screen::before{bottom:auto;height:max(var(--app-scene-height,100dvh),calc(var(--app-top-reserve) + 101.94cqw + var(--ui-home-legacy-tail)))}
+.tma-viewport .app.home-screen::before{height:var(--app-artwork-height,var(--app-scene-height))}
+@media(max-width:370px){:root{--ui-home-legacy-tail:300px}}
+@media(min-width:420px){:root{--ui-home-legacy-tail:310px}}
+
+/* The remaining work screens use the same compact control and type scale. */
+#app .nodes-screen{padding-top:var(--app-top-reserve)}
+#app .nodes-screen .nodes-header{height:var(--ui-header-height);padding:0 var(--ui-space-4);margin-bottom:var(--ui-space-6)}
+#app .nodes-screen .nodes-balance{top:10px;right:var(--ui-space-4);height:36px;min-width:0;padding:0 var(--ui-space-3);gap:var(--ui-space-2);font-size:var(--ui-text-body);font-weight:600;line-height:1.4;transform:none}
+#app .nodes-screen .node-hub{padding:0 var(--ui-space-4)}
+#app .nodes-screen .hub-tabs{height:var(--ui-touch-height);margin-bottom:var(--ui-space-6)}
+#app .nodes-screen .hub-tabs button{min-height:36px}
+#app .nodes-screen .orbit-heading{height:auto;min-height:36px;gap:var(--ui-space-3)}
+#app .nodes-screen .orbit-heading h1{font-size:28px;line-height:1.1;letter-spacing:-.02em}
+#app .nodes-screen .orbit-subtitle{margin:var(--ui-space-3) 0 var(--ui-space-6);font-size:var(--ui-text-body);line-height:1.45}
+#app .nodes-screen .orbit-cards{gap:var(--ui-space-4)}
+#app .nodes-screen .orbit-card{margin:0}
+#app .nodes-screen .orbit-card .orbit-name{font-size:24px;line-height:1.1}
+#app .nodes-screen .orbit-card :is(.orbit-sector,.orbit-slots,.orbit-type,.orbit-tag,.orbit-yield,.orbit-status){font-size:var(--ui-text-control);line-height:1.2}
+#app .app :is(.reward-model,.node-card){padding:0;overflow:hidden}
+#app .app :is(.reward-model-copy,.module-copy){padding:var(--ui-space-4)}
+#app .app :is(.reward-model-copy h3,.module-copy h3){font-size:var(--ui-text-panel);line-height:1.2;font-weight:700}
+#app .app :is(.reward-model-copy p,.module-copy p){font-size:var(--ui-text-control);line-height:1.45}
+#app .app :is(.hub-stats span,.reward-model-copy small,.probe-stats,.small,.demo-note){font-size:var(--ui-text-label);line-height:1.45}
+#app .app .career-table{font-size:var(--ui-text-control)}
+#app .app .career-table th{font-size:var(--ui-text-badge);font-weight:500}
+
+/* One 60px navigation rail on every tab, plus Telegram's existing safe bottom area. */
+#app .app .bottom-nav{top:auto;bottom:0;height:calc(var(--ui-nav-height) + var(--app-safe-bottom));padding:0 0 var(--app-safe-bottom);gap:0}
+.tma-viewport #app .app .bottom-nav{top:calc(var(--app-viewport-top,0px) + var(--app-nav-viewport-height,100dvh) - var(--ui-nav-height) - var(--app-safe-bottom));bottom:auto}
+#app .app .nav-item{height:var(--ui-nav-height);min-height:var(--ui-nav-height);padding:var(--ui-space-2) 0;gap:var(--ui-space-1);font-family:var(--ui-font);font-size:var(--ui-text-label);font-weight:500;line-height:1.2}
+#app .app .nav-item svg{width:var(--ui-icon-nav);height:var(--ui-icon-nav);stroke-width:1.75}
+#app .app .nav-item.active:after{top:-1px;left:calc(50% - 16px);right:auto;width:32px;height:2px;border-radius:0 0 2px 2px}
+#modal .modal-box{padding:var(--ui-space-5)}
+#modal .modal-head{gap:var(--ui-space-3);margin-bottom:var(--ui-space-4)}
+#modal .modal-head h2{font-size:var(--ui-text-section);font-weight:700;line-height:1.2}
+#modal .close{width:var(--ui-touch-height);height:var(--ui-touch-height);border-radius:var(--ui-radius-button)}
+#modal .close svg{width:var(--ui-icon);height:var(--ui-icon)}
+#modal .node-bonus-item{padding:var(--ui-space-3) 0 var(--ui-space-4)}
+#modal .node-bonus-item h3{font-size:var(--ui-text-panel);font-weight:700;line-height:1.2}
+#modal .node-bonus-item p,#modal .contract-conditions dd{font-size:var(--ui-text-body);line-height:1.45}
+#modal :is(.contract-conditions dt,.small,.demo-note){font-size:var(--ui-text-label);line-height:1.45}
+#modal .menu-list{gap:var(--ui-space-2)}
+#modal .menu-list button{min-height:var(--ui-touch-height);padding:var(--ui-space-3) var(--ui-space-4);font-size:var(--ui-text-control);font-weight:550}
+#modal :is(.card,.notice,.ad-visual){background:var(--ui-surface-2);border-color:var(--ui-border);border-radius:var(--ui-radius-card);color:var(--ui-text);box-shadow:none}
