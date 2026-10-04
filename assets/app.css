@@ -572,7 +572,7 @@ body.paused .home-flight-layer{animation-play-state:paused!important}
 @media(prefers-reduced-motion:reduce){.home-flight-layer{animation:none!important;will-change:auto}}
 /* Shared width-scaled scene coordinates: safe area moves planet and craft equally. */
 .home-screen{--home-artwork-offset:max(0px,calc(var(--app-top-reserve) - 56px));--home-planet-gap:8cqw}
-.home-screen::before{background-position:0 0,center calc(var(--home-artwork-offset) + var(--home-planet-gap))}
+.home-screen::before{background-position:0 0,center calc(var(--home-artwork-offset) + var(--home-planet-gap));mask-image:linear-gradient(to bottom,transparent calc(var(--home-artwork-offset) + var(--home-planet-gap)),#000 calc(var(--home-artwork-offset) + var(--home-planet-gap) + 20cqw));-webkit-mask-image:linear-gradient(to bottom,transparent calc(var(--home-artwork-offset) + var(--home-planet-gap)),#000 calc(var(--home-artwork-offset) + var(--home-planet-gap) + 20cqw))}
 .home-flight-layer{top:var(--home-artwork-offset);bottom:calc(-1 * var(--home-artwork-offset))}
 /* The mask feathers both arc ends; orbit duration, glow and label stay unchanged. */
 .session-orbit .orbit-mask{stroke:none;fill:url(#active-edge-fade)}
@@ -809,7 +809,8 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 /* The original balance footprint reserves the header geometry for the compact badge. */
 .home-screen .silver-header .session-wallet{position:relative;background:none;border-color:transparent;box-shadow:none}
 .home-screen .silver-header .session-wallet>strong,.home-screen .silver-header .session-wallet>.home-balance-reserve{visibility:hidden}
-.home-screen .silver-header .home-balance-badge{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:5px;height:30px;padding:0 8px;border:1px solid #ffffff0d;border-radius:999px;background:linear-gradient(135deg,#2a2d34,#20232a);box-shadow:inset 0 1px 1px #ffffff08;color:#dce0e5}
+.home-screen .silver-header .home-balance-badge{position:absolute;right:0;top:4px;transform:scale(1.09);transform-origin:top right;display:flex;align-items:center;gap:5px;height:30px;padding:0 8px;border:1px solid #ffffff0d;border-radius:999px;background:linear-gradient(135deg,#2a2d34,#20232a);box-shadow:inset 0 1px 1px #ffffff08;color:#dce0e5}
+@media(max-width:370px){.home-screen .silver-header .home-balance-badge{top:2.5px}}
 .home-screen .silver-header .home-balance-value{font-size:14px;line-height:18px;font-weight:400;letter-spacing:0;color:#dce0e5;white-space:nowrap;font-variant-numeric:tabular-nums}
 .home-screen .silver-header .session-wallet .home-balance-coin{width:18px;height:18px;flex-shrink:0}
 @media(max-width:370px){
@@ -957,3 +958,17 @@ dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh
 .home-device-lights mask path{fill:white;stroke:none}
 .home-device-lights .craft-long-light,.home-device-lights .craft-travelling-light,.home-device-lights .craft-short-light{opacity:0}
 @media(prefers-reduced-motion:reduce){.home-device-rig{will-change:auto}}
+
+/* Telegram changes the frame, not the spacing inside the authored composition. */
+:root{--app-safe-bottom:calc(max(env(safe-area-inset-bottom,0px),var(--app-system-bottom,0px)) + var(--app-chrome-bottom,0px));--app-safe-left:calc(max(env(safe-area-inset-left,0px),var(--app-system-left,0px)) + var(--app-chrome-left,0px));--app-safe-right:calc(max(env(safe-area-inset-right,0px),var(--app-system-right,0px)) + var(--app-chrome-right,0px));--app-frame-left:max(0px,calc(var(--app-safe-left) - 16px));--app-frame-right:max(0px,calc(var(--app-safe-right) - 16px))}
+html.tma-viewport,html.tma-viewport body{height:100%;overflow:hidden}
+.tma-viewport #app{position:fixed;top:var(--app-viewport-top,0px);bottom:auto;left:var(--app-frame-left);right:var(--app-frame-right);height:var(--app-viewport-height,100dvh);overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tma-viewport #app::-webkit-scrollbar{display:none}
+.tma-viewport #app>.app{min-height:max(var(--app-scene-height,100dvh),var(--app-stable-height,100dvh));padding-bottom:calc(90px + var(--app-safe-bottom))}
+.tma-viewport .app .bottom-nav{top:calc(var(--app-viewport-top,0px) + var(--app-nav-viewport-height,100dvh) - 72px - var(--app-safe-bottom));bottom:auto;left:calc(50% + (var(--app-frame-left) - var(--app-frame-right))/2);width:calc(100% - var(--app-frame-left) - var(--app-frame-right));height:calc(72px + var(--app-safe-bottom));padding:4px 6px calc(4px + var(--app-safe-bottom))}
+.tma-viewport .home-screen{--app-home-top-delta:calc(var(--app-top-reserve) - var(--app-home-top-base, var(--app-top-reserve)))}
+.tma-viewport .home-screen::before{top:var(--app-home-top-delta);bottom:auto;height:var(--app-artwork-height,var(--app-scene-height));background-position:0 0,center calc(var(--home-artwork-offset) + var(--home-planet-gap) - var(--app-home-top-delta));mask-image:linear-gradient(to bottom,transparent calc(var(--home-artwork-offset) + var(--home-planet-gap) - var(--app-home-top-delta)),#000 calc(var(--home-artwork-offset) + var(--home-planet-gap) - var(--app-home-top-delta) + 20cqw));-webkit-mask-image:linear-gradient(to bottom,transparent calc(var(--home-artwork-offset) + var(--home-planet-gap) - var(--app-home-top-delta)),#000 calc(var(--home-artwork-offset) + var(--home-planet-gap) - var(--app-home-top-delta) + 20cqw))}
+.tma-viewport dialog{left:var(--app-safe-left);right:var(--app-safe-right);bottom:calc(100dvh - var(--app-viewport-height) - var(--app-viewport-top,0px) + var(--app-safe-bottom) + 16px);max-height:var(--dialog-height,85dvh)}
+.tma-viewport dialog.contract-sheet{bottom:calc(100dvh - var(--app-viewport-height) - var(--app-viewport-top,0px) + var(--app-safe-bottom));max-height:min(calc(var(--app-viewport-height)*.85),var(--dialog-height,85dvh))}
+.tma-viewport dialog.contract-sheet .modal-box{max-height:min(calc(var(--app-viewport-height)*.85),var(--dialog-height,85dvh))}
+.tma-viewport #toast{bottom:calc(84px + var(--app-safe-bottom) + max(0px,calc(100dvh - var(--app-nav-viewport-height))))}

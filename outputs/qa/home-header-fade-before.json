@@ -1,0 +1,380 @@
+[
+  {
+    "width": 360,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        360,
+        47
+      ],
+      ".galaxy-selector": [
+        16,
+        64.796875,
+        167.390625,
+        45.390625
+      ],
+      ".session-wallet": [
+        193.390625,
+        65,
+        150.609375,
+        45
+      ],
+      ".session-total": [
+        0,
+        111,
+        360,
+        101
+      ],
+      ".session-scene": [
+        0,
+        212,
+        360,
+        194.390625
+      ],
+      ".home-device-rig": [
+        57.59375,
+        218.78125,
+        280.796875,
+        187.1875
+      ],
+      ".home-device-layer": [
+        57.59375,
+        218.78125,
+        280.796875,
+        187.1875
+      ],
+      ".home-device-lights": [
+        57.59375,
+        218.78125,
+        280.796875,
+        187.1875
+      ],
+      ".home-flight-layer": [
+        0,
+        139.59375,
+        360,
+        844
+      ],
+      ".home-hologram-layer": [
+        122.390625,
+        344.78125,
+        165.59375,
+        150.84375
+      ],
+      ".reference-session-panel": [
+        12.5625,
+        432.90625,
+        334.875,
+        198.0625
+      ],
+      ".session-control-button": [
+        30.296875,
+        579.15625,
+        299.40625,
+        42.546875
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        360,
+        72
+      ]
+    },
+    "badge": [
+      234,
+      72.5,
+      109,
+      30
+    ],
+    "icon": [
+      243,
+      78.5,
+      18,
+      18
+    ],
+    "value": [
+      266,
+      78.5,
+      68,
+      18
+    ],
+    "title": [
+      16,
+      64.796875,
+      108,
+      20.390625
+    ],
+    "glyphTop": 68.496875,
+    "wallet": [
+      193.390625,
+      65,
+      150.609375,
+      45
+    ],
+    "glyphOffset": 3.496875000000003,
+    "background": {
+      "image": "linear-gradient(0deg, rgb(9, 13, 20) 0%, rgba(0, 0, 0, 0) 18%), url(\"file:///C:/Test%20AI%20Code/Bountera-Clean-20261001/assets/aurora-planet-clean.png\")",
+      "position": "0px 0px, 50% 168.4px",
+      "size": "auto, 100% auto",
+      "top": "0px",
+      "height": "844px",
+      "mask": "none"
+    },
+    "balance": "550.00 CR",
+    "counter": "0.0000",
+    "appWidth": 360
+  },
+  {
+    "width": 390,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        390,
+        48
+      ],
+      ".galaxy-selector": [
+        16,
+        65.296875,
+        181.390625,
+        45.390625
+      ],
+      ".session-wallet": [
+        207.390625,
+        64,
+        166.609375,
+        48
+      ],
+      ".session-total": [
+        0,
+        112,
+        390,
+        109
+      ],
+      ".session-scene": [
+        0,
+        221,
+        390,
+        210.59375
+      ],
+      ".home-device-rig": [
+        62.390625,
+        231.6875,
+        304.1875,
+        202.78125
+      ],
+      ".home-device-layer": [
+        62.390625,
+        231.6875,
+        304.1875,
+        202.78125
+      ],
+      ".home-device-lights": [
+        62.390625,
+        231.6875,
+        304.1875,
+        202.78125
+      ],
+      ".home-flight-layer": [
+        0,
+        145.890625,
+        390,
+        844
+      ],
+      ".home-hologram-layer": [
+        132.59375,
+        368.1875,
+        179.390625,
+        163.40625
+      ],
+      ".reference-session-panel": [
+        13.609375,
+        459.8125,
+        362.78125,
+        210.734375
+      ],
+      ".session-control-button": [
+        32.734375,
+        610.625,
+        324.53125,
+        46.09375
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        390,
+        72
+      ]
+    },
+    "badge": [
+      264,
+      73,
+      109,
+      30
+    ],
+    "icon": [
+      273,
+      79,
+      18,
+      18
+    ],
+    "value": [
+      296,
+      79,
+      68,
+      18
+    ],
+    "title": [
+      16,
+      65.296875,
+      108,
+      20.390625
+    ],
+    "glyphTop": 68.996875,
+    "wallet": [
+      207.390625,
+      64,
+      166.609375,
+      48
+    ],
+    "glyphOffset": 4.996875000000003,
+    "background": {
+      "image": "linear-gradient(0deg, rgb(9, 13, 20) 0%, rgba(0, 0, 0, 0) 18%), url(\"file:///C:/Test%20AI%20Code/Bountera-Clean-20261001/assets/aurora-planet-clean.png\")",
+      "position": "0px 0px, 50% 177.1px",
+      "size": "auto, 100% auto",
+      "top": "0px",
+      "height": "844px",
+      "mask": "none"
+    },
+    "balance": "550.00 CR",
+    "counter": "0.0000",
+    "appWidth": 390
+  },
+  {
+    "width": 430,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        430,
+        48
+      ],
+      ".galaxy-selector": [
+        16,
+        65.296875,
+        221.390625,
+        45.390625
+      ],
+      ".session-wallet": [
+        247.390625,
+        64,
+        166.609375,
+        48
+      ],
+      ".session-total": [
+        0,
+        112,
+        430,
+        109
+      ],
+      ".session-scene": [
+        0,
+        221,
+        430,
+        232.1875
+      ],
+      ".home-device-rig": [
+        68.796875,
+        248.890625,
+        335.390625,
+        223.59375
+      ],
+      ".home-device-layer": [
+        68.796875,
+        248.890625,
+        335.390625,
+        223.59375
+      ],
+      ".home-device-lights": [
+        68.796875,
+        248.890625,
+        335.390625,
+        223.59375
+      ],
+      ".home-flight-layer": [
+        0,
+        154.296875,
+        430,
+        844
+      ],
+      ".home-hologram-layer": [
+        146.1875,
+        399.390625,
+        197.796875,
+        180.171875
+      ],
+      ".reference-session-panel": [
+        15,
+        483.6875,
+        400,
+        228.625
+      ],
+      ".session-control-button": [
+        35.984375,
+        641.078125,
+        358.03125,
+        50.8125
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        430,
+        72
+      ]
+    },
+    "badge": [
+      304,
+      73,
+      109,
+      30
+    ],
+    "icon": [
+      313,
+      79,
+      18,
+      18
+    ],
+    "value": [
+      336,
+      79,
+      68,
+      18
+    ],
+    "title": [
+      16,
+      65.296875,
+      108,
+      20.390625
+    ],
+    "glyphTop": 68.996875,
+    "wallet": [
+      247.390625,
+      64,
+      166.609375,
+      48
+    ],
+    "glyphOffset": 4.996875000000003,
+    "background": {
+      "image": "linear-gradient(0deg, rgb(9, 13, 20) 0%, rgba(0, 0, 0, 0) 18%), url(\"file:///C:/Test%20AI%20Code/Bountera-Clean-20261001/assets/aurora-planet-clean.png\")",
+      "position": "0px 0px, 50% 188.7px",
+      "size": "auto, 100% auto",
+      "top": "0px",
+      "height": "844px",
+      "mask": "none"
+    },
+    "balance": "550.00 CR",
+    "counter": "0.0000",
+    "appWidth": 430
+  }
+]

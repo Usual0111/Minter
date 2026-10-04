@@ -7,7 +7,7 @@ html=html.replace(/(assets\/[\w.-]+\.(?:css|js))\?v=[^"']*/g,'$1');
 const embed=name=>'data:image/'+(/\.jpe?g$/i.test(name)?'jpeg':'png')+';base64,'+fs.readFileSync(path.join(root,'assets',name)).toString('base64');
 for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg','canyon-world.png','aurora-scanner-scene.png','aurora-manta-scene.png','aurora-planet-layer.png','aurora-planet-clean.png','nodes-canyon-reference.png'])css=css.replaceAll(`url('${name}')`,`url('${embed(name)}')`);
 html=html.replace('<link rel="stylesheet" href="assets/app.css">',()=>`<style>${css}\n${viewport.css}</style><script>${viewport.script}</script>`);
-for(const name of ['config','node-system','home-system','cr-session-system','reward-mining-system','reward-adapter','engine','client','node-ui','contracts-ui','home-ui','motion','home-device-motion','app']){
+for(const name of ['config','node-system','home-system','cr-session-system','reward-mining-system','reward-adapter','engine','client','node-ui','contracts-ui','home-ui','motion','home-device-motion','telegram-viewport','app']){
  let js=fs.readFileSync(path.join(root,`assets/${name}.js`),'utf8');
  for(const image of ['session-coin.png','depin-probe.png','depin-planet.jpg','home-carrier.png','home-station.png','canyon-probe.png','aurora-device-layer.png','aurora-device-layer-lights-off.png','aurora-scanner-hologram.png'])js=js.replaceAll(`assets/${image}`,embed(image));
  html=html.replace(`<script src="assets/${name}.js"></script>`,()=>`<script>${js.replaceAll('</script','<\\/script')}</script>`);
