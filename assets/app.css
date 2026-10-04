@@ -972,3 +972,13 @@ html.tma-viewport,html.tma-viewport body{height:100%;overflow:hidden}
 .tma-viewport dialog.contract-sheet{bottom:calc(100dvh - var(--app-viewport-height) - var(--app-viewport-top,0px) + var(--app-safe-bottom));max-height:min(calc(var(--app-viewport-height)*.85),var(--dialog-height,85dvh))}
 .tma-viewport dialog.contract-sheet .modal-box{max-height:min(calc(var(--app-viewport-height)*.85),var(--dialog-height,85dvh))}
 .tma-viewport #toast{bottom:calc(84px + var(--app-safe-bottom) + max(0px,calc(100dvh - var(--app-nav-viewport-height))))}
+
+/* Upper controls can use spare Telegram headroom, never move down within the scene.
+   Transforms leave the measured header footprint and all following content intact. */
+.tma-viewport .home-screen{--app-header-lift:min(0px,calc(var(--app-chrome-top,56px) - 56px))}
+.tma-viewport .home-screen .silver-header :is(.galaxy-selector,.session-wallet){translate:0 var(--app-header-lift)}
+
+/* Home's oval geometry, retaining the existing Nodes surface and text palette. */
+.nodes-screen .nodes-header{position:relative}
+.nodes-screen .nodes-balance{position:absolute;top:0;right:17px;min-width:0;height:30px;padding:0 8px;gap:5px;border-radius:999px;transform:scale(1.09);transform-origin:top right;font-size:14px;line-height:18px;font-weight:400;letter-spacing:0}
+.nodes-screen .nodes-balance .nodes-balance-coin{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor}
