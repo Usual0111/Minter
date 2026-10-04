@@ -982,3 +982,10 @@ html.tma-viewport,html.tma-viewport body{height:100%;overflow:hidden}
 .nodes-screen .nodes-header{position:relative}
 .nodes-screen .nodes-balance{position:absolute;top:0;right:17px;min-width:0;height:30px;padding:0 8px;gap:5px;border-radius:999px;transform:scale(1.09);transform-origin:top right;font-size:14px;line-height:18px;font-weight:400;letter-spacing:0}
 .nodes-screen .nodes-balance .nodes-balance-coin{width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor}
+
+/* Only the two trailing mined digits have a small vertical motion trace. */
+.home-screen [data-session-live="amount"]{font-variant-numeric:tabular-nums; font-feature-settings:"tnum"}
+.mined-counter-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.home-screen .mined-counter-digit{position:relative;display:inline-block;--digit-trail:0}
+.home-screen .mined-counter-core{opacity:calc(1 - var(--digit-trail));transition:opacity 180ms ease-out}
+.home-screen .mined-counter-digit::after{content:attr(data-digit);position:absolute;inset:0;pointer-events:none;opacity:var(--digit-trail);filter:var(--digit-blur,url(#mined-digit-soft));transition:opacity 180ms ease-out}

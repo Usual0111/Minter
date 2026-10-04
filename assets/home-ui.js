@@ -1,5 +1,37 @@
 (function(root){'use strict';
+// Presentation only: sample the exact engine view; never interpolate or change mining.
+function createCounter({document:d=root.document,view,now=()=>root.performance.now(),schedule=root.setInterval}={}){
+ let record=null;
+ const filters='<svg class="mined-counter-defs" aria-hidden="true" width="0" height="0"><defs><filter id="mined-digit-soft" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0.6"/></filter><filter id="mined-digit-fast" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 0.9"/></filter></defs></svg>';
+ function sample(x){
+  if(d.hidden)return;
+  const el=d.querySelector('[data-session-live="amount"]');if(!el){record=null;return;}
+  const at=now(),text=(x.accumulatedMicroCents/x.unit/100).toFixed(4),units=BigInt(text.replace('.',''));
+  if(!record||record.el!==el||record.session!==x.sessionId){
+   if(!d.getElementById('mined-digit-soft'))d.body.insertAdjacentHTML('beforeend',filters);
+   const digits=[...text.slice(-2)].map(char=>{const digit=d.createElement('span'),core=d.createElement('span');digit.className='mined-counter-digit';digit.setAttribute('aria-hidden','true');core.className='mined-counter-core';core.textContent=char;digit.dataset.digit=char;digit.append(core);return digit;});
+   el.replaceChildren(d.createTextNode(text.slice(0,-2)),...digits);el.setAttribute('role','img');
+   record={el,session:x.sessionId,units,at,prefix:text.slice(0,-2),digits};
+  }
+  const elapsed=at-record.at,delta=units-record.units;
+  // Carries (9 -> 0) count as one step; resumed/offline jumps are not motion.
+  record.digits.forEach((digit,i)=>{
+   const divisor=i===0?10n:1n,steps=units/divisor-record.units/divisor;
+   const fast=x.status==='active'&&elapsed>0&&elapsed<=250&&delta>=0n&&steps>1n;
+   digit.style.setProperty('--digit-trail',fast?'0.55':'0');
+   digit.style.setProperty('--digit-blur',steps>2n?'url(#mined-digit-fast)':'url(#mined-digit-soft)');
+   const char=text.slice(-2)[i];if(digit.dataset.digit!==char){digit.dataset.digit=char;digit.firstElementChild.textContent=char;}
+  });
+  const prefix=text.slice(0,-2);if(record.prefix!==prefix){el.firstChild.nodeValue=prefix;record.prefix=prefix;}
+  if(el.getAttribute('aria-label')!==text)el.setAttribute('aria-label',text);
+  record.units=units;record.at=at;
+ }
+ // An independent 100ms display cadence leaves all other UI timers untouched.
+ if(typeof schedule==='function'&&typeof view==='function')schedule(()=>{if(!d.hidden&&d.querySelector('[data-session-live="amount"]'))sample(view().rewardMining);else record=null;},100);
+ return {sample};
+}
 function create(h){const {t,loc,icon,btn,action,open,toast}=h,K=typeof module==='object'?require('./contracts-ui.js'):root.ContractsUI,cr=K.amount,contracts=K.create(h);let signature='',pending='';
+const counter=typeof document!=='undefined'&&typeof root.setInterval==='function'&&h.view?createCounter({view:h.view}):null;
 const clock=ms=>{const sec=Math.ceil(Math.max(0,ms)/1000);return (sec>=3600?String(Math.floor(sec/3600)).padStart(2,'0')+':':'')+String(Math.floor(sec/60)%60).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');};
 const amount=x=>(x.accumulatedMicroCents/x.unit/100).toFixed(4);
 const status=x=>x.status==='ready'?t('Mining complete','Добыча завершена'):x.status==='active'?t('Mining active','Майнинг активен'):x.status==='finishing'?t('Finishing session','Завершаем сеанс'):t('Node awaiting charge','Нода ожидает заряд');
@@ -50,7 +82,7 @@ function extras(s){return `<section class="session-extras"><div class="daily-str
 async function click(a,intent,data={}){const s=h.view();if(a==='homeCollect'){const out=await action('homeCollect',{galaxy:s.home.galaxy.id});if(out){if(typeof MotionUI!=='undefined')MotionUI.claim(out.collected,s.state.settings.microPerData);toast('+'+cr(out.credited)+' CR');}return;}
 const x=s.rewardMining;if(a==='homeContract'){observeContract(x);(h.openSheet||open)(t('Mining contract','Контракт добычи'),contracts.details(x,contractFlash?.contract));return;}if(a==='homeBonuses'){openBonuses(s);return;}if(a==='homeBonusDaily'||a==='homeBonusViews'){if(bonusPending||h.busy?.())return;bonusPending=true;try{const out=await action(a==='homeBonusDaily'?'daily':'rewardViewBonusClaim',a==='homeBonusDaily'?{}:{dayKey:Number(data.dayKey),views:Number(data.views)});if(out){toast(a==='homeBonusDaily'?'+'+cr(s.state.settings.daily.cr)+' CR · +'+s.state.settings.daily.gems+' Gems':out.credited?'+'+cr(out.credited)+' CR':t('Reward already collected','Награда уже получена'));openBonuses(h.view());}}finally{bonusPending=false;}return;}if(a==='homeGalaxies'){open(t('Active galaxy','Активная галактика'),s.state.nodeHub.settings.galaxies.map(g=>btn(loc(g.name)+' · '+g.sector,'homeSelect',`data-galaxy="${g.id}" ${g.hazard&&!s.state.nodes.orbital?'disabled':''}`,'secondary full')).join('')+extras(s)+btn(t('Profile & settings','Профиль и настройки'),'menu','','secondary full'));return;}if(a==='homeEquipment'){h.route('nodes');return;}
 if(!a.startsWith('homeReward')||pending||h.busy?.())return;const c=control(x);if(c.action!==a||c.disabled||intent&&intent!==actionKey(x))return;pending=a==='homeRewardClaim'?'claim':a==='homeRewardFree'?'free':'ad';h.render();try{if(a==='homeRewardClaim'){const out=await action('rewardClaim',{sessionIds:x.readySessionIds,rewardCents:x.readyCents});if(out?.claimChanged)toast(t('Reward changed. Tap Collect again.','Награда обновлена. Нажмите «Получить» ещё раз.'));else if(out&&!out.credited)toast(t('Reward already collected','Награда уже получена'));}else if(a==='homeRewardFree'){const f=x.freeSession,out=await action('rewardFreeStart',{dayKey:f.dayKey,rewardCents:f.rewardCents,durationMs:f.durationMs,nodeId:f.nodeId});if(out?.freeOfferChanged)toast(t('Free launch changed. Check the button and try again.','Бесплатный запуск обновился. Проверьте кнопку и повторите.'));else if(out?.freeStarted)toast(t('Free mining session started','Бесплатный сеанс добычи запущен'));}else await h.watchRewardAd(x.offer);}finally{pending='';h.render();}}
-function tick(s){const x=s.rewardMining;observeContract(x);if(typeof document!=='undefined'&&document.querySelector('[data-node-bonuses]')&&!bonusPending&&bonusKey(s)!==bonusSheetKey)openBonuses(s);if(key(x,s)!==signature){h.render();return;}const set=(name,value)=>document.querySelectorAll(`[data-session-live="${name}"]`).forEach(e=>e.textContent=value);set('amount',amount(x));const effect=liveSpeedChange(x);document.querySelectorAll('[data-session-live="status"]').forEach(e=>{if(!effect||e.dataset?.speedEffect!==effect.key){const line=statusLine(x);if(e.innerHTML!==line)e.innerHTML=line;if(e.dataset)e.dataset.speedEffect=effect?.key||'';}e.classList.toggle('mining-speed',x.status==='active');});set('time',displayedTime(x));set('ready',cr(displayedReward(x))+' CR');if(x.offer.reason==='cooldown')document.querySelectorAll('.session-control-button').forEach(b=>b.textContent=control(x).label);document.querySelectorAll('.session-control-progress').forEach(e=>{e.setAttribute('aria-valuenow',Math.round(x.progress*100));e.firstElementChild.style.transform='scaleX('+x.progress+')';});}
+function tick(s){const x=s.rewardMining;observeContract(x);if(typeof document!=='undefined'&&document.querySelector('[data-node-bonuses]')&&!bonusPending&&bonusKey(s)!==bonusSheetKey)openBonuses(s);if(key(x,s)!==signature){h.render();return;}const set=(name,value)=>document.querySelectorAll(`[data-session-live="${name}"]`).forEach(e=>e.textContent=value);if(!counter)set('amount',amount(x));else if(x.status!=='active')counter.sample(x);const effect=liveSpeedChange(x);document.querySelectorAll('[data-session-live="status"]').forEach(e=>{if(!effect||e.dataset?.speedEffect!==effect.key){const line=statusLine(x);if(e.innerHTML!==line)e.innerHTML=line;if(e.dataset)e.dataset.speedEffect=effect?.key||'';}e.classList.toggle('mining-speed',x.status==='active');});set('time',displayedTime(x));set('ready',cr(displayedReward(x))+' CR');if(x.offer.reason==='cooldown')document.querySelectorAll('.session-control-button').forEach(b=>b.textContent=control(x).label);document.querySelectorAll('.session-control-progress').forEach(e=>{e.setAttribute('aria-valuenow',Math.round(x.progress*100));e.firstElementChild.style.transform='scaleX('+x.progress+')';});}
 return {render,click,tick,control,actionKey,confirmedBoost};}
-root.HomeUI={create};if(typeof module==='object')module.exports={create};
+root.HomeUI={create,createCounter};if(typeof module==='object')module.exports={create,createCounter};
 })(typeof globalThis!=='undefined'?globalThis:window);
