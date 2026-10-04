@@ -757,6 +757,9 @@ html:has(.app:not(.home-screen))::-webkit-scrollbar{display:none}
 .app:not(.home-screen) .nav-item.active:after{content:'';display:block;position:absolute;top:-4px;bottom:auto;left:35%;right:35%;width:40px;height:2px;border-radius:4px;background:#e5efff;box-shadow:0 6px 17px #b8ddff55}
 .app:not(.home-screen) .nav-badge{display:none}
 
+/* Match Nodes' navigation shade without the Home artwork shining through. */
+.app.home-screen .bottom-nav{background:linear-gradient(100deg,#17212ce8,#10141cec) #090d14!important}
+
 /* Dialogs inherit the same palette only while a non-Home screen is open. */
 body:has(.app:not(.home-screen)) :is(dialog,#toast){--accent:#e8edf2;--muted:#a4afb9}
 body:has(.app:not(.home-screen)) .modal-box{background:linear-gradient(145deg,#17212cf5,#10141cfa);border-color:#ffffff26;color:#f5f7fa}
@@ -832,7 +835,7 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 .home-screen .reference-session-panel .session-control-progress{height:2.9cqw;margin:6cqw 0 0;border-radius:999px}
 .home-screen .reference-session-panel .session-control-progress>span{border-radius:inherit}
 .home-screen .reference-session-panel .session-control-metrics{margin:2.7cqw 0 0;gap:2cqw}
-.home-screen .reference-session-panel .session-control-metrics dt{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap}
+.home-screen .reference-session-panel .session-control-metrics dt{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;clip-path:none;white-space:nowrap;font-size:10.5px;line-height:12px;color:#a6b0bc;font-weight:400}
 .home-screen .reference-session-panel .session-control-metrics dd{font-size:4.2cqw;line-height:5.5cqw;font-weight:400}
 .home-screen .reference-session-panel .session-reward-value{display:flex;align-items:center;justify-content:flex-end;gap:1.1cqw}
 .home-screen .reference-session-panel .session-reward-coin{width:4.3cqw;height:4.3cqw;flex-shrink:0}
@@ -891,33 +894,38 @@ dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh
 @media(max-width:350px){.home-screen .node-panel-heading{grid-template-columns:54px minmax(0,1fr) 54px}.home-screen .node-heading-center h1{font-size:6cqw}}
 
 /* Screenshot proportions are confined to the existing mining panel. */
-.home-screen .session-panel.session-control.reference-session-panel{margin:calc(6px + 5.7cqw) 3.49cqw 0;padding:4.07cqw 4.65cqw 4.46cqw;border-radius:5.23cqw;border:1px solid #aaa0a55c;background:radial-gradient(ellipse at 38% -12%,#ffffff1a,transparent 67%),linear-gradient(120deg,#273940a1,#39373c99 64%,#282931c9);box-shadow:inset 0 1px 1px #ffffff21,inset 0 -1px 3px #ffffff09,0 9px 22px #0005;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);font-family:Arial,Helvetica,sans-serif}
-.home-screen .reference-session-panel .node-panel-heading{height:auto;display:flex;justify-content:center;margin:0}
-.home-screen .reference-session-panel .node-panel-heading h1{display:flex;align-items:baseline;justify-content:center;gap:1.55cqw;font-size:5.43cqw;line-height:6.4cqw;font-weight:700;letter-spacing:0}
-.home-screen .reference-session-panel .session-reference-tier{font-size:5.04cqw;line-height:6.4cqw;font-weight:400;color:#eeedf0;white-space:nowrap}
-.home-screen .reference-session-panel .node-panel-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3.3cqw;margin-top:2.9cqw}
-.home-screen .reference-session-panel .node-panel-tile{display:flex;align-items:center;justify-content:flex-start;gap:2.13cqw;height:14.53cqw;min-height:44px;min-width:0;padding:1.94cqw 2.13cqw;border:1px solid #bcc0c04d;border-radius:2.52cqw;background:linear-gradient(125deg,#b7c4ca20,#d6c3c324);box-shadow:inset 0 1px 1px #ffffff05;text-align:left;color:#f7f8fa}
-.home-screen .reference-session-panel .node-card-icon{display:grid;place-items:center;position:relative;flex:none;width:10.46cqw;height:10.46cqw;border-radius:3.29cqw;background:#17212b8f}
-.home-screen .reference-session-panel .node-card-icon svg{width:7.36cqw;height:7.36cqw;fill:none;stroke:#b8bec5;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.home-screen .reference-session-panel .node-card-icon .node-contract-icon{width:6.98cqw;height:6.98cqw;stroke-width:2.4}
+.home-screen .session-panel.session-control.reference-session-panel{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:22px 38px 34px 3px auto;column-gap:0;row-gap:10px;height:calc(42.24cqw + 46px + var(--node-panel-height-adjustment,0px));margin:calc(6px + 5.7cqw) 3.49cqw 0;padding:max(6px,calc(15.21cqw - 46.5px + var(--node-panel-height-adjustment,0px)/2)) 4.65cqw;border-radius:22px;border:1px solid #ffffff14;background:rgba(21,28,35,.97);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;font-family:Arial,Helvetica,sans-serif}
+/* Preserve the previous title baseline height on wider phone screens. */
+@media(min-width:420px){.home-screen .reference-session-panel{--node-panel-height-adjustment:1px}}
+.home-screen .reference-session-panel .node-panel-heading{height:22px;display:flex;justify-content:space-between;margin:0;min-width:0}
+.home-screen .reference-session-panel .node-panel-heading h1{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;font-size:18px;line-height:22px;font-weight:500;letter-spacing:0}
+.home-screen .reference-session-panel .session-reference-tier{font-size:11px;line-height:15px;font-weight:400;color:#a6b0bc;white-space:nowrap;background:#10171e;border:1px solid #ffffff0d;border-radius:5px;padding:2px 6px}
+.home-screen .reference-session-panel .node-panel-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;min-width:0}
+.home-screen .reference-session-panel .node-panel-tile{display:flex;align-items:center;justify-content:flex-start;gap:6px;height:38px;min-height:38px;min-width:0;padding:0 8px;border:0;border-radius:8px;background:#ffffff06;box-shadow:none;text-align:left;color:#e6edf0}
+.home-screen .reference-session-panel .node-card-icon{display:grid;place-items:center;position:relative;flex:none;width:18px;height:18px;border-radius:0;background:none}
+.home-screen .reference-session-panel .node-card-icon svg{width:18px;height:18px;fill:none;stroke:#a6b0bc;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.home-screen .reference-session-panel .node-card-icon .node-contract-icon{width:18px;height:18px;stroke-width:2.4}
 .home-screen .reference-session-panel .node-contract-icon circle{fill:#b8bec5;stroke:#263039;stroke-width:1.4}
 .home-screen .reference-session-panel .node-contract-icon .contract-icon-check{stroke:#263039;stroke-width:2.4}
-.home-screen .reference-session-panel .node-card-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.19cqw;min-width:0}
-.home-screen .reference-session-panel .node-card-copy strong{font-size:4.65cqw;line-height:5.62cqw;font-weight:700;white-space:nowrap}
-.home-screen .reference-session-panel .node-card-caption{font-size:3.49cqw;line-height:4.46cqw;font-weight:400;color:#b8bec5;white-space:nowrap}
+.home-screen .reference-session-panel .node-card-copy{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:6px;min-width:0}
+.home-screen .reference-session-panel .node-card-copy strong{font-size:13px;line-height:18px;font-weight:400;white-space:nowrap;font-variant-numeric:tabular-nums}
+.home-screen .reference-session-panel .node-card-caption{font-size:13px;line-height:18px;font-weight:400;letter-spacing:0;color:#e6edf0;white-space:nowrap}
+.home-screen .reference-session-panel .node-bonus-control .node-card-copy strong{font-size:13px;line-height:18px;font-weight:400}
 .home-screen .reference-session-panel .node-contract-value.is-complete{color:#d5e5e4}
 .home-screen .reference-session-panel .node-bonus-dot{width:4px;height:4px;top:1px;right:1px;background:#d6b879}
-.home-screen .reference-session-panel .session-mining-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:3.1cqw;margin-top:3.1cqw;min-height:5.81cqw}
-.home-screen .reference-session-panel .session-mining-row .session-control-metrics{display:block;margin:0}
-.home-screen .reference-session-panel .session-mining-row .session-control-metrics dd{font-size:4.65cqw;line-height:5.81cqw;font-weight:400;color:#f4f4f7;white-space:nowrap;font-variant-numeric:tabular-nums}
-.home-screen .reference-session-panel .session-mining-row .session-reward-value{gap:1.55cqw}
-.home-screen .reference-session-panel .session-control-progress.segmented-mining-progress{display:flex;align-items:stretch;gap:.77cqw;height:4.84cqw;min-width:0;margin:0;padding:.77cqw 1.16cqw;border:1px solid #b4b6be6e;border-radius:2.52cqw;background:#8a8e974d;box-shadow:inset 0 0 0 1px #d5d6dd29;overflow:hidden}
-.home-screen .reference-session-panel .mining-progress-segment{display:block;position:relative;flex:1;min-width:0;border-radius:.48cqw;background:#515961;overflow:hidden;transform:skewX(-12deg)}
-.home-screen .reference-session-panel .mining-progress-segment>span{display:block;width:100%;height:100%;border-radius:inherit;transform-origin:left;background:linear-gradient(180deg,#f4f6ff,#c9d2db);box-shadow:inset 0 1px 2px #ffffffbd,inset 0 -1px 2px #94a6b47a}
-.home-screen .reference-session-panel .session-control-action{margin-top:3.68cqw}
-.home-screen .reference-session-panel .session-control-button{height:11.82cqw;min-height:11.82cqw;border:2px solid #edededba;border-radius:2.71cqw;font-size:4.65cqw;line-height:5.81cqw;font-weight:400;letter-spacing:0;background:radial-gradient(ellipse at 50% 0%,#ffffff70,transparent 62%),linear-gradient(105deg,#999b9c,#d6d6d5 48%,#aaaeb0);color:#080a0c;box-shadow:inset 0 1px 2px #ffffff91,inset 0 -1px 2px #30303077,0 3px 9px #0004,0 0 9px #ffffff12}
-.home-screen .reference-session-panel .session-control-button:before{inset:.58cqw;border-radius:2.04cqw;border:1px solid #ffffffc4;box-shadow:inset 0 1px 2px #ffffff75,inset 0 -1px 2px #ffffff40}
-.home-screen .reference-session-panel .session-control-button:disabled{background:linear-gradient(105deg,#73777a,#a3a6a6 48%,#797b80);border-color:#c0c3c388;color:#34383e;box-shadow:inset 0 1px 2px #ffffff40,0 3px 9px #0004}
+.home-screen .reference-session-panel .session-mining-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px;margin:0;min-height:0;height:34px}
+.home-screen .reference-session-panel .session-mining-row .session-control-metrics{display:block;margin:0;min-width:0}
+.home-screen .reference-session-panel .session-mining-row .session-control-metrics dd{font-size:18px;line-height:22px;font-weight:400;color:#f4f4f7;white-space:nowrap;font-variant-numeric:tabular-nums}
+.home-screen .reference-session-panel .session-mining-row .session-reward-value{justify-content:flex-start;gap:6px}
+.home-screen .reference-session-panel .session-mining-row .session-reward-coin{width:16px;height:16px;flex-shrink:0;object-fit:contain;filter:none;box-shadow:none}
+.home-screen .reference-session-panel .session-mining-row .session-time-metric{text-align:right}
+.home-screen .reference-session-panel .session-mining-row .session-reward-metric>div{text-align:left}
+.home-screen .reference-session-panel .session-control-progress.continuous-mining-progress{height:3px;min-width:0;width:100%;margin:0;padding:0;border:0;border-radius:999px;background:#303a43;box-shadow:none;overflow:hidden}
+.home-screen .reference-session-panel .continuous-mining-progress>span{display:block;width:100%;height:100%;border-radius:inherit;transform-origin:left;background:#a9ccd8;box-shadow:none;transition:transform .2s linear}
+.home-screen .reference-session-panel .session-control-action{margin:0}
+.home-screen .reference-session-panel .session-control-button{height:11.82cqw;min-height:11.82cqw;border:0;border-radius:2.71cqw;font-size:4.65cqw;line-height:5.81cqw;font-weight:400;letter-spacing:0;background:#e6edf0;color:#111820;box-shadow:none}
+.home-screen .reference-session-panel .session-control-button:before{content:none;box-shadow:none}
+.home-screen .reference-session-panel .session-control-button:disabled{background:#252e37;border:0;color:#a6b0bc;box-shadow:none;opacity:1}
 
 /* Copy stays inside the existing button bounds; speed layers share the same line. */
 .home-screen .reference-session-panel .free-mining-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;pointer-events:none}

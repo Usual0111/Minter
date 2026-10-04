@@ -1,0 +1,174 @@
+[
+  {
+    "tab": "home",
+    "low": false,
+    "rect": [
+      0,
+      772,
+      390,
+      72
+    ],
+    "background": "rgba(0, 0, 0, 0) linear-gradient(100deg, rgba(23, 33, 44, 0.91), rgba(16, 20, 28, 0.925)) repeat scroll 0% 0% / auto padding-box border-box",
+    "items": [
+      [
+        6,
+        777,
+        74,
+        63
+      ],
+      [
+        82,
+        777,
+        74,
+        63
+      ],
+      [
+        158,
+        777,
+        74,
+        63
+      ],
+      [
+        234,
+        777,
+        74,
+        63
+      ],
+      [
+        310,
+        777,
+        74,
+        63
+      ]
+    ]
+  },
+  {
+    "tab": "nodes",
+    "low": false,
+    "rect": [
+      0,
+      772,
+      390,
+      72
+    ],
+    "background": "rgba(0, 0, 0, 0) linear-gradient(100deg, rgba(23, 33, 44, 0.91), rgba(16, 20, 28, 0.925)) repeat scroll 0% 0% / auto padding-box border-box",
+    "items": [
+      [
+        6,
+        777,
+        74,
+        63
+      ],
+      [
+        82,
+        777,
+        74,
+        63
+      ],
+      [
+        158,
+        777,
+        74,
+        63
+      ],
+      [
+        234,
+        777,
+        74,
+        63
+      ],
+      [
+        310,
+        777,
+        74,
+        63
+      ]
+    ]
+  },
+  {
+    "tab": "home",
+    "low": true,
+    "rect": [
+      0,
+      772,
+      390,
+      72
+    ],
+    "background": "rgba(0, 0, 0, 0) linear-gradient(135deg, rgb(32, 48, 64), rgb(11, 20, 33)) repeat scroll 0% 0% / auto padding-box border-box",
+    "items": [
+      [
+        6,
+        777,
+        74,
+        63
+      ],
+      [
+        82,
+        777,
+        74,
+        63
+      ],
+      [
+        158,
+        777,
+        74,
+        63
+      ],
+      [
+        234,
+        777,
+        74,
+        63
+      ],
+      [
+        310,
+        777,
+        74,
+        63
+      ]
+    ]
+  },
+  {
+    "tab": "nodes",
+    "low": true,
+    "rect": [
+      0,
+      772,
+      390,
+      72
+    ],
+    "background": "rgba(0, 0, 0, 0) linear-gradient(100deg, rgba(23, 33, 44, 0.91), rgba(16, 20, 28, 0.925)) repeat scroll 0% 0% / auto padding-box border-box",
+    "items": [
+      [
+        6,
+        777,
+        74,
+        63
+      ],
+      [
+        82,
+        777,
+        74,
+        63
+      ],
+      [
+        158,
+        777,
+        74,
+        63
+      ],
+      [
+        234,
+        777,
+        74,
+        63
+      ],
+      [
+        310,
+        777,
+        74,
+        63
+      ]
+    ]
+  }
+]

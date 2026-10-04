@@ -1,0 +1,560 @@
+[
+  {
+    "width": 360,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        360,
+        47
+      ],
+      ".session-total": [
+        0,
+        111,
+        360,
+        101
+      ],
+      ".session-scene": [
+        0,
+        212,
+        360,
+        194.390625
+      ],
+      ".home-device-rig": [
+        57.59375,
+        218.78125,
+        280.796875,
+        187.1875
+      ],
+      ".home-flight-layer": [
+        0,
+        139.59375,
+        360,
+        844
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        360,
+        72
+      ],
+      ".reference-session-panel": [
+        12.5625,
+        432.90625,
+        334.875,
+        198.03125
+      ]
+    },
+    "button": {
+      "rect": [
+        30.296875,
+        571.34375,
+        299.40625,
+        42.546875
+      ],
+      "background": "rgb(230, 237, 240) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(17, 24, 32)",
+      "border": "0px none rgb(17, 24, 32)",
+      "shadow": "none"
+    },
+    "heading": {
+      "rect": [
+        117.203125,
+        448.546875,
+        64,
+        23.046875
+      ],
+      "text": "X-2700",
+      "size": "19.548px",
+      "color": "rgb(247, 246, 250)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "tier": {
+      "rect": [
+        186.78125,
+        448.546875,
+        56,
+        23.046875
+      ],
+      "text": "TIER 1",
+      "size": "18.144px",
+      "color": "rgb(238, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "contract": {
+      "rect": [
+        30.296875,
+        482.03125,
+        143.765625,
+        44
+      ],
+      "text": "0/3CONTRACT",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "bonuses": {
+      "rect": [
+        185.9375,
+        482.03125,
+        143.765625,
+        44
+      ],
+      "text": "Bonuses",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "reward": {
+      "rect": [
+        30.296875,
+        537.1875,
+        84,
+        20.921875
+      ],
+      "text": "Session reward0.05 CR",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "time": {
+      "rect": [
+        288.703125,
+        537.1875,
+        41,
+        20.921875
+      ],
+      "text": "Until completion10:00",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "progress": {
+      "rect": [
+        125.453125,
+        545.640625,
+        152.09375,
+        4
+      ],
+      "text": "",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgb(44, 55, 66)"
+    },
+    "icons": [
+      [
+        33.796875,
+        491.53125,
+        25,
+        25
+      ],
+      [
+        189.4375,
+        491.53125,
+        25,
+        25
+      ]
+    ],
+    "coin": [
+      30.296875,
+      538.640625,
+      18,
+      18
+    ],
+    "labels": [
+      {
+        "text": "Session reward",
+        "rect": [
+          29.296875,
+          536.1875,
+          1,
+          1
+        ],
+        "clip": "inset(50%)"
+      },
+      {
+        "text": "Until completion",
+        "rect": [
+          287.703125,
+          536.1875,
+          1,
+          1
+        ],
+        "clip": "inset(50%)"
+      }
+    ],
+    "counter": "0.0000"
+  },
+  {
+    "width": 390,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        390,
+        48
+      ],
+      ".session-total": [
+        0,
+        112,
+        390,
+        109
+      ],
+      ".session-scene": [
+        0,
+        221,
+        390,
+        210.59375
+      ],
+      ".home-device-rig": [
+        62.390625,
+        231.6875,
+        304.1875,
+        202.78125
+      ],
+      ".home-flight-layer": [
+        0,
+        145.890625,
+        390,
+        844
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        390,
+        72
+      ],
+      ".reference-session-panel": [
+        13.609375,
+        459.8125,
+        362.78125,
+        210.671875
+      ]
+    },
+    "button": {
+      "rect": [
+        32.734375,
+        606,
+        324.53125,
+        46.09375
+      ],
+      "background": "rgb(230, 237, 240) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(17, 24, 32)",
+      "border": "0px none rgb(17, 24, 32)",
+      "shadow": "none"
+    },
+    "heading": {
+      "rect": [
+        126.484375,
+        476.671875,
+        69,
+        24.953125
+      ],
+      "text": "X-2700",
+      "size": "21.177px",
+      "color": "rgb(247, 246, 250)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "tier": {
+      "rect": [
+        201.515625,
+        476.671875,
+        62,
+        24.953125
+      ],
+      "text": "TIER 1",
+      "size": "19.656px",
+      "color": "rgb(238, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "contract": {
+      "rect": [
+        32.734375,
+        512.921875,
+        155.828125,
+        44
+      ],
+      "text": "0/3CONTRACT",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "bonuses": {
+      "rect": [
+        201.421875,
+        512.921875,
+        155.84375,
+        44
+      ],
+      "text": "Bonuses",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "reward": {
+      "rect": [
+        32.734375,
+        569,
+        90,
+        22.65625
+      ],
+      "text": "Session reward0.05 CR",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "time": {
+      "rect": [
+        312.265625,
+        569,
+        45,
+        22.65625
+      ],
+      "text": "Until completion10:00",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "progress": {
+      "rect": [
+        134.8125,
+        578.328125,
+        165.375,
+        4
+      ],
+      "text": "",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgb(44, 55, 66)"
+    },
+    "icons": [
+      [
+        36.234375,
+        522.421875,
+        25,
+        25
+      ],
+      [
+        204.921875,
+        522.421875,
+        25,
+        25
+      ]
+    ],
+    "coin": [
+      32.734375,
+      571.328125,
+      18,
+      18
+    ],
+    "labels": [
+      {
+        "text": "Session reward",
+        "rect": [
+          31.734375,
+          568,
+          1,
+          1
+        ],
+        "clip": "inset(50%)"
+      },
+      {
+        "text": "Until completion",
+        "rect": [
+          311.265625,
+          568,
+          1,
+          1
+        ],
+        "clip": "inset(50%)"
+      }
+    ],
+    "counter": "0.0000"
+  },
+  {
+    "width": 430,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        430,
+        48
+      ],
+      ".session-total": [
+        0,
+        112,
+        430,
+        109
+      ],
+      ".session-scene": [
+        0,
+        221,
+        430,
+        232.1875
+      ],
+      ".home-device-rig": [
+        68.796875,
+        248.890625,
+        335.390625,
+        223.59375
+      ],
+      ".home-flight-layer": [
+        0,
+        154.296875,
+        430,
+        844
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        430,
+        72
+      ],
+      ".reference-session-panel": [
+        15,
+        483.6875,
+        400,
+        228.59375
+      ]
+    },
+    "button": {
+      "rect": [
+        35.984375,
+        641.296875,
+        358.03125,
+        50.8125
+      ],
+      "background": "rgb(230, 237, 240) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(17, 24, 32)",
+      "border": "0px none rgb(17, 24, 32)",
+      "shadow": "none"
+    },
+    "heading": {
+      "rect": [
+        139.671875,
+        502.1875,
+        75,
+        27.515625
+      ],
+      "text": "X-2700",
+      "size": "23.349px",
+      "color": "rgb(247, 246, 250)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "tier": {
+      "rect": [
+        221.328125,
+        503.1875,
+        69,
+        27.515625
+      ],
+      "text": "TIER 1",
+      "size": "21.672px",
+      "color": "rgb(238, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "contract": {
+      "rect": [
+        35.984375,
+        543.171875,
+        171.921875,
+        44
+      ],
+      "text": "0/3CONTRACT",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "bonuses": {
+      "rect": [
+        222.09375,
+        543.171875,
+        171.921875,
+        44
+      ],
+      "text": "Bonuses",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "reward": {
+      "rect": [
+        35.984375,
+        600.5,
+        97,
+        24.984375
+      ],
+      "text": "Session reward0.05 CR",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "time": {
+      "rect": [
+        344.015625,
+        600.5,
+        50,
+        24.984375
+      ],
+      "text": "Until completion10:00",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "progress": {
+      "rect": [
+        146.3125,
+        610.984375,
+        184.375,
+        4
+      ],
+      "text": "",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgb(44, 55, 66)"
+    },
+    "icons": [
+      [
+        39.484375,
+        552.671875,
+        25,
+        25
+      ],
+      [
+        225.59375,
+        552.671875,
+        25,
+        25
+      ]
+    ],
+    "coin": [
+      35.984375,
+      603.984375,
+      18,
+      18
+    ],
+    "labels": [
+      {
+        "text": "Session reward",
+        "rect": [
+          34.984375,
+          599.5,
+          1,
+          1
+        ],
+        "clip": "inset(50%)"
+      },
+      {
+        "text": "Until completion",
+        "rect": [
+          343.015625,
+          599.5,
+          1,
+          1
+        ],
+        "clip": "inset(50%)"
+      }
+    ],
+    "counter": "0.0000"
+  }
+]

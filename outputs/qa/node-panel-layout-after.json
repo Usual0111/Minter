@@ -1,0 +1,716 @@
+[
+  {
+    "width": 360,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        360,
+        47
+      ],
+      ".session-total": [
+        0,
+        111,
+        360,
+        101
+      ],
+      ".session-scene": [
+        0,
+        212,
+        360,
+        194.390625
+      ],
+      ".home-device-rig": [
+        57.59375,
+        218.78125,
+        280.796875,
+        187.1875
+      ],
+      ".home-flight-layer": [
+        0,
+        139.59375,
+        360,
+        844
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        360,
+        72
+      ],
+      ".reference-session-panel": [
+        12.5625,
+        432.90625,
+        334.875,
+        198.0625
+      ]
+    },
+    "button": {
+      "rect": [
+        30.296875,
+        579.15625,
+        299.40625,
+        42.546875
+      ],
+      "background": "rgb(230, 237, 240) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(17, 24, 32)",
+      "border": "0px none rgb(17, 24, 32)",
+      "shadow": "none"
+    },
+    "heading": {
+      "rect": [
+        30.296875,
+        442.15625,
+        57,
+        22
+      ],
+      "text": "X-2700",
+      "size": "18px",
+      "color": "rgb(247, 246, 250)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "tier": {
+      "rect": [
+        288.703125,
+        442.65625,
+        41,
+        21
+      ],
+      "text": "Tier 1",
+      "size": "11px",
+      "color": "rgb(166, 176, 188)",
+      "background": "rgb(16, 23, 30)"
+    },
+    "contract": {
+      "rect": [
+        30.296875,
+        474.15625,
+        143.703125,
+        38
+      ],
+      "text": "Contract0/3",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(255, 255, 255, 0.024)"
+    },
+    "bonuses": {
+      "rect": [
+        186,
+        474.15625,
+        143.703125,
+        38
+      ],
+      "text": "Bonuses",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(255, 255, 255, 0.024)"
+    },
+    "reward": {
+      "rect": [
+        30.296875,
+        522.15625,
+        143.703125,
+        34
+      ],
+      "text": "Session reward0.05 CR",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "time": {
+      "rect": [
+        186,
+        522.15625,
+        143.703125,
+        34
+      ],
+      "text": "Time left10:00",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "progress": {
+      "rect": [
+        30.296875,
+        566.15625,
+        299.40625,
+        3
+      ],
+      "text": "",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgb(48, 58, 67)"
+    },
+    "icons": [
+      [
+        38.296875,
+        484.15625,
+        18,
+        18
+      ],
+      [
+        194,
+        484.15625,
+        18,
+        18
+      ]
+    ],
+    "coin": [
+      30.296875,
+      537.15625,
+      16,
+      16
+    ],
+    "labels": [
+      {
+        "text": "Session reward",
+        "rect": [
+          30.296875,
+          522.15625,
+          143.703125,
+          12
+        ],
+        "clip": "none"
+      },
+      {
+        "text": "Time left",
+        "rect": [
+          186,
+          522.15625,
+          143.703125,
+          12
+        ],
+        "clip": "none"
+      }
+    ],
+    "counter": "0.0000",
+    "boosts": [
+      {
+        "rewardCents": 20,
+        "title": "Boost mining",
+        "subtitle": "Watch ad · +0.20 CR",
+        "rect": [
+          30.296875,
+          579.15625,
+          299.40625,
+          42.546875
+        ],
+        "initial": [
+          30.296875,
+          579.15625,
+          299.40625,
+          42.546875
+        ],
+        "titleSize": "16px",
+        "titleWeight": "500",
+        "titleColor": "rgb(17, 24, 32)",
+        "subtitleSize": "12px",
+        "subtitleWeight": "400",
+        "subtitleColor": "rgb(80, 89, 99)",
+        "gap": "3px",
+        "background": "rgb(230, 237, 240)"
+      },
+      {
+        "rewardCents": 35,
+        "title": "Boost mining",
+        "subtitle": "Watch ad · +0.35 CR",
+        "rect": [
+          30.296875,
+          579.15625,
+          299.40625,
+          42.546875
+        ],
+        "initial": [
+          30.296875,
+          579.15625,
+          299.40625,
+          42.546875
+        ],
+        "titleSize": "16px",
+        "titleWeight": "500",
+        "titleColor": "rgb(17, 24, 32)",
+        "subtitleSize": "12px",
+        "subtitleWeight": "400",
+        "subtitleColor": "rgb(80, 89, 99)",
+        "gap": "3px",
+        "background": "rgb(230, 237, 240)"
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        390,
+        48
+      ],
+      ".session-total": [
+        0,
+        112,
+        390,
+        109
+      ],
+      ".session-scene": [
+        0,
+        221,
+        390,
+        210.59375
+      ],
+      ".home-device-rig": [
+        62.390625,
+        231.6875,
+        304.1875,
+        202.78125
+      ],
+      ".home-flight-layer": [
+        0,
+        145.890625,
+        390,
+        844
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        390,
+        72
+      ],
+      ".reference-session-panel": [
+        13.609375,
+        459.8125,
+        362.78125,
+        210.734375
+      ]
+    },
+    "button": {
+      "rect": [
+        32.734375,
+        610.625,
+        324.53125,
+        46.09375
+      ],
+      "background": "rgb(230, 237, 240) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(17, 24, 32)",
+      "border": "0px none rgb(17, 24, 32)",
+      "shadow": "none"
+    },
+    "heading": {
+      "rect": [
+        32.734375,
+        473.625,
+        57,
+        22
+      ],
+      "text": "X-2700",
+      "size": "18px",
+      "color": "rgb(247, 246, 250)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "tier": {
+      "rect": [
+        316.265625,
+        474.125,
+        41,
+        21
+      ],
+      "text": "Tier 1",
+      "size": "11px",
+      "color": "rgb(166, 176, 188)",
+      "background": "rgb(16, 23, 30)"
+    },
+    "contract": {
+      "rect": [
+        32.734375,
+        505.625,
+        156.265625,
+        38
+      ],
+      "text": "Contract0/3",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(255, 255, 255, 0.024)"
+    },
+    "bonuses": {
+      "rect": [
+        201,
+        505.625,
+        156.265625,
+        38
+      ],
+      "text": "Bonuses",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(255, 255, 255, 0.024)"
+    },
+    "reward": {
+      "rect": [
+        32.734375,
+        553.625,
+        156.265625,
+        34
+      ],
+      "text": "Session reward0.05 CR",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "time": {
+      "rect": [
+        201,
+        553.625,
+        156.265625,
+        34
+      ],
+      "text": "Time left10:00",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "progress": {
+      "rect": [
+        32.734375,
+        597.625,
+        324.53125,
+        3
+      ],
+      "text": "",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgb(48, 58, 67)"
+    },
+    "icons": [
+      [
+        40.734375,
+        515.625,
+        18,
+        18
+      ],
+      [
+        209,
+        515.625,
+        18,
+        18
+      ]
+    ],
+    "coin": [
+      32.734375,
+      568.625,
+      16,
+      16
+    ],
+    "labels": [
+      {
+        "text": "Session reward",
+        "rect": [
+          32.734375,
+          553.625,
+          156.265625,
+          12
+        ],
+        "clip": "none"
+      },
+      {
+        "text": "Time left",
+        "rect": [
+          201,
+          553.625,
+          156.265625,
+          12
+        ],
+        "clip": "none"
+      }
+    ],
+    "counter": "0.0000",
+    "boosts": [
+      {
+        "rewardCents": 20,
+        "title": "Boost mining",
+        "subtitle": "Watch ad · +0.20 CR",
+        "rect": [
+          32.734375,
+          610.625,
+          324.53125,
+          46.09375
+        ],
+        "initial": [
+          32.734375,
+          610.625,
+          324.53125,
+          46.09375
+        ],
+        "titleSize": "16px",
+        "titleWeight": "500",
+        "titleColor": "rgb(17, 24, 32)",
+        "subtitleSize": "12px",
+        "subtitleWeight": "400",
+        "subtitleColor": "rgb(80, 89, 99)",
+        "gap": "3px",
+        "background": "rgb(230, 237, 240)"
+      },
+      {
+        "rewardCents": 35,
+        "title": "Boost mining",
+        "subtitle": "Watch ad · +0.35 CR",
+        "rect": [
+          32.734375,
+          610.625,
+          324.53125,
+          46.09375
+        ],
+        "initial": [
+          32.734375,
+          610.625,
+          324.53125,
+          46.09375
+        ],
+        "titleSize": "16px",
+        "titleWeight": "500",
+        "titleColor": "rgb(17, 24, 32)",
+        "subtitleSize": "12px",
+        "subtitleWeight": "400",
+        "subtitleColor": "rgb(80, 89, 99)",
+        "gap": "3px",
+        "background": "rgb(230, 237, 240)"
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "geometry": {
+      ".header": [
+        0,
+        64,
+        430,
+        48
+      ],
+      ".session-total": [
+        0,
+        112,
+        430,
+        109
+      ],
+      ".session-scene": [
+        0,
+        221,
+        430,
+        232.1875
+      ],
+      ".home-device-rig": [
+        68.796875,
+        248.890625,
+        335.390625,
+        223.59375
+      ],
+      ".home-flight-layer": [
+        0,
+        154.296875,
+        430,
+        844
+      ],
+      ".bottom-nav": [
+        0,
+        772,
+        430,
+        72
+      ],
+      ".reference-session-panel": [
+        15,
+        483.6875,
+        400,
+        228.625
+      ]
+    },
+    "button": {
+      "rect": [
+        35.984375,
+        641.078125,
+        358.03125,
+        50.8125
+      ],
+      "background": "rgb(230, 237, 240) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(17, 24, 32)",
+      "border": "0px none rgb(17, 24, 32)",
+      "shadow": "none"
+    },
+    "heading": {
+      "rect": [
+        35.984375,
+        504.078125,
+        57,
+        22
+      ],
+      "text": "X-2700",
+      "size": "18px",
+      "color": "rgb(247, 246, 250)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "tier": {
+      "rect": [
+        353.015625,
+        504.578125,
+        41,
+        21
+      ],
+      "text": "Tier 1",
+      "size": "11px",
+      "color": "rgb(166, 176, 188)",
+      "background": "rgb(16, 23, 30)"
+    },
+    "contract": {
+      "rect": [
+        35.984375,
+        536.078125,
+        173.015625,
+        38
+      ],
+      "text": "Contract0/3",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(255, 255, 255, 0.024)"
+    },
+    "bonuses": {
+      "rect": [
+        221,
+        536.078125,
+        173.015625,
+        38
+      ],
+      "text": "Bonuses",
+      "size": "16px",
+      "color": "rgb(230, 237, 240)",
+      "background": "rgba(255, 255, 255, 0.024)"
+    },
+    "reward": {
+      "rect": [
+        35.984375,
+        584.078125,
+        173.015625,
+        34
+      ],
+      "text": "Session reward0.05 CR",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "time": {
+      "rect": [
+        221,
+        584.078125,
+        173.015625,
+        34
+      ],
+      "text": "Time left10:00",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "progress": {
+      "rect": [
+        35.984375,
+        628.078125,
+        358.03125,
+        3
+      ],
+      "text": "",
+      "size": "16px",
+      "color": "rgb(244, 243, 248)",
+      "background": "rgb(48, 58, 67)"
+    },
+    "icons": [
+      [
+        43.984375,
+        546.078125,
+        18,
+        18
+      ],
+      [
+        229,
+        546.078125,
+        18,
+        18
+      ]
+    ],
+    "coin": [
+      35.984375,
+      599.078125,
+      16,
+      16
+    ],
+    "labels": [
+      {
+        "text": "Session reward",
+        "rect": [
+          35.984375,
+          584.078125,
+          173.015625,
+          12
+        ],
+        "clip": "none"
+      },
+      {
+        "text": "Time left",
+        "rect": [
+          221,
+          584.078125,
+          173.015625,
+          12
+        ],
+        "clip": "none"
+      }
+    ],
+    "counter": "0.0000",
+    "boosts": [
+      {
+        "rewardCents": 20,
+        "title": "Boost mining",
+        "subtitle": "Watch ad · +0.20 CR",
+        "rect": [
+          35.984375,
+          641.078125,
+          358.03125,
+          50.8125
+        ],
+        "initial": [
+          35.984375,
+          641.078125,
+          358.03125,
+          50.8125
+        ],
+        "titleSize": "16px",
+        "titleWeight": "500",
+        "titleColor": "rgb(17, 24, 32)",
+        "subtitleSize": "12px",
+        "subtitleWeight": "400",
+        "subtitleColor": "rgb(80, 89, 99)",
+        "gap": "3px",
+        "background": "rgb(230, 237, 240)"
+      },
+      {
+        "rewardCents": 35,
+        "title": "Boost mining",
+        "subtitle": "Watch ad · +0.35 CR",
+        "rect": [
+          35.984375,
+          641.078125,
+          358.03125,
+          50.8125
+        ],
+        "initial": [
+          35.984375,
+          641.078125,
+          358.03125,
+          50.8125
+        ],
+        "titleSize": "16px",
+        "titleWeight": "500",
+        "titleColor": "rgb(17, 24, 32)",
+        "subtitleSize": "12px",
+        "subtitleWeight": "400",
+        "subtitleColor": "rgb(80, 89, 99)",
+        "gap": "3px",
+        "background": "rgb(230, 237, 240)"
+      }
+    ]
+  }
+]
