@@ -65,3 +65,11 @@ test('cached light elements are rebound when a fresh Home overlay is attached',(
  f.m.sync(active);f.step(6000);f.step(6100);assert.equal(+long.style.opacity,.68);assert(+moving.style.opacity>0);assert(slices.every(s=>s['stroke-dashoffset']!==undefined));
  f.step(6800);assert.equal(+moving.style.opacity,0);assert(short.every(s=>+s.style.opacity===.68));
 });
+
+test('each halo filters only its own strip with padding and unchanged blur/color',()=>{
+ const html=M.lights(),filters=[...html.matchAll(/<filter id="([^"]+)"[^>]* x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)"/g)];
+ assert.equal(filters.length,7);assert.equal((html.match(/stdDeviation="4.5"/g)||[]).length,7);assert.equal((html.match(/flood-color="#8FB5C4"/g)||[]).length,7);
+ const shapes=JSON.parse(require('node:fs').readFileSync('outputs/qa/device-unlit-strip-mask-data.json')).shapes;let area=0;
+ filters.forEach((f,i)=>{const [x,y,w,h]=f.slice(2).map(Number);area+=w*h;for(const row of shapes[i].matchAll(/M(\d+) (\d+)h(\d+)v1/g)){const [left,top,width]=row.slice(1).map(Number);assert(left>=x+18&&top>=y+18&&left+width<=x+w-18&&top+1<=y+h-18);}});
+ assert(area<1536*1024*.12);assert(!html.includes('href="#craft-emission"'));assert(html.includes('href="#craft-front-emission"'));
+});
