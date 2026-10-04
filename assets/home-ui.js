@@ -6,7 +6,7 @@ function createCounter({document:d=root.document,view,now=()=>root.performance.n
  function sample(x){
   if(d.hidden)return;
   const el=d.querySelector('[data-session-live="amount"]');if(!el){record=null;return;}
-  const at=now(),text=(x.accumulatedMicroCents/x.unit/100).toFixed(4),units=BigInt(text.replace('.',''));
+  const at=now(),text=(x.accumulatedMicroCents/x.unit/100).toFixed(5),units=BigInt(text.replace('.',''));
   if(!record||record.el!==el||record.session!==x.sessionId){
    if(!d.getElementById('mined-digit-soft'))d.body.insertAdjacentHTML('beforeend',filters);
    const digits=[...text.slice(-2)].map(char=>{const digit=d.createElement('span'),core=d.createElement('span');digit.className='mined-counter-digit';digit.setAttribute('aria-hidden','true');core.className='mined-counter-core';core.textContent=char;digit.dataset.digit=char;digit.append(core);return digit;});
@@ -33,7 +33,7 @@ function createCounter({document:d=root.document,view,now=()=>root.performance.n
 function create(h){const {t,loc,icon,btn,action,open,toast}=h,K=typeof module==='object'?require('./contracts-ui.js'):root.ContractsUI,cr=K.amount,contracts=K.create(h);let signature='',pending='';
 const counter=typeof document!=='undefined'&&typeof root.setInterval==='function'&&h.view?createCounter({view:h.view}):null;
 const clock=ms=>{const sec=Math.ceil(Math.max(0,ms)/1000);return (sec>=3600?String(Math.floor(sec/3600)).padStart(2,'0')+':':'')+String(Math.floor(sec/60)%60).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');};
-const amount=x=>(x.accumulatedMicroCents/x.unit/100).toFixed(4);
+const amount=x=>(x.accumulatedMicroCents/x.unit/100).toFixed(5);
 const status=x=>x.status==='ready'?t('Mining complete','Добыча завершена'):x.status==='active'?t('Mining active','Майнинг активен'):x.status==='finishing'?t('Finishing session','Завершаем сеанс'):t('Node awaiting charge','Нода ожидает заряд');
 const speed=x=>(Number(x.rate.numerator)/Number(x.rate.denominator)/x.unit/100).toFixed(3);
 let speedChange=null;const speedReceipts=new Set();
