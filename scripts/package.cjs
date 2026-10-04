@@ -7,7 +7,7 @@ css=css.replaceAll("url('InterVariable.woff2')","url('data:font/woff2;base64,"+f
 css+='\n/* Inter font license:\n'+fs.readFileSync(path.join(root,'assets/Inter-LICENSE.txt'),'utf8').replaceAll('*/','* /')+'\n*/';
 html=html.replace(/(assets\/[\w.-]+\.(?:css|js))\?v=[^"']*/g,'$1');
 const embed=name=>'data:image/'+(/\.svg$/i.test(name)?'svg+xml':/\.jpe?g$/i.test(name)?'jpeg':'png')+';base64,'+fs.readFileSync(path.join(root,'assets',name)).toString('base64');
-for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg','canyon-world.png','aurora-scanner-scene.png','aurora-manta-scene.png','aurora-planet-layer.png','aurora-planet-clean.png','nodes-canyon-reference.png'])css=css.replaceAll(`url('${name}')`,`url('${embed(name)}')`);
+for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg','canyon-world.png','aurora-scanner-scene.png','aurora-manta-scene.png','aurora-planet-layer.png','aurora-planet-clean.png','home-rocky-planet.jpg','nodes-canyon-reference.png'])css=css.replaceAll(`url('${name}')`,`url('${embed(name)}')`);
 html=html.replace('<link rel="stylesheet" href="assets/app.css">',()=>`<style>${css}\n${viewport.css}</style><script>${viewport.script}</script>`);
 for(const name of ['config','node-system','home-system','cr-session-system','reward-mining-system','reward-adapter','engine','client','node-ui','contracts-ui','home-ui','motion','home-device-motion','telegram-viewport','app']){
  let js=fs.readFileSync(path.join(root,`assets/${name}.js`),'utf8');
