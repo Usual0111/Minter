@@ -43,3 +43,25 @@ test('idle, mining, start, completion and collection keep scale at one',()=>{
  const ready={...active,status:'ready',readySessionIds:['s1']};f.m.sync(ready);f.step(2200);assert.equal(f.m.sample().scale,1);f.m.success('rewardClaim',ready,idle,{credited:5,sessionIds:['s1']});
  for(let t=2200;t<=3300;t+=25){f.step(t);assert.equal(f.m.sample().scale,1);assert(!/scale/.test(f.rig.style.transform));}
 });
+
+test('calm light does not search SVG descendants or rewrite light values between packets',()=>{
+ const f=fixture();let searches=0,writes=0;
+ for(const owner of [f.svg,f.moving])for(const method of ['querySelector','querySelectorAll'])if(owner[method]){const original=owner[method];owner[method]=function(...args){searches++;return original.apply(this,args);};}
+ for(const element of [f.long,f.moving,...f.short])element.style=new Proxy(element.style,{set(target,key,value){writes++;target[key]=value;return true;}});
+ for(const slice of f.slices){const original=slice.setAttribute;slice.setAttribute=function(...args){writes++;return original.apply(this,args);};}
+ f.m.sync(active);f.step(700);const cachedSearches=searches;writes=0;
+ for(let t=716;t<6000;t+=16)f.step(t);
+ assert.equal(searches,cachedSearches);assert.equal(writes,0);assert.notEqual(f.y(),0);
+ f.step(6000);f.step(6100);assert(writes>20);assert(+f.moving.style.opacity>0);
+ f.step(6800);writes=0;for(let t=6816;t<12000;t+=16)f.step(t);
+ assert.equal(searches,cachedSearches);assert.equal(writes,0);
+});
+
+test('cached light elements are rebound when a fresh Home overlay is attached',()=>{
+ const f=fixture();f.m.sync(active);f.step(700);
+ const long={style:{}},short=Array.from({length:6},()=>({style:{}})),slices=Array.from({length:20},()=>({setAttribute(k,v){this[k]=v;}})),moving={style:{},querySelectorAll:()=>slices};
+ const svg={style:{},querySelector:s=>s==='.craft-long-light'?long:moving,querySelectorAll:()=>short};
+ f.doc.querySelector=s=>s==='.home-device-layer'?f.node:s==='.home-device-rig'?f.rig:svg;
+ f.m.sync(active);f.step(6000);f.step(6100);assert.equal(+long.style.opacity,.68);assert(+moving.style.opacity>0);assert(slices.every(s=>s['stroke-dashoffset']!==undefined));
+ f.step(6800);assert.equal(+moving.style.opacity,0);assert(short.every(s=>+s.style.opacity===.68));
+});
