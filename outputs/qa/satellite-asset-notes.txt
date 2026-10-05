@@ -1,0 +1,11 @@
+Transparent Home satellite asset
+
+Input preserved: C:/Users/Lenovo/Downloads/Isolate_satellite_on_black_backg…_2K_20261005134217.jpg
+Project asset: assets/home-satellite-transparent.png (1451 × 1084, RGBA)
+Method: built-in imagegen, transparent_background=true. Generated PNG copied without further image editing.
+Original Aurora assets are retained; Nodes still uses its original artwork.
+
+Final imagegen prompt:
+BACKGROUND EXTRACTION ONLY. This is an exact existing game asset, not a new render or creative interpretation. Replace exclusively the empty black background with alpha transparency. The original satellite must retain the SAME muted gray brightness, exposure, darker underside, panel text, original geometry and every detail. Do NOT brighten white panels or add highlights. Do NOT redraw any feature, replace markings, crop, rescale the object within the canvas or re-center. Preserve the original complete 2400x1792 composition and original subject pixel appearance as closely as possible: the dish is on the left, cylindrical camera on the right, antenna above, two vertically aligned small gray indicator windows on the narrow front side plate to the right of the central screen. Keep these indicators gray. No added lighting or colors. Only remove the black exterior surrounding the silhouette, preserve internal black/dark cavities and all shadows. Output true transparent PNG with clean antialiased alpha edges and no white or colored fringe.
+
+Code overlay: two ellipses at (868.4, 457) and (868.4, 643.5) in the PNG coordinate system. Fill uses --ui-accent, the enabled primary button color. Image and lights share the existing moving Home rig. Only indicator opacity is sampled at up to 20 Hz; no blur or whole-image light filter is added.
