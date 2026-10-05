@@ -960,7 +960,7 @@ dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh
 @media(prefers-reduced-motion:reduce){.home-device-rig{will-change:auto}}
 .home-screen .home-flight-layer .home-device-layer[data-device-art="satellite"],.home-device-lights.home-satellite-lights{left:2.3620054%;top:.1545783%;width:101.6370849%;height:113.8951757%;aspect-ratio:auto;object-fit:fill}
 .home-satellite-lights .craft-indicator{fill:var(--ui-accent,#9825e8);stroke:none;opacity:0}
-.home-device-rig[data-device-art="satellite"]{left:8%}
+.home-device-rig[data-device-art="satellite"]{left:10.2128906%}
 
 /* Telegram changes the frame, not the spacing inside the authored composition. */
 :root{--app-safe-bottom:calc(max(env(safe-area-inset-bottom,0px),var(--app-system-bottom,0px)) + var(--app-chrome-bottom,0px));--app-safe-left:calc(max(env(safe-area-inset-left,0px),var(--app-system-left,0px)) + var(--app-chrome-left,0px));--app-safe-right:calc(max(env(safe-area-inset-right,0px),var(--app-system-right,0px)) + var(--app-chrome-right,0px));--app-frame-left:max(0px,calc(var(--app-safe-left) - 16px));--app-frame-right:max(0px,calc(var(--app-safe-right) - 16px))}
