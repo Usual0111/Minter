@@ -1,0 +1,11 @@
+Image edit: background-extraction. Mode: built-in image_gen.
+Input: C:/Users/Lenovo/Downloads/Isolate_satellite_on_black_backg…_2K_20261005151928.jpg
+Generated artifact: C:/Users/Lenovo/.codex/generated_images/01a0f441-4a7e-72f0-a9d6-741582da6d1d/exec-2e242733-0151-41b5-b9b3-8cb86fad9447.png
+Copied unchanged with alpha to: assets/home-satellite-v2-transparent.png
+Previous image preserved: assets/home-satellite-transparent.png
+Indicator centers: (885.5,465.5) and (885.5,665.5) on a 1451 x 1084 canvas.
+Horizontal center uses the main casing, x=760 (excluding dish and forward camera barrel). Natural aspect ratio, previous visible silhouette width and vertical silhouette center preserved.
+Only the asset, its own placement and matching light masks changed. Existing motion and lighting scenarios retained.
+
+Final prompt:
+Use case: background-extraction. Edit target: the supplied satellite JPG only. Remove ONLY the black background and return a real RGBA PNG with transparent alpha. Preserve the satellite exactly as in the edit target: identical dish shape and size, identical satellite body geometry, camera lens, antennas, panels, circular gray indicator inserts at two vertically aligned positions, all tiny screws, labels, text, scratches, shadows, materials, and native highlights. Do not redesign, regenerate, simplify, recolor, retouch or relight any part of the object. Preserve the original camera view, perspective, proportions and composition on its 2400 by 1792 canvas if possible, including the original surrounding empty space, which should now be fully transparent. Make clean antialiased silhouette edges, no black matte fringe, no glow and no artificial drop shadow. The two indicator inserts must remain gray and unlit; their light is added later by the application. No background and no new elements.

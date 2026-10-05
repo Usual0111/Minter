@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {chromium}=require('C:/Users/Lenovo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const root=path.resolve(__dirname,'../..'),file=path.join(root,'outputs/Bountera.html'),image='data:image/png;base64,'+fs.readFileSync(path.join(root,'assets/home-satellite-transparent.png')).toString('base64');
+const root=path.resolve(__dirname,'../..'),file=path.join(root,'outputs/Bountera.html'),image='data:image/png;base64,'+fs.readFileSync(path.join(root,'assets/home-satellite-v2-transparent.png')).toString('base64');
 if(process.argv.includes('--static')){const html=fs.readFileSync(file,'utf8'),scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];scripts.forEach((s,i)=>new vm.Script(s[1],{filename:'inline-'+i}));assert(!/<script[^>]+src=["']assets\//.test(html));assert(html.includes(image));console.log('Standalone static check: '+scripts.length+' valid inline scripts and exact prepared image embedded.');process.exit(0);}
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:'chrome'});

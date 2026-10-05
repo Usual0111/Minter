@@ -1,0 +1,218 @@
+{
+  "360": {
+    ".header": {
+      "x": 0,
+      "y": 64,
+      "width": 360,
+      "height": 56,
+      "background": "none"
+    },
+    ".session-total": {
+      "x": 0,
+      "y": 120,
+      "width": 360,
+      "height": 119,
+      "background": "none"
+    },
+    ".reference-total": {
+      "x": 55.125,
+      "y": 157,
+      "width": 249.75,
+      "height": 56,
+      "background": "none"
+    },
+    ".session-panel": {
+      "x": 16,
+      "y": 433.390625,
+      "width": 328,
+      "height": 246,
+      "background": "none"
+    },
+    ".session-control-button": {
+      "x": 33,
+      "y": 606.390625,
+      "width": 294,
+      "height": 56,
+      "background": "none"
+    },
+    ".bottom-nav": {
+      "x": 0,
+      "y": 784,
+      "width": 360,
+      "height": 60,
+      "background": "none"
+    },
+    ".home-flight-layer": {
+      "x": 0,
+      "y": 139.59375,
+      "width": 360,
+      "height": 844,
+      "background": "none"
+    },
+    ".home-device-rig": {
+      "x": 36.765625,
+      "y": 218.78125,
+      "width": 280.796875,
+      "height": 187.1875,
+      "background": "none"
+    },
+    ".home-device-layer": {
+      "x": 43.390625,
+      "y": 219.0625,
+      "width": 285.390625,
+      "height": 213.1875,
+      "background": "none"
+    },
+    ".home-device-lights": {
+      "x": 43.390625,
+      "y": 219.0625,
+      "width": 285.390625,
+      "height": 213.1875,
+      "background": "none"
+    }
+  },
+  "390": {
+    ".header": {
+      "x": 0,
+      "y": 64,
+      "width": 390,
+      "height": 56,
+      "background": "none"
+    },
+    ".session-total": {
+      "x": 0,
+      "y": 120,
+      "width": 390,
+      "height": 119,
+      "background": "none"
+    },
+    ".reference-total": {
+      "x": 70.125,
+      "y": 157,
+      "width": 249.75,
+      "height": 56,
+      "background": "none"
+    },
+    ".session-panel": {
+      "x": 16,
+      "y": 449.59375,
+      "width": 358,
+      "height": 246,
+      "background": "none"
+    },
+    ".session-control-button": {
+      "x": 33,
+      "y": 622.59375,
+      "width": 324,
+      "height": 56,
+      "background": "none"
+    },
+    ".bottom-nav": {
+      "x": 0,
+      "y": 784,
+      "width": 390,
+      "height": 60,
+      "background": "none"
+    },
+    ".home-flight-layer": {
+      "x": 0,
+      "y": 145.890625,
+      "width": 390,
+      "height": 844,
+      "background": "none"
+    },
+    ".home-device-rig": {
+      "x": 39.828125,
+      "y": 231.6875,
+      "width": 304.1875,
+      "height": 202.78125,
+      "background": "none"
+    },
+    ".home-device-layer": {
+      "x": 47,
+      "y": 232,
+      "width": 309.15625,
+      "height": 230.953125,
+      "background": "none"
+    },
+    ".home-device-lights": {
+      "x": 47,
+      "y": 232,
+      "width": 309.15625,
+      "height": 230.953125,
+      "background": "none"
+    }
+  },
+  "430": {
+    ".header": {
+      "x": 0,
+      "y": 64,
+      "width": 430,
+      "height": 56,
+      "background": "none"
+    },
+    ".session-total": {
+      "x": 0,
+      "y": 120,
+      "width": 430,
+      "height": 119,
+      "background": "none"
+    },
+    ".reference-total": {
+      "x": 90.125,
+      "y": 157,
+      "width": 249.75,
+      "height": 56,
+      "background": "none"
+    },
+    ".session-panel": {
+      "x": 16,
+      "y": 471.1875,
+      "width": 398,
+      "height": 246,
+      "background": "none"
+    },
+    ".session-control-button": {
+      "x": 33,
+      "y": 644.1875,
+      "width": 364,
+      "height": 56,
+      "background": "none"
+    },
+    ".bottom-nav": {
+      "x": 0,
+      "y": 784,
+      "width": 430,
+      "height": 60,
+      "background": "none"
+    },
+    ".home-flight-layer": {
+      "x": 0,
+      "y": 154.296875,
+      "width": 430,
+      "height": 844,
+      "background": "none"
+    },
+    ".home-device-rig": {
+      "x": 43.90625,
+      "y": 248.890625,
+      "width": 335.390625,
+      "height": 223.59375,
+      "background": "none"
+    },
+    ".home-device-layer": {
+      "x": 51.828125,
+      "y": 249.234375,
+      "width": 340.875,
+      "height": 254.65625,
+      "background": "none"
+    },
+    ".home-device-lights": {
+      "x": 51.828125,
+      "y": 249.234375,
+      "width": 340.875,
+      "height": 254.65625,
+      "background": "none"
+    }
+  }
+}

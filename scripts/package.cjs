@@ -11,7 +11,7 @@ for(const name of ['node-catalog.png','deep-space.jpg','depin-space.jpg','canyon
 html=html.replace('<link rel="stylesheet" href="assets/app.css">',()=>`<style>${css}\n${viewport.css}</style><script>${viewport.script}</script>`);
 for(const name of ['config','node-system','home-system','cr-session-system','reward-mining-system','reward-adapter','engine','client','node-ui','contracts-ui','home-ui','motion','home-device-motion','telegram-viewport','app']){
  let js=fs.readFileSync(path.join(root,`assets/${name}.js`),'utf8');
- for(const image of ['session-coin.png','ui-coin.svg','depin-probe.png','depin-planet.jpg','home-carrier.png','home-station.png','canyon-probe.png','aurora-device-layer.png','aurora-device-layer-lights-off.png','home-satellite-transparent.png','aurora-scanner-hologram.png'])js=js.replaceAll(`assets/${image}`,embed(image));
+ for(const image of ['session-coin.png','ui-coin.svg','depin-probe.png','depin-planet.jpg','home-carrier.png','home-station.png','canyon-probe.png','aurora-device-layer.png','aurora-device-layer-lights-off.png','home-satellite-transparent.png','home-satellite-v2-transparent.png','aurora-scanner-hologram.png'])js=js.replaceAll(`assets/${image}`,embed(image));
  html=html.replace(`<script src="assets/${name}.js"></script>`,()=>`<script>${js.replaceAll('</script','<\\/script')}</script>`);
 }
 fs.writeFileSync(path.join(out,'Bountera.html'),html);
