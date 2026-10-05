@@ -1,0 +1,224 @@
+{
+  "360": {
+    ".galaxy-selector": {
+      "x": 16,
+      "y": 70,
+      "width": 190,
+      "height": 44
+    },
+    ".home-balance-badge": {
+      "x": 219,
+      "y": 74,
+      "width": 124,
+      "height": 36
+    },
+    ".session-total>p:first-child": {
+      "x": 162.5,
+      "y": 132,
+      "width": 35,
+      "height": 17
+    },
+    ".reference-total": {
+      "x": 25.671875,
+      "y": 157,
+      "width": 308.640625,
+      "height": 56
+    },
+    ".mined-counter-progress": {
+      "x": 108,
+      "y": 218,
+      "width": 144,
+      "height": 8
+    },
+    ".sector-count": {
+      "x": 0,
+      "y": 230,
+      "width": 360,
+      "height": 18
+    },
+    ".home-device-rig": {
+      "x": 34.953125,
+      "y": 218.78125,
+      "width": 280.796875,
+      "height": 187.1875
+    },
+    ".home-device-layer": {
+      "x": 41.578125,
+      "y": 219.984375,
+      "width": 276.609375,
+      "height": 206.640625
+    },
+    ".home-flight-layer": {
+      "x": 0,
+      "y": 139.59375,
+      "width": 360,
+      "height": 844
+    },
+    ".session-panel": {
+      "x": 16,
+      "y": 433.390625,
+      "width": 328,
+      "height": 162
+    },
+    ".session-control-button": {
+      "x": 27,
+      "y": 618.78125,
+      "width": 306,
+      "height": 82.796875
+    },
+    ".bottom-nav": {
+      "x": 0,
+      "y": 784,
+      "width": 360,
+      "height": 60
+    }
+  },
+  "390": {
+    ".galaxy-selector": {
+      "x": 16,
+      "y": 70,
+      "width": 220,
+      "height": 44
+    },
+    ".home-balance-badge": {
+      "x": 249,
+      "y": 74,
+      "width": 124,
+      "height": 36
+    },
+    ".session-total>p:first-child": {
+      "x": 177.5,
+      "y": 132,
+      "width": 35,
+      "height": 17
+    },
+    ".reference-total": {
+      "x": 40.671875,
+      "y": 157,
+      "width": 308.640625,
+      "height": 56
+    },
+    ".mined-counter-progress": {
+      "x": 117,
+      "y": 218,
+      "width": 156,
+      "height": 8
+    },
+    ".sector-count": {
+      "x": 0,
+      "y": 230,
+      "width": 390,
+      "height": 18
+    },
+    ".home-device-rig": {
+      "x": 37.859375,
+      "y": 231.6875,
+      "width": 304.1875,
+      "height": 202.78125
+    },
+    ".home-device-layer": {
+      "x": 45.03125,
+      "y": 233,
+      "width": 299.65625,
+      "height": 223.859375
+    },
+    ".home-flight-layer": {
+      "x": 0,
+      "y": 145.890625,
+      "width": 390,
+      "height": 844
+    },
+    ".session-panel": {
+      "x": 16,
+      "y": 449.59375,
+      "width": 358,
+      "height": 162
+    },
+    ".session-control-button": {
+      "x": 29.25,
+      "y": 636.9375,
+      "width": 331.5,
+      "height": 89.6875
+    },
+    ".bottom-nav": {
+      "x": 0,
+      "y": 784,
+      "width": 390,
+      "height": 60
+    }
+  },
+  "430": {
+    ".galaxy-selector": {
+      "x": 16,
+      "y": 70,
+      "width": 260,
+      "height": 44
+    },
+    ".home-balance-badge": {
+      "x": 289,
+      "y": 74,
+      "width": 124,
+      "height": 36
+    },
+    ".session-total>p:first-child": {
+      "x": 197.5,
+      "y": 132,
+      "width": 35,
+      "height": 17
+    },
+    ".reference-total": {
+      "x": 60.671875,
+      "y": 157,
+      "width": 308.640625,
+      "height": 56
+    },
+    ".mined-counter-progress": {
+      "x": 129,
+      "y": 218,
+      "width": 172,
+      "height": 8
+    },
+    ".sector-count": {
+      "x": 0,
+      "y": 230,
+      "width": 430,
+      "height": 18
+    },
+    ".home-device-rig": {
+      "x": 41.75,
+      "y": 248.890625,
+      "width": 335.390625,
+      "height": 223.59375
+    },
+    ".home-device-layer": {
+      "x": 49.671875,
+      "y": 250.328125,
+      "width": 330.390625,
+      "height": 246.828125
+    },
+    ".home-flight-layer": {
+      "x": 0,
+      "y": 154.296875,
+      "width": 430,
+      "height": 844
+    },
+    ".session-panel": {
+      "x": 16,
+      "y": 471.1875,
+      "width": 398,
+      "height": 162
+    },
+    ".session-control-button": {
+      "x": 32.25,
+      "y": 661.125,
+      "width": 365.5,
+      "height": 98.890625
+    },
+    ".bottom-nav": {
+      "x": 0,
+      "y": 784,
+      "width": 430,
+      "height": 60
+    }
+  }
+}

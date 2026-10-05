@@ -1,0 +1,54 @@
+{
+  "360": {
+    "gap": 6.296875,
+    "geometry": "unchanged except requested button shift",
+    "decor": {
+      "animation": "none",
+      "z": "-1",
+      "background": "radial-gradient(at 8% 0%, rgba(181, 178, 192, 0.17), rgba(0, 0, 0, 0) 62%), radial-gradient(at 92% 100%, rgba(121, 101, 151, 0.05), rgba(0, 0, 0, 0) 65%), linear-gradient(120deg, rgb(36, 36, 45), rgb(25, 25, 31) 57%, rgb(28, 27, 35))"
+    }
+  },
+  "390": {
+    "gap": 6.8125,
+    "geometry": "unchanged except requested button shift",
+    "decor": {
+      "animation": "none",
+      "z": "-1",
+      "background": "radial-gradient(at 8% 0%, rgba(181, 178, 192, 0.17), rgba(0, 0, 0, 0) 62%), radial-gradient(at 92% 100%, rgba(121, 101, 151, 0.05), rgba(0, 0, 0, 0) 65%), linear-gradient(120deg, rgb(36, 36, 45), rgb(25, 25, 31) 57%, rgb(28, 27, 35))"
+    }
+  },
+  "430": {
+    "gap": 7.515625,
+    "geometry": "unchanged except requested button shift",
+    "decor": {
+      "animation": "none",
+      "z": "-1",
+      "background": "radial-gradient(at 8% 0%, rgba(181, 178, 192, 0.17), rgba(0, 0, 0, 0) 62%), radial-gradient(at 92% 100%, rgba(121, 101, 151, 0.05), rgba(0, 0, 0, 0) 65%), linear-gradient(120deg, rgb(36, 36, 45), rgb(25, 25, 31) 57%, rgb(28, 27, 35))"
+    }
+  },
+  "animation": {
+    "name": "home-panel-iridescence",
+    "duration": "13s",
+    "frames": [
+      [
+        {
+          "offset": 0,
+          "easing": "ease-in-out",
+          "composite": "auto",
+          "opacity": "0.3",
+          "transform": "translate3d(-7%, -2%, 0px)",
+          "computedOffset": 0
+        },
+        {
+          "offset": 1,
+          "easing": "ease-in-out",
+          "composite": "auto",
+          "opacity": "0.6",
+          "transform": "translate3d(7%, 2%, 0px)",
+          "computedOffset": 1
+        }
+      ]
+    ]
+  },
+  "bonusClick": "opens existing modal"
+}

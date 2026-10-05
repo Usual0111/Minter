@@ -8,7 +8,7 @@ const root=path.resolve(__dirname,'../..'),packaged=process.argv.includes('--pac
   await page.goto('file:///'+root.replaceAll('\\','/')+(packaged?'/outputs/Bountera.html':'/index.html')+'#/home',{waitUntil:'commit'});await page.waitForSelector('[data-session-live="amount"]');await page.waitForTimeout(250);await page.evaluate(()=>document.getAnimations().forEach(a=>a.finish()));
   const result=await page.evaluate(async()=>{
    const el=document.querySelector('[data-session-live="amount"]'),bounds=e=>{const r=e.getBoundingClientRect();return [r.x,r.y,r.width,r.height];};el.textContent=el.textContent;
-   const selectors=['.reference-total','[data-session-live="amount"]','.reference-total img','.session-total','.sector-count','.home-device-rig','.home-device-layer','.reference-session-panel','.bottom-nav','.galaxy-selector','.home-balance-badge'];
+   const selectors=['.reference-total','[data-session-live="amount"]','.mined-counter-currency','.session-total','.sector-count','.home-device-rig','.home-device-layer','.reference-session-panel','.bottom-nav','.galaxy-selector','.home-balance-badge'];
    const geometry=()=>selectors.map(s=>bounds(document.querySelector(s))),before=geometry(),ranges=[];
    for(let i=0;i<el.textContent.length;i++){const r=document.createRange();r.setStart(el.firstChild,i);r.setEnd(el.firstChild,i+1);ranges.push(bounds(r));}
    let at=0;window.counterView={status:'active',sessionId:'visual-test',unit:1000000,accumulatedMicroCents:0};let cadence;

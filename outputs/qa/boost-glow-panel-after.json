@@ -1,0 +1,17 @@
+{
+  "360": {
+    "geometry": "Only panel and its content raised 6 px",
+    "button": "Unmoved",
+    "gap": 12.296875
+  },
+  "390": {
+    "geometry": "Only panel and its content raised 6 px",
+    "button": "Unmoved",
+    "gap": 12.8125
+  },
+  "430": {
+    "geometry": "Only panel and its content raised 6 px",
+    "button": "Unmoved",
+    "gap": 13.515625
+  }
+}

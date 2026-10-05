@@ -800,10 +800,10 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 .home-screen .reference-session-panel .session-control-progress{height:4px;margin:12px 0 0;background:#414149;border-radius:2px}
 .home-screen .reference-session-panel .session-control-progress>span{background:#e3e1e8;border-radius:0}
 .home-screen .reference-session-panel .session-control-action{height:auto;min-height:0;margin-top:13px}
-.home-screen .reference-session-panel .session-control-button{position:relative;isolation:isolate;height:51px;min-height:51px;border:2px solid #dadadab8;border-radius:999px;font-size:16px;line-height:21px;font-weight:500;background:radial-gradient(ellipse at 50% 0%,#ffffffad,transparent 53%),radial-gradient(ellipse at 50% 100%,#ffffffb0,transparent 52%),linear-gradient(100deg,#8e8e8e,#d5d5d5 47%,#a9a9a9);color:#080e13;box-shadow:inset 0 1px 1px #f6f6f680,inset 0 -1px 2px #20202080,0 3px 10px #0005,0 0 14px #ffffff22}
-.home-screen .reference-session-panel .session-control-button:before{content:'';position:absolute;inset:3px;z-index:-1;border:1px solid #ffffffc2;border-radius:inherit;box-shadow:inset 0 1px 3px #ffffff55,inset 0 -1px 3px #ffffff44;pointer-events:none}
-.home-screen .reference-session-panel .session-control-button:disabled{background:#38383f;border-color:#8b8b8b55;color:#aaa9b2;box-shadow:none}
-.home-screen .reference-session-panel .session-control-button:disabled:before{border-color:#c4c4c433;box-shadow:none}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button{position:relative;isolation:isolate;height:51px;min-height:51px;border:2px solid #dadadab8;border-radius:999px;font-size:16px;line-height:21px;font-weight:500;background:radial-gradient(ellipse at 50% 0%,#ffffffad,transparent 53%),radial-gradient(ellipse at 50% 100%,#ffffffb0,transparent 52%),linear-gradient(100deg,#8e8e8e,#d5d5d5 47%,#a9a9a9);color:#080e13;box-shadow:inset 0 1px 1px #f6f6f680,inset 0 -1px 2px #20202080,0 3px 10px #0005,0 0 14px #ffffff22}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:before{content:'';position:absolute;inset:3px;z-index:-1;border:1px solid #ffffffc2;border-radius:inherit;box-shadow:inset 0 1px 3px #ffffff55,inset 0 -1px 3px #ffffff44;pointer-events:none}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:disabled{background:#38383f;border-color:#8b8b8b55;color:#aaa9b2;box-shadow:none}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:disabled:before{border-color:#c4c4c433;box-shadow:none}
 .home-screen .reference-session-panel .session-control-note{color:#aaa9b0}
 
 /* The original balance footprint reserves the header geometry for the compact badge. */
@@ -824,7 +824,7 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
  .home-screen .reference-session-panel .reward-daily-row{margin-top:5px;font-size:11px;line-height:14px}
  .home-screen .reference-session-panel .session-control-progress{margin-top:10px}
  .home-screen .reference-session-panel .session-control-action{margin-top:11px}
- .home-screen .reference-session-panel .session-control-button{height:45px;min-height:45px;font-size:14px}
+ .home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button{height:45px;min-height:45px;font-size:14px}
 }
 
 /* Reference proportions for the session card and its daily-charge row only. */
@@ -841,7 +841,7 @@ body:has(.app:not(.home-screen)) #toast{background:#e8edf2;color:#101820}
 .home-screen .reference-session-panel .session-reward-value{display:flex;align-items:center;justify-content:flex-end;gap:1.1cqw}
 .home-screen .reference-session-panel .session-reward-coin{width:4.3cqw;height:4.3cqw;flex-shrink:0}
 .home-screen .reference-session-panel .session-control-action{margin-top:6.2cqw}
-.home-screen .reference-session-panel .session-control-button{height:13.5cqw;min-height:13.5cqw;border-radius:3.3cqw;font-size:4.6cqw;line-height:5.8cqw}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button{height:13.5cqw;min-height:13.5cqw;border-radius:3.3cqw;font-size:4.6cqw;line-height:5.8cqw}
 .home-screen .reference-daily-charge{flex-direction:column;justify-content:center;gap:3.8cqw;margin:6.8cqw 9.55cqw 12.3cqw;font-size:4.2cqw;line-height:5.5cqw;color:#aaa9b0}
 .home-screen .reference-daily-charge b{color:#b8b7bf;font-weight:600}
 .home-screen .reference-daily-charge b>span{font-weight:400}
@@ -924,14 +924,14 @@ dialog.contract-sheet .modal-box{width:min(100%,480px);margin:0;max-height:85dvh
 .home-screen .reference-session-panel .session-control-progress.continuous-mining-progress{height:3px;min-width:0;width:100%;margin:0;padding:0;border:0;border-radius:999px;background:#303a43;box-shadow:none;overflow:hidden}
 .home-screen .reference-session-panel .continuous-mining-progress>span{display:block;width:100%;height:100%;border-radius:inherit;transform-origin:left;background:#a9ccd8;box-shadow:none;transition:transform .2s linear}
 .home-screen .reference-session-panel .session-control-action{margin:0}
-.home-screen .reference-session-panel .session-control-button{height:11.82cqw;min-height:11.82cqw;border:0;border-radius:2.71cqw;font-size:4.65cqw;line-height:5.81cqw;font-weight:400;letter-spacing:0;background:#e6edf0;color:#111820;box-shadow:none}
-.home-screen .reference-session-panel .session-control-button:before{content:none;box-shadow:none}
-.home-screen .reference-session-panel .session-control-button:disabled{background:#252e37;border:0;color:#a6b0bc;box-shadow:none;opacity:1}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button{height:11.82cqw;min-height:11.82cqw;border:0;border-radius:2.71cqw;font-size:4.65cqw;line-height:5.81cqw;font-weight:400;letter-spacing:0;background:#e6edf0;color:#111820;box-shadow:none}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:before{content:none;box-shadow:none}
+.home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:disabled{background:#252e37;border:0;color:#a6b0bc;box-shadow:none;opacity:1}
 
 /* Copy stays inside the existing button bounds; speed layers share the same line. */
-.home-screen .reference-session-panel .free-mining-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;pointer-events:none}
-.home-screen .reference-session-panel .free-mining-title{font-size:16px;line-height:18px;font-weight:500;color:#111820}
-.home-screen .reference-session-panel .free-mining-subtitle{font-size:12px;line-height:14px;font-weight:400;color:#505963}
+.home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;pointer-events:none}
+.home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-title{font-size:16px;line-height:18px;font-weight:500;color:#111820}
+.home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-subtitle{font-size:12px;line-height:14px;font-weight:400;color:#505963}
 .home-screen .mining-speed-dot,.home-screen .mining-speed-arrow,.home-screen .mining-speed-value{color:#afe3df}
 .home-screen .mining-speed-old{color:#a6b0bc}
 .home-screen .mining-speed-transition{display:inline-grid;vertical-align:top;line-height:inherit}
@@ -1041,7 +1041,7 @@ body{background:var(--ui-bg);color:var(--ui-text)}
 #app .home-screen .session-total>p,#app .home-screen .sector-count{color:var(--ui-muted)}
 #app .home-screen :is(.mining-speed-dot,.mining-speed-arrow,.mining-speed-value){color:var(--ui-hover)}
 #app .home-screen :is(.mining-speed-label,.mining-speed-old){color:var(--ui-muted)}
-#app .home-screen .reference-session-panel{background:var(--ui-surface);border-color:var(--ui-border);border-radius:24px;box-shadow:var(--ui-shadow);backdrop-filter:none;-webkit-backdrop-filter:none}
+#app .home-screen .reference-session-panel{top:-12px;background:radial-gradient(ellipse at 8% 0%,#b5b2c014,transparent 62%),radial-gradient(ellipse at 92% 100%,#79659708,transparent 65%),linear-gradient(120deg,#1c1c24,#15151b 57%,#18171f);border-color:#45454f;border-radius:24px;box-shadow:inset 0 1px 0 #d5d2e11a,inset 0 -1px 0 #8580900d,0 8px 24px #00000073;backdrop-filter:none;-webkit-backdrop-filter:none}
 #app .home-screen .reference-session-panel .session-model-link{color:var(--ui-text);text-shadow:none}
 #app .home-screen .reference-session-panel .session-reference-tier{background:var(--ui-selected);border-color:var(--ui-selected-line);border-radius:var(--ui-radius-pill);color:var(--ui-focus)}
 #app .home-screen .node-panel-tile{background:var(--ui-surface-2);border-color:var(--ui-border);border-radius:var(--ui-radius-button);box-shadow:inset 0 0 0 1px var(--ui-border);color:var(--ui-text)}
@@ -1051,10 +1051,10 @@ body{background:var(--ui-bg);color:var(--ui-text)}
 #app .home-screen .node-bonus-dot{background:var(--ui-warn);box-shadow:none}
 #app .home-screen .reference-session-panel .session-control-metrics dt{color:var(--ui-muted)}
 #app .home-screen .reference-session-panel .session-control-metrics dd{color:var(--ui-text)}
-#app .home-screen .reference-session-panel .session-control-button{background:var(--ui-accent);color:var(--ui-text);border-radius:12px;box-shadow:var(--ui-cta-shadow)}
-#app .home-screen .reference-session-panel .free-mining-title{color:var(--ui-text)}
-#app .home-screen .reference-session-panel .free-mining-subtitle{color:#f5f5f7d1}
-#app .home-screen .reference-session-panel .session-control-button:disabled{background:var(--ui-surface-2);color:var(--ui-off);box-shadow:none}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button{background:var(--ui-accent);color:var(--ui-text);border-radius:12px;box-shadow:var(--ui-cta-shadow)}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-title{color:var(--ui-text)}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-subtitle{color:#f5f5f7d1}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:disabled{background:var(--ui-surface-2);color:var(--ui-off);box-shadow:none}
 
 /* Nodes artworks stay intact; only their surrounding UI surfaces are recolored. */
 #app .nodes-screen :is(.orbit-sector,.orbit-slots,.orbit-type,.orbit-tag,.orbit-yield,.hub-stats span,.hub-event [data-node-live]){color:var(--ui-muted)}
@@ -1147,10 +1147,10 @@ body,#app .app,#modal,#toast{font-family:var(--ui-font);font-size:var(--ui-text-
 @media(prefers-reduced-motion:reduce){body:not(.force-animations) .home-screen .session-reward-number.is-reward-credit{animation:none;transform:none}}
 #app .home-screen .reference-session-panel .session-reward-coin{width:20px;height:20px}
 #app .home-screen .reference-session-panel .continuous-mining-progress{height:var(--ui-progress-height)}
-#app .home-screen .reference-session-panel .session-control-button{height:var(--ui-cta-height);min-height:var(--ui-cta-height);padding:var(--ui-space-2) var(--ui-space-6);font-size:14px;line-height:20px;font-weight:650}
-#app .home-screen .reference-session-panel .free-mining-copy{gap:var(--ui-space-1)}
-#app .home-screen .reference-session-panel .free-mining-title{font-size:14px;font-weight:700;line-height:20px;letter-spacing:.02em}
-#app .home-screen .reference-session-panel .free-mining-subtitle{font-size:var(--ui-text-label);font-weight:500;line-height:17px}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button{height:var(--ui-cta-height);min-height:var(--ui-cta-height);padding:var(--ui-space-2) var(--ui-space-6);font-size:14px;line-height:20px;font-weight:650}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-copy{gap:var(--ui-space-1)}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-title{font-size:14px;font-weight:700;line-height:20px;letter-spacing:.02em}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .free-mining-subtitle{font-size:var(--ui-text-label);font-weight:500;line-height:17px}
 
 /* Keep the old painted canvas height independent of the new UI's content height. */
 .app.home-screen::before{bottom:auto;height:max(var(--app-scene-height,100dvh),calc(var(--app-top-reserve) + 101.94cqw + var(--ui-home-legacy-tail)))}
@@ -1197,4 +1197,32 @@ body,#app .app,#modal,#toast{font-family:var(--ui-font);font-size:var(--ui-text-
 #modal :is(.contract-conditions dt,.small,.demo-note){font-size:var(--ui-text-label);line-height:1.45}
 #modal .menu-list{gap:var(--ui-space-2)}
 #modal .menu-list button{min-height:var(--ui-touch-height);padding:var(--ui-space-3) var(--ui-space-4);font-size:var(--ui-text-control);font-weight:550}
+
+/* Home CTA artwork only: existing text metrics and layout stay unchanged. */
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button{background:#171125 url('home-mining-button.svg') center/100% 100% no-repeat;border-radius:999px;box-shadow:0 0 9px #ac50ee38;color:#f8f6fc;text-shadow:0 1px 2px #070514b3}
+#app .home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:disabled{background:linear-gradient(#0d0b1499,#0d0b1499),url('home-mining-button.svg') center/100% 100% no-repeat;background-color:#171125;color:var(--ui-off);box-shadow:none;text-shadow:none}
+@media(hover:hover){#app .home-screen :is(.reference-session-panel,.reference-session-action) .session-control-button:not(:disabled):hover{background:#171125 url('home-mining-button.svg') center/100% 100% no-repeat;box-shadow:0 0 12px #ac50ee4d}}
 #modal :is(.card,.notice,.ad-visual){background:var(--ui-surface-2);border-color:var(--ui-border);border-radius:var(--ui-radius-card);color:var(--ui-text);box-shadow:none}
+
+/* Separate Home action: reference proportions, with the panel content fixed in place. */
+#app .home-screen .reference-session-panel{grid-template-rows:20px var(--ui-touch-height) 40px var(--ui-progress-height)}
+#app .home-screen .reference-session-action{position:relative;top:-6px;width:85cqw;height:23cqw;min-height:0;flex:none;margin:1.75cqw auto calc(var(--ui-cta-height) + var(--ui-space-3) - 24.75cqw);padding:0;background:none;border:0;box-shadow:none}
+#app .home-screen .reference-session-action .session-control-button{width:100%;height:23cqw;min-height:23cqw}
+
+/* Counter styling and relocated elapsed-time ticks; the Home scene keeps its height. */
+#app .home-screen .session-total{position:relative;transform:translateY(-12px)}
+#app .home-screen .reference-total{color:#f4efff;text-shadow:0 0 14px #9280e34d}
+#app .home-screen .mined-counter-currency{color:#b59cff;text-shadow:0 0 16px #8e6deb55}
+#app .home-screen .mined-counter-progress{position:absolute;top:98px;left:50%;transform:translateX(-50%);width:40cqw;height:8px;border:0;background:none;overflow:visible}
+#app .home-screen .mined-progress-track{position:absolute;top:2px;left:0;width:100%;height:4px;background:#1b2931;mask-image:repeating-linear-gradient(90deg,#000 0 1.2px,transparent 1.2px 2.777778%);-webkit-mask-image:repeating-linear-gradient(90deg,#000 0 1.2px,transparent 1.2px 2.777778%)}
+#app .home-screen .mined-progress-fill{display:block;width:100%;height:100%;background:linear-gradient(90deg,#769ba8,#b8e2e8 50%,#89b7c1);transform-origin:left center}
+#app .home-screen .mined-counter-progress:before,#app .home-screen .mined-counter-progress:after{content:'';position:absolute;top:0;width:1px;height:8px;background:#59636e;opacity:.65}
+#app .home-screen .mined-counter-progress:before{left:-4px}
+#app .home-screen .mined-counter-progress:after{right:-4px}
+#app .home-screen .session-total .sector-count{position:absolute;top:110px;left:0;right:0;text-align:center}
+#app .home-screen .reference-session-panel{grid-template-rows:20px var(--ui-touch-height) 40px}
+
+/* A slow, clipped surface reflection; only transform and opacity animate. */
+#app .home-screen .reference-session-panel:before{content:"";position:absolute;inset:-30% -35%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 25% 20%,#d8d1e926,transparent 48%),radial-gradient(ellipse at 74% 85%,#9b84bd18,transparent 49%);opacity:.16;animation:home-panel-iridescence 13s ease-in-out infinite alternate}
+@keyframes home-panel-iridescence{from{transform:translate3d(-7%,-2%,0);opacity:.12}to{transform:translate3d(7%,2%,0);opacity:.25}}
+@media(prefers-reduced-motion:reduce){#app .home-screen .reference-session-panel:before{animation:none;transform:none;opacity:.16}}
