@@ -1226,3 +1226,17 @@ body,#app .app,#modal,#toast{font-family:var(--ui-font);font-size:var(--ui-text-
 #app .home-screen .reference-session-panel:before{content:"";position:absolute;inset:-30% -35%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 25% 20%,#d8d1e926,transparent 48%),radial-gradient(ellipse at 74% 85%,#9b84bd18,transparent 49%);opacity:.16;animation:home-panel-iridescence 13s ease-in-out infinite alternate}
 @keyframes home-panel-iridescence{from{transform:translate3d(-7%,-2%,0);opacity:.12}to{transform:translate3d(7%,2%,0);opacity:.25}}
 @media(prefers-reduced-motion:reduce){#app .home-screen .reference-session-panel:before{animation:none;transform:none;opacity:.16}}
+
+/* Available Boost only: sparse compositor motion and two quiet side waves. */
+#app .home-screen .reference-session-action{overflow:visible;isolation:isolate}
+#app .home-screen .reference-session-action:before,#app .home-screen .reference-session-action:after{content:"";position:absolute;inset:3px;z-index:-1;border-radius:999px;border:1.5px solid #aa7ae480;box-shadow:0 0 5px #a067da30,inset 0 0 4px #a067da24;opacity:0;pointer-events:none;transform-origin:center;mask-image:linear-gradient(90deg,#000,#0004 28%,#0003 50%,#0004 72%,#000);-webkit-mask-image:linear-gradient(90deg,#000,#0004 28%,#0003 50%,#0004 72%,#000)}
+#app .home-screen .reference-session-action.is-boost-ready .session-control-button:not(:disabled){animation:home-boost-bump 4.5s ease-in-out infinite;transform-origin:center}
+#app .home-screen .reference-session-action.is-boost-ready:before{animation:home-boost-wave 4.5s ease-out infinite}
+#app .home-screen .reference-session-action.is-boost-ready:after{animation:home-boost-wave 4.5s ease-out .24s infinite}
+@keyframes home-boost-bump{0%,68%,88%,100%{transform:scale(1)}77%{transform:scale(1.032)}}
+@keyframes home-boost-wave{0%,68%{transform:scale(1);opacity:0}73%{opacity:.65}98%,100%{transform:scale(1.12,1.42);opacity:0}}
+body.paused #app .home-screen .reference-session-action .session-control-button,body.paused #app .home-screen .reference-session-action:before,body.paused #app .home-screen .reference-session-action:after,
+body:has(#modal[open]) #app .home-screen .reference-session-action .session-control-button,body:has(#modal[open]) #app .home-screen .reference-session-action:before,body:has(#modal[open]) #app .home-screen .reference-session-action:after,
+#app .home-screen.busy .reference-session-action .session-control-button,#app .home-screen.busy .reference-session-action:before,#app .home-screen.busy .reference-session-action:after,
+#app .home-screen .reference-session-action:has(.session-control-button:disabled):before,#app .home-screen .reference-session-action:has(.session-control-button:disabled):after{animation:none!important}
+@media(prefers-reduced-motion:reduce){#app .home-screen .reference-session-action .session-control-button,#app .home-screen .reference-session-action:before,#app .home-screen .reference-session-action:after{animation:none!important}}
