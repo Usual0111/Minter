@@ -1240,3 +1240,9 @@ body:has(#modal[open]) #app .home-screen .reference-session-action .session-cont
 #app .home-screen.busy .reference-session-action .session-control-button,#app .home-screen.busy .reference-session-action:before,#app .home-screen.busy .reference-session-action:after,
 #app .home-screen .reference-session-action:has(.session-control-button:disabled):before,#app .home-screen .reference-session-action:has(.session-control-button:disabled):after{animation:none!important}
 @media(prefers-reduced-motion:reduce){#app .home-screen .reference-session-action .session-control-button,#app .home-screen .reference-session-action:before,#app .home-screen .reference-session-action:after{animation:none!important}}
+
+/* Collect completion: a static soft text halo, animated only through opacity. */
+#app .home-screen .collect-balance-flash{position:relative}
+#app .home-screen .collect-balance-flash:after{content:attr(data-collect-flash);position:absolute;inset:0;pointer-events:none;color:#d8c9f0;text-shadow:0 0 5px #b19bdf;opacity:0;animation:home-collect-flash 340ms ease-out both}
+@keyframes home-collect-flash{0%,100%{opacity:0}28%{opacity:.6}}
+@media(prefers-reduced-motion:reduce){#app .home-screen .collect-balance-flash:after{animation:none}}
