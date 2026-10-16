@@ -49,7 +49,7 @@ const motionOff=()=>typeof document!=='undefined'&&document.hidden||typeof Motio
 function clearReward(){if(rewardTimer)root.clearTimeout?.(rewardTimer);if(rewardFrame)root.cancelAnimationFrame?.(rewardFrame);rewardTimer=rewardFrame=0;const el=rewardChange?.node;if(el){el.classList.remove('is-reward-credit');el.style.removeProperty('animation-delay');}rewardChange=null;}
 function liveReward(x){if(rewardChange&&(x.status!=='active'||x.sessionId!==rewardChange.id||x.sessionRewardCents!==rewardChange.to||motionOff()))clearReward();return rewardChange;}
 function rewardValue(x){const change=liveReward(x);if(!change)return displayedReward(x);if(change.at===null)return change.from;const elapsed=Date.now()-change.at-2850;if(elapsed<=0)return change.from;if(elapsed>=600)return change.to;const p=elapsed/600,eased=1-Math.pow(1-p,3);return Math.round((change.from+(change.to-change.from)*eased)*change.factor)/change.factor;}
-const rewardText=x=>'+'+cr(rewardValue(x))+' CR';
+const rewardText=x=>{const current='+'+cr(rewardValue(x));return boostReady(x)?current+' + '+cr(x.offer.rewardCents)+' CR':current+' CR';};
 function paintReward(x){
  const change=liveReward(x),nodes=typeof document!=='undefined'?document.querySelectorAll('[data-session-live="ready"]'):[];
  const elapsed=change&&change.at!==null?Date.now()-change.at-2850:-1;
