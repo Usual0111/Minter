@@ -1246,3 +1246,30 @@ body:has(#modal[open]) #app .home-screen .reference-session-action .session-cont
 #app .home-screen .collect-balance-flash:after{content:attr(data-collect-flash);position:absolute;inset:0;pointer-events:none;color:#d8c9f0;text-shadow:0 0 5px #b19bdf;opacity:0;animation:home-collect-flash 340ms ease-out both}
 @keyframes home-collect-flash{0%,100%{opacity:0}28%{opacity:.6}}
 @media(prefers-reduced-motion:reduce){#app .home-screen .collect-balance-flash:after{animation:none}}
+
+/* Home summary: one compact row. Keep the scene's total flow height unchanged. */
+#app .home-screen .reference-session-panel{grid-template-rows:40px;gap:0}
+#app .home-screen .reference-session-action{margin-bottom:calc(var(--ui-cta-height) + var(--ui-space-3) - 24.75cqw + 20px + var(--ui-touch-height) + 2 * var(--ui-space-3))}
+#app .home-screen .home-device-hit{position:absolute;inset:0 10%;width:80%;height:100%;padding:0;border:0;border-radius:0;background:none;box-shadow:none;pointer-events:auto}
+#app .bottom-nav .tasks-reward-dot{position:absolute;top:5px;left:calc(50% + 10px);width:5px;height:5px;border-radius:50%;background:var(--ui-accent);pointer-events:none}
+#app .task-bonuses .node-bonus-item{border-color:var(--ui-border)}
+#app .task-bonuses .node-bonus-item h3{font-size:var(--ui-text-panel);font-weight:700}
+#app .task-bonuses .node-bonus-value{color:var(--ui-text)}
+
+/* Static graphite sci-fi frame; circular remaining time uses the existing session clock. */
+#app .home-screen .reference-session-panel{height:74px;grid-template-rows:64px;padding:5px 17px;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible}
+#app .home-screen .reference-session-panel:before{content:none;animation:none}
+#app .home-screen .session-panel-frame{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#app .home-screen .reference-session-panel .session-mining-row{height:64px;grid-template-columns:minmax(0,1fr) 64px;gap:12px;align-items:center}
+#app .home-screen .reference-session-panel .session-reward-metric dt{font-size:12px;line-height:17px}
+#app .home-screen .reference-session-panel .session-reward-value{font-size:22px;line-height:28px;gap:7px;align-items:center}
+#app .home-screen .reference-session-panel .session-reward-coin{width:26px;height:26px}
+#app .home-screen .reference-session-panel .session-time-metric{height:64px;text-align:center}
+#app .home-screen .session-time-dial{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;width:64px;height:64px;gap:1px;font-variant-numeric:tabular-nums}
+#app .home-screen .reference-session-panel .session-time-dial dt{max-width:46px;font-size:9px;line-height:10px;white-space:normal}
+#app .home-screen .reference-session-panel .session-time-dial dd{font-size:16px;line-height:20px;font-weight:700}
+#app .home-screen .session-time-dial svg{position:absolute;inset:0;width:100%;height:100%;fill:none;pointer-events:none}
+#app .home-screen .time-dial-ticks{stroke:#7b77884d;stroke-width:2;stroke-dasharray:.6 1.4;stroke-linecap:butt}
+#app .home-screen .time-dial-track{stroke:#35343f;stroke-width:3}
+#app .home-screen .time-dial-fill{stroke:#b5a4cd;stroke-width:3;stroke-dasharray:100;stroke-linecap:round}
+#app .home-screen .time-dial-inner{stroke:#66607138;stroke-width:1;stroke-dasharray:.5 2}

@@ -1,0 +1,108 @@
+@font-face{font-family:AlienTech;src:url('AlienTech.ttf') format('truetype');font-weight:400 900;font-style:normal;font-display:swap}
+#app>.app.alien-home{--alien-top:calc(var(--app-system-top,0px) + var(--app-chrome-top,0px));--alien-bottom:var(--app-system-bottom,env(safe-area-inset-bottom,0px));--alien-ink:#94f5a5;--alien-muted:#5da979;position:relative;container-type:inline-size;width:100%;max-width:480px;height:max(calc(min(100vw,480px)*1.79),var(--app-scene-height,100dvh));min-height:max(calc(min(100vw,480px)*1.79),var(--app-scene-height,100dvh));padding:0;margin:auto;background:#030d17;color:var(--alien-ink);font-family:AlienTech,'Bountera Inter',sans-serif;overflow:hidden;isolation:isolate;box-shadow:none;border:0}
+#app .alien-home:before,#app .alien-home:after{content:none!important}
+#app .alien-home>main{position:absolute;inset:var(--alien-top) 0 var(--alien-bottom);height:auto;min-height:0;margin:0;padding:0;z-index:2;pointer-events:none}
+#app .alien-home .alien-layout{position:absolute;inset:0;margin:0;padding:0;pointer-events:none}
+#app .alien-home .alien-scene{position:absolute;inset:var(--alien-top) 0 var(--alien-bottom);height:auto;transform:none!important;animation:none!important;overflow:hidden;pointer-events:none;z-index:0;background:linear-gradient(90deg,transparent 13.5%,#2e956925 13.6%,transparent 13.8%,transparent 25.7%,#2e956925 25.8%,transparent 26%,transparent 37.8%,#2e956925 37.9%,transparent 38.1%,transparent 49.9%,#2e956925 50%,transparent 50.2%,transparent 62%,#2e956925 62.1%,transparent 62.3%,transparent 74.1%,#2e956925 74.2%,transparent 74.4%,transparent 86.2%,#2e956925 86.3%,transparent 86.5%),repeating-linear-gradient(0deg,transparent 0 calc(7.8% - 1px),#2e956920 calc(7.8% - 1px) 7.8%);background-size:100% 100%;will-change:auto}
+#app .alien-home .alien-planet{position:absolute;left:-1%;top:25%;width:102%;height:29%;object-fit:cover;object-position:center 35%;z-index:0;mask-image:linear-gradient(transparent,#000 12%,#000 70%,transparent);-webkit-mask-image:linear-gradient(transparent,#000 12%,#000 70%,transparent);pointer-events:none;animation:none;transform:none}
+#app .alien-home .alien-beam{position:absolute;left:29%;top:22%;width:42%;height:20%;object-fit:fill;z-index:2;pointer-events:none;animation:none;transform:none}
+#app .alien-home .alien-ufo-rig{position:absolute;left:17%;top:11%;width:66%;height:13%;aspect-ratio:auto;z-index:3;transform:none!important;animation:none!important;will-change:auto}
+#app .alien-home .alien-ufo-rig .home-device-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;object-position:center;aspect-ratio:auto;filter:none;animation:none!important;transform:none!important;will-change:auto}
+#app .alien-home .alien-page-frame{position:absolute;inset:0;width:100%;height:100%;z-index:20;object-fit:fill;pointer-events:none}
+#app .alien-home .alien-header{position:absolute;inset:var(--alien-top) 0 var(--alien-bottom);height:auto;margin:0;padding:0;background:none;z-index:4;pointer-events:none;font-family:AlienTech,'Bountera Inter',sans-serif}
+#app .alien-home .alien-toolbar{position:absolute;left:5.3%;right:5.3%;top:3.1%;height:5%;display:flex;align-items:center;justify-content:space-between;padding:0;gap:3%;border:0}
+#app .alien-home .alien-tools{display:flex;gap:1.8cqw;height:100%;align-items:center}
+#app .alien-home .alien-tool{width:7.6cqw;height:7.6cqw;display:grid;place-items:center;padding:0;border:1px solid #3a8d665e;border-radius:1.5cqw;background:linear-gradient(135deg,#14362a8c,#071d22b8);box-shadow:inset 0 0 8px #4dc48b12;color:#6ae68c;pointer-events:auto;min-height:0}
+#app .alien-home .alien-tool svg{width:5cqw;height:5cqw;stroke-width:1.6}
+#app .alien-home .alien-tool.selected{border-color:#72eda1;background:#12492c}
+#app .alien-home .alien-tool.selected svg{fill:#77f794;stroke:none}
+#app .alien-home .alien-brand{color:#60d18a;font-size:3.9cqw;letter-spacing:.15em;white-space:nowrap;line-height:1;opacity:.9}
+#app .alien-home .alien-connected{position:relative;display:flex;align-items:center;justify-content:flex-end;gap:1.4cqw;min-height:0;width:26cqw;height:6.2cqw;padding:0 1cqw 0 1.6cqw;background:linear-gradient(90deg,#0e2a23,#0d3321);border:1px solid #32745291;border-radius:1.6cqw;color:#6bdf8d;font-family:inherit;font-size:2.3cqw;white-space:nowrap;pointer-events:auto}
+#app .alien-home .alien-orb{width:6.1cqw;height:6.1cqw;flex:none;margin-right:-1cqw;border-radius:50%;border:1px solid #52b477;background:radial-gradient(circle at 45% 43%,#d8ffd0 0,#89ff95 11%,#27db64 26%,#237640 46%,#062f26 66%,#081c20 73%);box-shadow:0 0 10px #48f97666,inset 0 0 8px #63ff9a66}
+#app .alien-home .alien-caption{position:absolute;top:8.65%;left:5.3%;right:5.3%;display:flex;justify-content:space-between;gap:12px;padding-top:1.3cqw;border-top:1px solid #2e6e4b;color:#69c486;font-family:'Bountera Inter',sans-serif;font-size:2.05cqw;line-height:1.1}
+#app .alien-home .alien-caption>span:last-child{text-align:right}
+#app .alien-home .alien-caption small{display:block;margin-top:.4cqw;font-size:1.5cqw;letter-spacing:.2em}
+#app .alien-home .alien-hit-stage{position:absolute;top:11%;left:17%;width:66%;height:13%;min-height:0;margin:0;padding:0;border:0;background:none;pointer-events:none}
+#app .alien-home .home-device-hit{position:absolute;inset:0;width:100%;height:100%;background:none;border:0;pointer-events:auto}
+#app .alien-home .alien-reticle{position:absolute;top:22.8%;left:22%;width:56%;height:4.3%;border:1px solid #4bdc8b88;border-radius:50%;transform:rotate(-1deg);box-shadow:inset 0 0 0 2px #3cbf701a;pointer-events:none}
+#app .alien-home .alien-reticle:before,#app .alien-home .alien-reticle:after{content:'';position:absolute;top:0;bottom:0;left:3%;right:3%;border-radius:50%;border:1px dashed #57dd8177}
+#app .alien-home .alien-reticle:after{left:8%;right:8%;border-style:solid;border-color:#4adb6544}
+#app .alien-home .alien-extract-status{position:absolute;top:29.7%;right:17%;padding:1cqw 1.1cqw;border:1px solid #6bcd8a9c;background:#163f35bd;color:#9dedab;font-family:'Bountera Inter',sans-serif;font-size:2cqw;line-height:1;pointer-events:none}
+#app .alien-home .alien-extract-status:before{content:'';position:absolute;right:100%;top:50%;width:3cqw;height:2cqw;border-top:1px solid #70c594;transform:skewY(35deg);transform-origin:right}
+#app .alien-home .alien-yield.session-total{position:absolute;left:8.8%;top:48.1%;width:82.4%;height:13.2%;transform:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.9cqw;font-family:AlienTech,'Bountera Inter',sans-serif;pointer-events:auto}
+#app .alien-home .alien-yield-frame{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:-1}
+#app .alien-home .alien-yield-frame path{fill:none;stroke:#73eaa0;stroke-width:1.3;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 3px #5be78966)}
+#app .alien-home .alien-yield>p{font-size:3.1cqw;line-height:1;color:#7fd799;font-weight:500;letter-spacing:.01em}
+#app .alien-home .alien-yield .reference-total{display:flex;gap:1cqw;justify-content:center;align-items:baseline;width:auto;max-width:100%;font-family:inherit;font-size:7.9cqw;font-weight:750;line-height:1.15;letter-spacing:-.035em;color:#b4ffb2;text-shadow:0 0 10px #65e98366;white-space:nowrap;font-variant-numeric:tabular-nums}
+#app .alien-home .alien-yield .mined-counter-currency{font:inherit;color:inherit;letter-spacing:0;text-shadow:none}
+#app .alien-home .alien-yield [data-session-live="amount"]{flex:none;font-kerning:none;text-shadow:0 0 1px #d2ffcf,0 0 3px #91ffa080,0 0 7px #65e98366}
+#app .alien-home .alien-yield :is(.mined-counter-cell,.mined-counter-digit){display:inline-block;width:calc(1ch - .035em);text-align:center}
+#app .alien-home .alien-wallet-line{font-size:2.65cqw;line-height:1.1;letter-spacing:-.04em;color:#7f9f8c;white-space:nowrap}
+#app .alien-home .alien-wallet-line .home-balance-badge{position:static;display:inline;width:auto;height:auto;min-height:0;padding:0;margin:0;background:none;border:0;border-radius:0;box-shadow:none;font:inherit;color:inherit;transform:none}
+#app .alien-home .alien-glyph-line{font-size:2.1cqw;line-height:1;color:#6acf8d;letter-spacing:.18em}
+#app .alien-home .alien-instruments.reference-session-panel{position:absolute;left:0;top:62%;width:100%;height:14.8%;margin:0;padding:0;display:block;grid-template-rows:none;gap:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;pointer-events:none}
+#app .alien-home .alien-instruments:before,#app .alien-home .alien-instruments:after{content:none;animation:none}
+#app .alien-home .alien-rate-dial{position:absolute;left:8%;top:0;width:26cqw;height:26cqw;display:grid;place-items:center;border:1.8cqw ridge #597b73;border-radius:46% 52% 48% 47%;background:radial-gradient(circle,#082920 44%,#173a30 57%,#8ad6a9 58%,#082522 60%,#0a1e22 72%);box-shadow:inset 0 0 0 1px #a0d3b599,0 0 0 1px #365d53}
+#app .alien-home .alien-rate-dial:before{content:'';position:absolute;inset:1cqw;border-radius:50%;border:1.2cqw solid #66d77b;border-right-color:#214a35;border-bottom-color:#316b49;transform:rotate(-30deg);box-shadow:0 0 5px #65ec754d}
+#app .alien-home .alien-rate-dial>div{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5cqw;width:100%;font-variant-numeric:tabular-nums;line-height:1}
+#app .alien-home .alien-rate-dial small{font-family:'Bountera Inter',sans-serif;font-size:1.35cqw;color:#a2df9f;white-space:nowrap}
+#app .alien-home .alien-rate-dial strong{font-size:4cqw;line-height:1.15;font-weight:700;color:#baffaf}
+#app .alien-home .alien-rate-dial span{font-size:1.9cqw;color:#94d792}
+#app .alien-home .alien-wave-label{position:absolute;top:2%;left:36.5%;font-size:2.8cqw;line-height:1.15;color:#81dc95;letter-spacing:-.04em}
+#app .alien-home .alien-wave{position:absolute;left:52%;top:0;width:39%;height:27%;fill:none;stroke:#9bfa9f;stroke-width:2.2;stroke-linecap:round;filter:drop-shadow(0 0 2px #6cdd8e66)}
+#app .alien-home .alien-instruments .sector-count{position:absolute;left:36.5%;right:7.5%;top:30%;width:auto;margin:0;font-family:'Bountera Inter',sans-serif;font-size:1.6cqw;line-height:1.25;text-align:left;min-height:0;color:#6cbd88}
+#app .alien-home .mining-speed-value,#app .alien-home .mining-speed-dot,#app .alien-home .mining-speed-arrow{color:#acfab0}
+#app .alien-home .mining-speed-label,#app .alien-home .mining-speed-old{color:#76ab88}
+#app .alien-home .alien-instruments .session-mining-row{position:absolute;left:36.5%;top:43%;width:55.5%;height:57%;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:1fr 1fr;gap:1.3cqw;margin:0}
+#app .alien-home .alien-instruments .alien-energy{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;width:100%;height:100%;margin:0;padding:0 2.2cqw;border:.7cqw ridge #80bba4;border-radius:4.5cqw;background:radial-gradient(ellipse at 60% 45%,#4adc6470,transparent 37%),linear-gradient(90deg,#258a4a,#072622 77%);box-shadow:inset 0 0 0 1px #8aec8f88,inset 0 2px 4px #afffc544;overflow:hidden;text-align:left}
+#app .alien-home .alien-instruments .alien-energy:after{content:'';position:absolute;inset:15% 10%;opacity:.5;pointer-events:none;background:radial-gradient(circle at 7% 40%,#c8f7a8 0 1px,transparent 1.6px),radial-gradient(circle at 21% 80%,#c8f7a8 0 1px,transparent 1.6px),radial-gradient(circle at 78% 50%,#8bff91 0 1px,transparent 1.6px),radial-gradient(circle at 83% 20%,#8bff91 0 1px,transparent 1.6px),radial-gradient(circle at 94% 80%,#8bff91 0 1px,transparent 1.6px)}
+#app .alien-home .alien-instruments .alien-energy>div{position:relative;width:100%;display:flex;align-items:center;justify-content:space-between;gap:4px;z-index:2}
+#app .alien-home .alien-instruments .alien-energy dt{font-family:'Bountera Inter',sans-serif;font-size:1.7cqw;line-height:1.15;font-weight:500;color:#b0e4b7}
+#app .alien-home .alien-instruments .alien-energy dd{margin:0;font-family:AlienTech,'Bountera Inter',sans-serif;font-size:2.5cqw;line-height:1.2;font-weight:700;color:#d4ffd1;white-space:nowrap}
+#app .alien-home .alien-instruments .session-reward-value{display:block;gap:0}
+#app .alien-home .alien-instruments .mined-counter-progress{position:relative;inset:auto;transform:none;overflow:hidden}
+#app .alien-home .alien-instruments .mined-counter-progress:before,#app .alien-home .alien-instruments .mined-counter-progress:after{content:none}
+#app .alien-home .alien-instruments .mined-progress-fill{position:absolute;inset:0;background:linear-gradient(90deg,#4ac36999,#91ff8288);width:100%;height:100%;transform-origin:left center;opacity:.6;mask:none;-webkit-mask:none}
+#app .alien-home .alien-action.reference-session-action{position:absolute;left:3%;top:79%;width:94%;height:8.4%;min-height:0;margin:0;padding:0;background:none;border:0;border-radius:0;box-shadow:none;pointer-events:auto;isolation:isolate;overflow:visible}
+#app .alien-home .alien-action-frame{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#app .alien-home .alien-action .session-control-button{position:absolute;inset:0;width:100%;height:100%;min-height:0;display:flex;align-items:center;justify-content:center;margin:0;padding:0 13%;background:transparent!important;border:0;border-radius:0;box-shadow:none!important;text-shadow:none;color:#001e17;font-family:AlienTech,'Bountera Inter',sans-serif;font-size:4cqw;font-weight:850;line-height:1.25;letter-spacing:-.025em;text-transform:uppercase}
+#app .alien-home .alien-action .session-control-button:disabled{color:#487058;opacity:.75}
+#app .alien-home .alien-action:has(.session-control-button:disabled) .alien-action-frame{opacity:.5}
+#app .alien-home .alien-action .free-mining-copy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:.65cqw;pointer-events:none}
+#app .alien-home .alien-action .free-mining-title{font:inherit;color:#001e17;font-size:3.8cqw;line-height:1.2}
+#app .alien-home .alien-action .free-mining-subtitle{font-family:AlienTech,'Bountera Inter',sans-serif;font-size:1.75cqw;line-height:1.2;color:#164c2b;font-weight:600;letter-spacing:0}
+#app .alien-home .alien-action:before,#app .alien-home .alien-action:after{border-color:#74d89466;box-shadow:0 0 5px #67cf8d30,inset 0 0 4px #67cf8d24;border-radius:6cqw}
+#app .bottom-nav{background:#05131bf5;border-top:1px solid #2f654b;color:#77c890;font-family:AlienTech,'Bountera Inter',sans-serif;height:calc(80px + var(--app-safe-bottom,env(safe-area-inset-bottom)));padding:8px 14px calc(12px + var(--app-safe-bottom,env(safe-area-inset-bottom)));gap:7px;backdrop-filter:none}
+#app .bottom-nav .nav-item{height:100%;margin:0;padding:6px 2px;gap:4px;border:1px solid #3e8c6077;border-bottom:0;border-radius:9px 9px 0 0;background:linear-gradient(#0e352a66,transparent);color:#6fad85;font-size:10px;font-family:inherit;font-weight:600;text-transform:uppercase}
+#app .bottom-nav .nav-item svg{width:24px;height:24px;padding:2px;stroke:#91d3ad;filter:drop-shadow(0 0 2px #4ea97555)}
+#app .bottom-nav .nav-item.active{color:#c0ffb8;border-color:#83eaa0;background:linear-gradient(#18543799,transparent)}
+#app .bottom-nav .nav-item.active:after{display:none}
+#app .bottom-nav .tasks-reward-dot{background:#b7ffad;top:5px;left:calc(50% + 15px)}
+#app .alien-home>.bottom-nav{position:absolute;left:5.2%;right:5.2%;top:calc(var(--alien-top) + (100% - var(--alien-top) - var(--alien-bottom))*.89);bottom:calc(var(--alien-bottom) + 3.1%);width:auto;max-width:none;height:auto;transform:none;margin:0;padding:0;gap:2.1cqw;border:0;background:none;z-index:5}
+#app .alien-home>.bottom-nav:after{content:'REACTOR ONLINE  ///  GALACTIC NETWORK';position:absolute;left:0;right:0;top:calc(100% + 1.3cqw);padding-top:.9cqw;border-top:1px solid #26583d;color:#6fc386;text-align:center;font-size:1.55cqw;letter-spacing:-.03em;white-space:nowrap}
+#app .alien-home>.bottom-nav .nav-item{padding:1cqw 0;gap:.6cqw;border-radius:2cqw 2cqw 0 0;font-size:2.05cqw}
+#app .alien-home>.bottom-nav .nav-item svg{width:8.7cqw;height:8.7cqw;border:1px solid #4a8d68;border-radius:43%;background:radial-gradient(ellipse at 35% 10%,#9dc4b25e,#0d3026 45%,#071d22 70%);box-shadow:inset 0 1px 1px #bfe4c49c;padding:1.4cqw;stroke:#a4e4b3}
+#app .alien-home .collect-balance-flash:after{color:#c3ffc0;text-shadow:0 0 5px #71e98a}
+body:has(.alien-home) #modal .modal-box{background:#071b20;border-color:#306347;color:#b1e2ba;font-family:AlienTech,'Bountera Inter',sans-serif}
+body:has(.alien-home) #modal .primary{background:#76e598;color:#062c21;box-shadow:none}
+body:has(.alien-home) #modal :is(.secondary,.close){background:#10362b;border-color:#2c6b47;color:#a8e5b3}
+body:has(.alien-home) #toast{background:#133529;border:1px solid #3a8055;color:#bff5c8}
+@media(max-height:700px){#app .alien-home .alien-brand{font-size:3.6cqw}}
+
+/* Imagegen chrome widgets, kept as separate static artwork beneath HTML labels. */
+#app .alien-home .alien-rate-dial{border:0;border-radius:0;background:transparent url('alien-dial.png') center/109% 109% no-repeat;box-shadow:none}
+#app .alien-home .alien-rate-dial:before{content:none}
+#app .alien-home .alien-action-frame{top:-57%;left:0;width:100%;height:214%;object-fit:fill}
+
+#app .alien-home>.bottom-nav .nav-item svg{border:0;border-radius:0;background:transparent url('alien-dial.png') center/100% 100% no-repeat;box-shadow:none;padding:2cqw;filter:none}
+#app .app:not(.alien-home){padding-bottom:calc(100px + var(--app-safe-bottom))}
+#app .app:not(.alien-home) .bottom-nav{top:auto;bottom:0}
+.tma-viewport #app .app:not(.alien-home) .bottom-nav{top:calc(var(--app-viewport-top,0px) + var(--app-nav-viewport-height,100dvh) - 80px - var(--app-safe-bottom));bottom:auto}
+
+#app .alien-home .alien-action.is-boost-ready{animation:home-boost-bump 4.5s ease-in-out infinite;transform-origin:center}
+#app .alien-home .alien-action .session-control-button{animation:none!important}
+body.paused #app .alien-home .alien-action,body:has(#modal[open]) #app .alien-home .alien-action,#app .alien-home.busy .alien-action{animation:none!important}
+
+.tma-viewport #app .app.alien-home>.bottom-nav{top:calc(var(--alien-top) + (100% - var(--alien-top) - var(--alien-bottom))*.89);bottom:calc(var(--alien-bottom) + 3.1%);height:auto}
+
+.tma-viewport #app>.app.alien-home{height:var(--app-scene-height,100dvh);min-height:var(--app-scene-height,100dvh)}
